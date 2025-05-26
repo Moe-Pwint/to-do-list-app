@@ -16,3 +16,7 @@ const path = require('path');
                 clean: true,
             },
             };
+
+//git add dist -f && git commit -m "Deployment commit"
+//npm deploy (git subtree push --prefix dist origin gh-pages)
+//git checkout main
