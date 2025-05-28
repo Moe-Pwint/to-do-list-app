@@ -5,18 +5,42 @@ const path = require('path');
             entry: {
                 app: './src/index.js',
             },
-            plugins: [
-                new HtmlWebpackPlugin({
-                title: 'Production',
-                }),
-            ],
             output: {
                 filename: '[name].bundle.js',
                 path: path.resolve(__dirname, 'dist'),
                 clean: true,
             },
+            plugins: [
+                new HtmlWebpackPlugin({
+                title: 'Production',
+                }),
+            ],
+            module: {
+                rules: [
+                {
+                    test: /\.css$/i,
+                    use: ["style-loader", "css-loader"],
+                },
+                {
+                    test: /\.html$/i,
+                    loader: "html-loader",
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: "asset/resource",
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: 'asset/resource',
+                },
+                {
+                    test: /\.svg$/,
+                    loader: 'svg-inline-loader'
+                }
+                ],
+            },
             };
 
 //git add dist -f && git commit -m "Deployment commit"
-//npm deploy (git subtree push --prefix dist origin gh-pages)
+//npm run deploy (git subtree push --prefix dist origin gh-pages)
 //git checkout main

@@ -1,7 +1,21 @@
 body {
     margin:0;
     padding:0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+button {
+    background-color: transparent;
+      border: none;
+      margin: 0;
+      padding: 0;
+      text-align: inherit;
+      font: inherit;
+      border-radius: 0;
+      appearance: none;
+      cursor: pointer;
+    }
 
 @font-face {
     font-family:'handWritten_Bold';
@@ -33,12 +47,97 @@ body {
     unicode-range: U+0020-007A;
 }
 
+
+/* main elements */
+
+#appContainer {
+    display:flex;
+}
+
+#leftContainer {
+    padding:30px;
+    width:350px;
+    height:100vh;
+    border-right:1px solid #E0E0E0;
+    box-sizing: border-box;
+}
+
+/* logo section */
+
+#logoContainer {
+    display:flex;
+    height:50px;
+    gap:20px;
+}
+
 #logo {
-    background-color: rgb(52, 167, 128);
+    background-color: rgb(85, 140, 121);
+
+    height:auto;
+    border-radius: 10px;
+    padding:5px 15px;
 }
 
 #logoText {
-    font-family: 'handWritten_Bold';
-    font-size: 50px;
+    font-family: 'handWritten_Reg';
+    font-size: 30px;
     color:rgb(216, 174, 34);
+    margin:0;
+    align-self:center;
+}
+
+
+/* top-left section */
+
+#topLeftContainer {
+    margin-top:50px;
+}
+
+.icons {
+    width:25px;
+    height:25px;
+    padding-left:5px;
+    padding-right: 10px;
+}
+
+.top-left-tabs {
+    height:40px;
+    display:flex;
+    align-items: center;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+
+/* bottom section */
+
+#projectsTitleContainer {
+    margin-top: 80px;
+    display:flex;
+    align-items:center;
+    color: #343434;
+}
+
+#addProjectIcon {
+    margin-left: auto;
+}
+
+#projectIcon {
+    width:30px;
+    height:30px;
+}
+
+/* project tabs section */
+.projects-tabs {
+    display:flex;
+    width:290px;
+    height:50px;
+    align-items: center;
+    padding:10px;
+    gap:15px;
+    color: #565656;
+}
+
+#del-tab {
+    background-color: #EADDFF;
 }
