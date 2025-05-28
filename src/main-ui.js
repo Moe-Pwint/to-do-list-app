@@ -8,6 +8,7 @@ import addProject from "./svg/addProject.svg";
 import del from "./svg/del.svg";
 
 
+import portraitDots from './svg/portraitDots.svg';
 function createEle (ele) {
     return document.createElement(ele);
 }
@@ -124,17 +125,25 @@ leftContainer.appendChild(projectsContainer);
 
 //Deleted tasks
 
-const delContainer = createEle('button');
-//this is common class for all dynamically created projects.
-delContainer.setAttribute('class', 'projects-tabs purple-bg');
-delContainer.id = 'del-tab';
+const delContainer = createEle('div');
 leftContainer.appendChild(delContainer);
+
+const delTab = createEle('button');
+//this is common class for all dynamically created projects.
+delTab.setAttribute('class', 'projects-tabs purple-bg');
+delTab.id = 'del-tab';
+delContainer.appendChild(delTab);
 
 const delIcon = createEle('img');
 delIcon.src = del;
 delIcon.setAttribute('class', 'icons');
-delContainer.appendChild(delIcon);
+delTab.appendChild(delIcon);
 
 const delTabText = createEle('p');
 delTabText.textContent = 'Deleted Tasks';
-delContainer.appendChild(delTabText);
+delTab.appendChild(delTabText);
+
+const portraitDotsIcon = createEle('img');
+portraitDotsIcon.src = portraitDots;
+portraitDotsIcon.setAttribute('class', 'icons push-right');
+delTab.appendChild(portraitDotsIcon);

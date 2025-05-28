@@ -47,6 +47,9 @@ button {
     unicode-range: U+0020-007A;
 }
 
+.push-right {
+    margin-left:auto;
+}
 
 /* main elements */
 
@@ -141,3 +144,4 @@ button {
 #del-tab {
     background-color: #EADDFF;
 }
+

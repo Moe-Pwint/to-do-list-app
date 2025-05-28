@@ -1,5 +1,3 @@
-* are elements that share across multiple things
-
 
 Let's think about how many modules we're gonna need.
 
@@ -11,13 +9,16 @@ Let's think about how many modules we're gonna need.
         #Add a new task
         #Search task or project
         #Today
+
+- Main display on left - projects section
+        #My projects
+        #Add new project icon
+        #sample project folder
+        #deleted tasks tab
+
+        
 - Main display on the right section module
         #Basically empty (default -Today task shown)
-
-- Display of Task module
-- Display of Adding new task module
-- Display of Adding new item in existing task
-- Display of Today module
 
 
 
@@ -101,3 +102,26 @@ Let's think about how many modules we're gonna need.
 9. Select Deleted tasks:
         #See the deleted tasks
         #Recover the deleted task (and its parent folder if it's empty)
+
+
+
+
+
+
+{
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "svg-inline-loader": "^0.8.2",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1",
+    "webpack-merge": "^6.0.1"
+  },
+  "scripts": {
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "deploy": "git subtree push --prefix dist origin gh-pages --force"
+  }
+}
