@@ -104,6 +104,7 @@ button {
 }
 
 .top-left-tabs {
+    width: 290px;
     height:40px;
     display:flex;
     align-items: center;
@@ -145,3 +146,17 @@ button {
     background-color: #EADDFF;
 }
 
+/* add-task.js */
+
+.active-yellow {
+    background-color: #FFCC00;
+}
+
+#newTaskDetailsBox {
+    width:980px;
+    height: 550px;
+    background-color: #F4F4F4;
+    margin-top: 80px;
+    margin-left: 80px;
+    padding:80px 120px;
+}

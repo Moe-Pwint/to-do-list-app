@@ -6,12 +6,16 @@ import search from "./svg/search.svg";
 import today from "./svg/today.svg";
 import addProject from "./svg/addProject.svg";
 import del from "./svg/del.svg";
-
-
 import portraitDots from './svg/portraitDots.svg';
+
+export default createMainElements;
+export {createEle};
+
 function createEle (ele) {
     return document.createElement(ele);
 }
+
+function createMainElements () {
 
 
 //main containers
@@ -147,3 +151,5 @@ const portraitDotsIcon = createEle('img');
 portraitDotsIcon.src = portraitDots;
 portraitDotsIcon.setAttribute('class', 'icons push-right');
 delTab.appendChild(portraitDotsIcon);
+}
+
