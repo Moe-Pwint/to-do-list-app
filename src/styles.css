@@ -1,11 +1,18 @@
-body {
+:root {
+    --light-purple: #EADDFF;
+    --border-line: #E0E0E0;
+    --focused-yellow: #FFCC00;
+    --dark-purple: #4F378B;
+}
+
+body,p {
     margin:0;
     padding:0;
     box-sizing: border-box;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-button {
+button, input, select {
     background-color: transparent;
       border: none;
       margin: 0;
@@ -15,6 +22,11 @@ button {
       border-radius: 0;
       appearance: none;
       cursor: pointer;
+      outline: none;
+    }
+
+    input {
+        cursor:text;
     }
 
 @font-face {
@@ -47,6 +59,7 @@ button {
     unicode-range: U+0020-007A;
 }
 
+
 .push-right {
     margin-left:auto;
 }
@@ -59,10 +72,14 @@ button {
 
 #leftContainer {
     padding:30px;
-    width:350px;
+    min-width:350px;
     height:100vh;
     border-right:1px solid #E0E0E0;
     box-sizing: border-box;
+}
+
+#rightContainer {
+    width:100%;
 }
 
 /* logo section */
@@ -84,7 +101,7 @@ button {
 #logoText {
     font-family: 'handWritten_Reg';
     font-size: 30px;
-    color:rgb(216, 174, 34);
+    color:var(--dark-purple);
     margin:0;
     align-self:center;
 }
@@ -96,7 +113,7 @@ button {
     margin-top:50px;
 }
 
-.icons {
+.left-side-icons {
     width:25px;
     height:25px;
     padding-left:5px;
@@ -104,7 +121,7 @@ button {
 }
 
 .top-left-tabs {
-    width: 290px;
+    width: 100%;
     height:40px;
     display:flex;
     align-items: center;
@@ -134,8 +151,8 @@ button {
 /* project tabs section */
 .projects-tabs {
     display:flex;
-    width:290px;
-    height:50px;
+    width:100%;
+    height:45px;
     align-items: center;
     padding:10px;
     gap:15px;
@@ -143,20 +160,97 @@ button {
 }
 
 #del-tab {
-    background-color: #EADDFF;
+    background-color: var(--light-purple);
 }
 
 /* add-task.js */
 
+#addNewTaskPage {
+    width:inherit;
+    display:flex;
+    justify-content: center;
+}
+
 .active-yellow {
-    background-color: #FFCC00;
+    background-color: var(--focused-yellow);
 }
 
 #newTaskDetailsBox {
-    width:980px;
-    height: 550px;
+    width:800px;
+    height:550px;
     background-color: #F4F4F4;
-    margin-top: 80px;
-    margin-left: 80px;
-    padding:80px 120px;
+    margin-top: 60px;
+    padding:50px 90px;
+}
+
+#taskDetailsTitle {
+    margin-bottom:70px;
+}
+
+.taskDetailsContainers {
+    display:flex;
+    border-top:1px solid var(--border-line);
+    width:100%;
+    height:40px;
+    padding:10px;
+    align-items: center;
+}
+
+input {
+    margin-left:15px;
+}
+
+
+.plusButton {
+    background-color: var(--light-purple);
+    width:120px;
+    height:35px;
+    color:var(--dark-purple);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    gap:8px;
+    margin-left:auto;
+}
+
+.folderTabs {
+    margin-left:auto;
+    display:flex;
+    gap:15px;
+}
+
+.setProjectFolderBtn {
+    background-color: var(--light-purple);
+    width:220px;
+    height:35px;
+    color:var(--dark-purple);
+    border-radius: 8px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:8px;
+}
+
+.mainActionBtnsContainer {
+    border-top:1px solid var(--border-line);
+    padding-top:30px;
+    display:flex;
+    gap:35px;
+}
+
+.mainActionBtns {
+    font-size: 18px;
+    padding: 10px 22px;
+    border-radius: 10px;
+}
+
+.addActionBtn {
+    background-color: #299DFD;
+    color:white;
+}
+
+.cancelActionBtn {
+    background-color: #DBDBDB;
+    color: #424242;
 }
