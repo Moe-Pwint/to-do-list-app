@@ -5,6 +5,7 @@ const { merge } = require('webpack-merge');
             mode: 'development',
             devtool: 'inline-source-map',
             devServer: {
+                historyApiFallback: true,
                 static: './dist',
                 watchFiles: ["./src/template.html"],
                 open: true, // Open the browser automatically

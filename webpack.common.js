@@ -8,12 +8,14 @@ const path = require('path');
             output: {
                 filename: '[name].bundle.js',
                 path: path.resolve(__dirname, 'dist'),
+                publicPath: '',
                 clean: true,
             },
             plugins: [
                 new HtmlWebpackPlugin({
-                title: 'Production',
-                }),
+                    template: './src/template.html',
+                    filename: 'index.html',
+                  }),
             ],
             module: {
                 rules: [
