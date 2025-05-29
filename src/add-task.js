@@ -13,6 +13,7 @@ const addTaskBtn = document.querySelector('.addTask');
 addTaskBtn.addEventListener('click',() => {
     changeAddTaskTab();
     createTaskDetailsBox();
+    createNewTask();
 });
 
 function changeAddTaskTab () {
@@ -111,6 +112,7 @@ function createTaskDetailsBox() {
     newTaskDetailsBox.appendChild(mainActionBtnsContainer);
 
     const addTaskActionBtn = createEle('button');
+    addTaskActionBtn.id = 'addNewTaskActionBtn';
     addTaskActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     addTaskActionBtn.textContent = 'Add new Task';
     mainActionBtnsContainer.appendChild(addTaskActionBtn);
@@ -132,7 +134,7 @@ function createTaskDetailsLabel (forValue, text) {
 function createTaskDetailsInput(typeValue, idValue, defaultText) {
     const input = createEle('input');
     input.setAttribute('type', typeValue);
-    input.id = idValue;
+    input.setAttribute('id', idValue);
     input.setAttribute('name', idValue);
     defaultText && input.setAttribute('placeholder', defaultText);
     return input;
@@ -156,4 +158,52 @@ function createAddButton () {
     const addBtn = createButton(plusPurple, 'Add');
     addBtn.setAttribute('class', 'plusButton');
     return addBtn;
+}
+
+function assignedFolder() {
+    let selectedFolder;
+    return selectedFolder;
+}
+
+//It takes the inputs from user and create a new task object.
+class NewTask {
+    constructor(taskName,projectFolder,description,notes) {
+        this.taskName = taskName;
+        this.projectFolder = projectFolder;
+        this.description = description;
+        this.notes = notes;
+    }
+    printTaskDetails() {
+        console.log(`task name: ${this.taskName}`);
+        console.log(`project folder: ${this.projectFolder}`);
+        console.log(`description: ${this.description}`);
+        console.log(`Notes: ${this.notes}`);
+    }
+}
+
+//Listen to Add New Task action button, calls class NewTask() and return object's values.
+function createNewTask() {
+    const generateNewTask = document.querySelector('#addNewTaskActionBtn');
+    generateNewTask.addEventListener('click', () => {
+        const nameValue = document.querySelector('#taskName').value;
+        const descriptionValue = document.querySelector('#taskDescription').value;
+        const notesValue = document.querySelector('#taskNotes').value;
+        const objName = nameValue;
+        const objFolder = assignedFolder();
+        let objDescription;
+        let objNotes;
+        if (descriptionValue) {
+            objDescription = descriptionValue;
+        } else {
+            objDescription = '';
+        }
+        if (notesValue) {
+            objNotes = notesValue;
+        } else {
+            objNotes = '';
+        }
+
+        const newTaskObj = new NewTask(objName, objFolder, objDescription, objNotes);
+        newTaskObj.printTaskDetails();
+    })
 }
