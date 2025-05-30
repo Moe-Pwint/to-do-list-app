@@ -1,11 +1,12 @@
 import "./styles.css";
-import "./index.js";
+import { projectObjects, taskObjects } from "./object-arrays.js";
 import {createEle, createLabel, createInput, createButton, createPurpleAddButton} from "./helper-functions.js";
 
 //svg imports
 import landscapeDots from "./svg/landscapeDots.svg";
 import folderSearch from "./svg/folderSearch.svg";
 import newFolder from "./svg/newFolder.svg";
+import plus from "./svg/plus.svg";
 
 
 const addTaskBtn = document.querySelector('.addTask');
@@ -14,6 +15,7 @@ const addTaskBtn = document.querySelector('.addTask');
 addTaskBtn.addEventListener('click',() => {
     changeAddTaskTab();
     createTaskDetailsBox();
+    assignFolderValue();
     createNewTask();
 });
 
@@ -24,22 +26,21 @@ function changeAddTaskTab () {
     const landscapeDotsIcon = createEle('img');
     landscapeDotsIcon.src = landscapeDots;
     landscapeDotsIcon.setAttribute('class','left-side-icons');
-    addTaskBtn.appendChild(landscapeDotsIcon);
+    //addTaskBtn.appendChild(landscapeDotsIcon);
 
     const addingTaskText = createEle('p');
     addingTaskText.textContent = 'Adding a new task';
-    addTaskBtn.appendChild(addingTaskText);
+    //addTaskBtn.appendChild(addingTaskText);
     addTaskBtn.replaceChildren(landscapeDotsIcon, addingTaskText);
 }
-
 
 function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
     addNewTaskPage.id = 'addNewTaskPage';
     rightContainer.appendChild(addNewTaskPage);
 
-    const newTaskDetailsBox = createEle('div');
-    newTaskDetailsBox.id = "newTaskDetailsBox";
+    const newTaskDetailsBox = createEle('form');
+    newTaskDetailsBox.id = "newTaskDetailsForm";
     addNewTaskPage.appendChild(newTaskDetailsBox);
 
     const taskDetailsTitle = createEle('h1');
@@ -56,6 +57,7 @@ function createTaskDetailsBox() {
     taskNameContainer.appendChild(taskNameLabel);
 
     const taskNameInput = createInput('text', 'taskName', 'Add task name');
+    taskNameInput.required = true;
     taskNameContainer.appendChild(taskNameInput);
 
     const taskNameAddBtn = createPurpleAddButton();
@@ -69,17 +71,44 @@ function createTaskDetailsBox() {
     const setFolderLabel = createLabel('setFolder', '*Project folder:');
     setFolderContainer.appendChild(setFolderLabel);
 
+    const setFolderInput = createInput('text', 'setFolder', '*Please choose a project folder');
+    setFolderInput.required = true;
+    setFolderInput.disabled = true;
+    setFolderContainer.appendChild(setFolderInput);
+
     const folderTabsContainer = createEle('div');
     folderTabsContainer.setAttribute('class', 'folderTabs');
     setFolderContainer.appendChild(folderTabsContainer);
 
-    const chooseFolderAddBtn = createButton(folderSearch, 'choose project folder');
-    chooseFolderAddBtn.setAttribute('class', 'setProjectFolderBtn');
-    folderTabsContainer.appendChild(chooseFolderAddBtn);
+    const chooseFolderDropdown = createEle('label');
+    chooseFolderDropdown.setAttribute('for', 'choosingFolder');
+    chooseFolderDropdown.id = 'chooseFolderDropdown';
+    folderTabsContainer.appendChild(chooseFolderDropdown);
+    
+    const select = createEle('select');
+    select.setAttribute('id', 'choosingFolder');
+    select.setAttribute('class', 'setProjectFolderBtn');
+    folderTabsContainer.appendChild(select);
+
+    const defaultOption = createEle('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Choose a project folder';
+    select.appendChild(defaultOption);
+
+    projectObjects.forEach ((folder) => {
+        const option = createEle('option');
+        option.value = folder.folderName;
+        option.textContent = folder.folderName;
+        select.appendChild(option);
+    });
+
+    folderTabsContainer.appendChild(select);
 
     const newFolderAddBtn = createButton(newFolder, 'create new project');
     newFolderAddBtn.setAttribute('class', 'setProjectFolderBtn');
+    newFolderAddBtn.id = 'newFolderWindow';
     folderTabsContainer.appendChild(newFolderAddBtn);
+    newFolderAddBtn.addEventListener('click', displayNewFolderWindow);
 
         //Description tab
     const taskDescriptionContainer = createEle('div');
@@ -115,7 +144,9 @@ function createTaskDetailsBox() {
     newTaskDetailsBox.appendChild(mainActionBtnsContainer);
 
     const addTaskActionBtn = createEle('button');
+    addTaskActionBtn.setAttribute('type', 'submit');
     addTaskActionBtn.id = 'addNewTaskActionBtn';
+    //addTaskActionBtn.disabled = true;
     addTaskActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     addTaskActionBtn.textContent = 'Add new Task';
     mainActionBtnsContainer.appendChild(addTaskActionBtn);
@@ -126,10 +157,6 @@ function createTaskDetailsBox() {
     mainActionBtnsContainer.appendChild(newTaskCancelBtn);
 }
 
-function assignedFolder() {
-    let selectedFolder;
-    return selectedFolder;
-}
 
 //It takes the inputs from user and create a new task object.
 class NewTask {
@@ -150,12 +177,19 @@ class NewTask {
 //Listen to Add New Task action button, calls class NewTask() and return object's values. Then call function removeTaskPage.
 function createNewTask() {
     const generateNewTask = document.querySelector('#addNewTaskActionBtn');
+
+    const nameValue = document.querySelector('#taskName').value;
+    const descriptionValue = document.querySelector('#taskDescription').value;
+    const objFolder = document.querySelector('#setFolder').value;
+    const notesValue = document.querySelector('#taskNotes').value;
+
+    //generateNewTask.disabled = false;
     generateNewTask.addEventListener('click', () => {
-        const nameValue = document.querySelector('#taskName').value;
-        const descriptionValue = document.querySelector('#taskDescription').value;
-        const notesValue = document.querySelector('#taskNotes').value;
-        const objName = nameValue;
-        const objFolder = assignedFolder();
+        
+        if (nameValue == '' || objFolder == '') {
+            return false;
+        } else {
+
         let objDescription;
         let objNotes;
         if (descriptionValue) {
@@ -169,10 +203,14 @@ function createNewTask() {
             objNotes = '';
         }
 
-        const newTaskObj = new NewTask(objName, objFolder, objDescription, objNotes);
+        const newTaskObj = new NewTask(nameValue, objFolder, objDescription, objNotes);
+        taskObjects.push(newTaskObj);
+        console.log(taskObjects);
         newTaskObj.printTaskDetails();
 
         removeTaskPage();
+        resetAddTaskTab();
+        }
     })
     
 }
@@ -182,3 +220,27 @@ function removeTaskPage() {
     const taskPage = document.querySelector('#addNewTaskPage');
     taskPage.remove();
 }
+
+function resetAddTaskTab () {
+    addTaskBtn.classList.remove('active-yellow');
+    const plusIcon = createEle('img');
+    plusIcon.src = plus;
+    plusIcon.setAttribute('class','left-side-icons');
+
+    const newTaskText = createEle('p');
+    newTaskText.textContent = 'Add a new task';
+    addTaskBtn.replaceChildren(plusIcon, newTaskText);
+
+}
+
+//Listens to folder buttons, add chosen option to the the folder input.   
+function assignFolderValue () {
+    const dropDown = document.querySelector('#choosingFolder');
+    const setFolder = document.querySelector('#setFolder');
+    dropDown.addEventListener('change', () => {
+        const selectedValue = dropDown.value;
+        setFolder.value = selectedValue;
+    })
+}
+
+function displayNewFolderWindow() {}

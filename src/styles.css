@@ -1,3 +1,5 @@
+
+
 :root {
     --light-purple: #EADDFF;
     --border-line: #E0E0E0;
@@ -25,9 +27,22 @@ button, input, select {
       outline: none;
     }
 
-    input {
-        cursor:text;
-    }
+button:disabled {
+    background-color: rgb(168, 168, 168);
+    color:rgb(122, 122, 122);
+    cursor:unset;
+}
+
+input {
+    cursor:text;
+}
+
+.transparent-bg {
+    width:100vw;
+    height:100vh;
+    background-color: grey;
+    opacity: 0.6;
+}
 
 @font-face {
     font-family:'handWritten_Bold';
@@ -175,8 +190,8 @@ button, input, select {
     background-color: var(--focused-yellow);
 }
 
-#newTaskDetailsBox {
-    width:800px;
+#newTaskDetailsForm {
+    width:900px;
     height:550px;
     background-color: #F4F4F4;
     margin-top: 60px;
@@ -198,8 +213,12 @@ button, input, select {
 
 input {
     margin-left:15px;
+    width: 300px;
 }
 
+input:disabled {
+    cursor: unset;
+}
 
 .plusButton {
     background-color: var(--light-purple);
@@ -251,6 +270,34 @@ input {
 }
 
 .cancelActionBtn {
-    background-color: #DBDBDB;
-    color: #424242;
+    /* background-color: #DBDBDB;
+    color: #424242; */
+    background-color: var(--light-purple);
+    color:var(--dark-purple);
 }
+#chooseFolderDropDown {
+    position:relative;
+}
+
+#chooseFolderContainer {
+    position:absolute;
+    top:0;
+    left:-50%;
+    /* transform: translate(-50%, -50%); */
+    width:500px;
+    height:200px;
+    background-color: #299DFD;
+}
+
+select#choosingFolder {
+    background: url('./svg/folderSearch.svg') no-repeat;
+    background-position: 20px 50%;
+    background-color: var(--light-purple);
+    width:250px;
+    height:35px;
+    color:var(--dark-purple);
+    border-radius: 8px;
+    padding-left:20px;
+    text-align: center;
+}
+
