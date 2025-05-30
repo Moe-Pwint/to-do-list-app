@@ -14,4 +14,3 @@ class ProjectObj {
 
 const sampleFolder = new ProjectObj('sample folder');
 sampleFolder.addToProjectArr();
-console.log(projectObjects);

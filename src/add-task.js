@@ -16,7 +16,6 @@ addTaskBtn.addEventListener('click',() => {
     changeAddTaskTab();
     createTaskDetailsBox();
     assignFolderValue();
-    createNewTask();
 });
 
 //Once "Add a new task" tab is clicked, it's turned yellow and text changed.
@@ -38,8 +37,8 @@ function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
     addNewTaskPage.id = 'addNewTaskPage';
     rightContainer.appendChild(addNewTaskPage);
-
-    const newTaskDetailsBox = createEle('form');
+    //div or form???
+    const newTaskDetailsBox = createEle('div');
     newTaskDetailsBox.id = "newTaskDetailsForm";
     addNewTaskPage.appendChild(newTaskDetailsBox);
 
@@ -57,7 +56,7 @@ function createTaskDetailsBox() {
     taskNameContainer.appendChild(taskNameLabel);
 
     const taskNameInput = createInput('text', 'taskName', 'Add task name');
-    taskNameInput.required = true;
+    //taskNameInput.required = true;
     taskNameContainer.appendChild(taskNameInput);
 
     const taskNameAddBtn = createPurpleAddButton();
@@ -72,18 +71,18 @@ function createTaskDetailsBox() {
     setFolderContainer.appendChild(setFolderLabel);
 
     const setFolderInput = createInput('text', 'setFolder', '*Please choose a project folder');
-    setFolderInput.required = true;
-    setFolderInput.disabled = true;
+    //setFolderInput.required = true;
+    setFolderInput.readOnly = true;
     setFolderContainer.appendChild(setFolderInput);
 
     const folderTabsContainer = createEle('div');
     folderTabsContainer.setAttribute('class', 'folderTabs');
     setFolderContainer.appendChild(folderTabsContainer);
 
-    const chooseFolderDropdown = createEle('label');
-    chooseFolderDropdown.setAttribute('for', 'choosingFolder');
-    chooseFolderDropdown.id = 'chooseFolderDropdown';
-    folderTabsContainer.appendChild(chooseFolderDropdown);
+    // const chooseFolderDropdown = createEle('label');
+    // chooseFolderDropdown.setAttribute('for', 'choosingFolder');
+    // chooseFolderDropdown.id = 'chooseFolderDropdown';
+    // folderTabsContainer.appendChild(chooseFolderDropdown);
     
     const select = createEle('select');
     select.setAttribute('id', 'choosingFolder');
@@ -143,9 +142,12 @@ function createTaskDetailsBox() {
     mainActionBtnsContainer.setAttribute('class', 'mainActionBtnsContainer');
     newTaskDetailsBox.appendChild(mainActionBtnsContainer);
 
+    
+
     const addTaskActionBtn = createEle('button');
     addTaskActionBtn.setAttribute('type', 'submit');
     addTaskActionBtn.id = 'addNewTaskActionBtn';
+    addTaskActionBtn.addEventListener('click', clickSubmit);
     //addTaskActionBtn.disabled = true;
     addTaskActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     addTaskActionBtn.textContent = 'Add new Task';
@@ -175,46 +177,29 @@ class NewTask {
 }
 
 //Listen to Add New Task action button, calls class NewTask() and return object's values. Then call function removeTaskPage.
-function createNewTask() {
-    const generateNewTask = document.querySelector('#addNewTaskActionBtn');
 
-    const nameValue = document.querySelector('#taskName').value;
-    const descriptionValue = document.querySelector('#taskDescription').value;
-    const objFolder = document.querySelector('#setFolder').value;
-    const notesValue = document.querySelector('#taskNotes').value;
 
-    //generateNewTask.disabled = false;
-    generateNewTask.addEventListener('click', () => {
-        
-        if (nameValue == '' || objFolder == '') {
-            return false;
-        } else {
 
-        let objDescription;
-        let objNotes;
-        if (descriptionValue) {
-            objDescription = descriptionValue;
-        } else {
-            objDescription = '';
-        }
-        if (notesValue) {
-            objNotes = notesValue;
-        } else {
-            objNotes = '';
-        }
+function clickSubmit() {
+    
+    const objName = document.querySelector('#taskName');
+    const objFolder = document.querySelector('#setFolder');
+    const objDescription = document.querySelector('#taskDescription').value;
+    const objNotes = document.querySelector('#taskNotes').value;
 
-        const newTaskObj = new NewTask(nameValue, objFolder, objDescription, objNotes);
+    if (objName.value === "" || objFolder.value === "") {
+        alert("Please add task name and project folder");
+        return false;
+    } else {
+        const newTaskObj = new NewTask(objName.value, objFolder.value, objDescription, objNotes);
         taskObjects.push(newTaskObj);
-        console.log(taskObjects);
         newTaskObj.printTaskDetails();
-
         removeTaskPage();
         resetAddTaskTab();
-        }
-    })
-    
-}
+        return true;
+    }
 
+}
 
 function removeTaskPage() {
     const taskPage = document.querySelector('#addNewTaskPage');

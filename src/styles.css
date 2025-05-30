@@ -210,13 +210,16 @@ input {
     padding:10px;
     align-items: center;
 }
+label {
+    width:120px;
+}
 
 input {
     margin-left:15px;
-    width: 300px;
+    width: 250px;
 }
 
-input:disabled {
+input:read-only {
     cursor: unset;
 }
 
