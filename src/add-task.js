@@ -1,21 +1,23 @@
 import "./styles.css";
-import createMainElements, {createEle} from "./main-ui";
+import "./index.js";
+import {createEle, createLabel, createInput, createButton, createPurpleAddButton} from "./helper-functions.js";
 
+//svg imports
 import landscapeDots from "./svg/landscapeDots.svg";
-import plusPurple from "./svg/plusPurple.svg";
 import folderSearch from "./svg/folderSearch.svg";
 import newFolder from "./svg/newFolder.svg";
 
-createMainElements();
 
 const addTaskBtn = document.querySelector('.addTask');
 
+//Listen to "Add a new task" tab in Left Container.
 addTaskBtn.addEventListener('click',() => {
     changeAddTaskTab();
     createTaskDetailsBox();
     createNewTask();
 });
 
+//Once "Add a new task" tab is clicked, it's turned yellow and text changed.
 function changeAddTaskTab () {
     //change the tab contents.
     addTaskBtn.classList.add('active-yellow');
@@ -29,6 +31,7 @@ function changeAddTaskTab () {
     addTaskBtn.appendChild(addingTaskText);
     addTaskBtn.replaceChildren(landscapeDotsIcon, addingTaskText);
 }
+
 
 function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
@@ -49,13 +52,13 @@ function createTaskDetailsBox() {
     taskNameContainer.setAttribute('class', 'taskDetailsContainers');
     newTaskDetailsBox.appendChild(taskNameContainer);
 
-    const taskNameLabel = createTaskDetailsLabel('taskName', '*Task Name:');
+    const taskNameLabel = createLabel('taskName', '*Task Name:');
     taskNameContainer.appendChild(taskNameLabel);
 
-    const taskNameInput = createTaskDetailsInput('text', 'taskName', 'Add task name');
+    const taskNameInput = createInput('text', 'taskName', 'Add task name');
     taskNameContainer.appendChild(taskNameInput);
 
-    const taskNameAddBtn = createAddButton();
+    const taskNameAddBtn = createPurpleAddButton();
     taskNameContainer.appendChild(taskNameAddBtn);
 
         //choose project folder tab
@@ -63,7 +66,7 @@ function createTaskDetailsBox() {
     setFolderContainer.setAttribute('class', 'taskDetailsContainers');
     newTaskDetailsBox.appendChild(setFolderContainer);
 
-    const setFolderLabel = createTaskDetailsLabel('setFolder', '*Project folder:');
+    const setFolderLabel = createLabel('setFolder', '*Project folder:');
     setFolderContainer.appendChild(setFolderLabel);
 
     const folderTabsContainer = createEle('div');
@@ -83,13 +86,13 @@ function createTaskDetailsBox() {
     taskDescriptionContainer.setAttribute('class', 'taskDetailsContainers');
     newTaskDetailsBox.appendChild(taskDescriptionContainer);
 
-    const taskDescriptionLabel = createTaskDetailsLabel('taskDescription', 'Description:');
+    const taskDescriptionLabel = createLabel('taskDescription', 'Description:');
     taskDescriptionContainer.appendChild(taskDescriptionLabel);
 
-    const taskDescriptionInput = createTaskDetailsInput('text', 'taskDescription');
+    const taskDescriptionInput = createInput('text', 'taskDescription');
     taskDescriptionContainer.appendChild(taskDescriptionInput);
 
-    const taskDescriptionAddBtn = createAddButton();
+    const taskDescriptionAddBtn = createPurpleAddButton();
     taskDescriptionContainer.appendChild(taskDescriptionAddBtn);
 
         //Notes tab
@@ -97,13 +100,13 @@ function createTaskDetailsBox() {
     taskNotesContainer.setAttribute('class', 'taskDetailsContainers');
     newTaskDetailsBox.appendChild(taskNotesContainer);
 
-    const taskNotesLabel = createTaskDetailsLabel('taskNotes', 'Notes:');
+    const taskNotesLabel = createLabel('taskNotes', 'Notes:');
     taskNotesContainer.appendChild(taskNotesLabel);
 
-    const taskNotesInput = createTaskDetailsInput('text', 'taskNotes');
+    const taskNotesInput = createInput('text', 'taskNotes');
     taskNotesContainer.appendChild(taskNotesInput);
 
-    const taskNotesAddBtn = createAddButton();
+    const taskNotesAddBtn = createPurpleAddButton();
     taskNotesContainer.appendChild(taskNotesAddBtn);
 
         //Main Action Buttons tab
@@ -121,43 +124,6 @@ function createTaskDetailsBox() {
     newTaskCancelBtn.setAttribute('class', 'mainActionBtns cancelActionBtn');
     newTaskCancelBtn.textContent = 'Cancel Task';
     mainActionBtnsContainer.appendChild(newTaskCancelBtn);
-}
-
-function createTaskDetailsLabel (forValue, text) {
-    const label = createEle('label');
-    label.setAttribute('for', forValue);
-    label.textContent = text;
-    return label;
-
-}
-
-function createTaskDetailsInput(typeValue, idValue, defaultText) {
-    const input = createEle('input');
-    input.setAttribute('type', typeValue);
-    input.setAttribute('id', idValue);
-    input.setAttribute('name', idValue);
-    defaultText && input.setAttribute('placeholder', defaultText);
-    return input;
-}
-
-function createButton(iconSrc, textValue) {
-    const button = createEle('button');
-    
-    const icon = createEle('img');
-    icon.src = iconSrc;
-    button.appendChild(icon);
-
-    const text = createEle('p');
-    text.textContent = textValue;
-    button.appendChild(text);
-
-    return button;
-} 
-
-function createAddButton () {
-    const addBtn = createButton(plusPurple, 'Add');
-    addBtn.setAttribute('class', 'plusButton');
-    return addBtn;
 }
 
 function assignedFolder() {
@@ -181,7 +147,7 @@ class NewTask {
     }
 }
 
-//Listen to Add New Task action button, calls class NewTask() and return object's values.
+//Listen to Add New Task action button, calls class NewTask() and return object's values. Then call function removeTaskPage.
 function createNewTask() {
     const generateNewTask = document.querySelector('#addNewTaskActionBtn');
     generateNewTask.addEventListener('click', () => {
@@ -205,5 +171,14 @@ function createNewTask() {
 
         const newTaskObj = new NewTask(objName, objFolder, objDescription, objNotes);
         newTaskObj.printTaskDetails();
+
+        removeTaskPage();
     })
+    
+}
+
+
+function removeTaskPage() {
+    const taskPage = document.querySelector('#addNewTaskPage');
+    taskPage.remove();
 }

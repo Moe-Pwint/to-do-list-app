@@ -1,5 +1,9 @@
-import "./styles.css";
+//export default createMainElements;
 
+import "./styles.css";
+import {createEle} from './helper-functions.js';
+
+//images import
 import odinImage from "./images/odin.png";
 import plus from "./svg/plus.svg";
 import search from "./svg/search.svg";
@@ -8,12 +12,7 @@ import addProject from "./svg/addProject.svg";
 import del from "./svg/del.svg";
 import portraitDots from './svg/portraitDots.svg';
 
-export default createMainElements;
-export {createEle};
-
-function createEle (ele) {
-    return document.createElement(ele);
-}
+createMainElements();
 
 function createMainElements () {
 

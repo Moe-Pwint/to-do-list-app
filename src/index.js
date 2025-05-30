@@ -1,3 +1,4 @@
 import "./styles.css";
-import "./main-ui.js";
+import "./main-ui";
 import "./add-task.js";
+
