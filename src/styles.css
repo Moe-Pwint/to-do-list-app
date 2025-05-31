@@ -4,7 +4,17 @@
     --light-purple: #EADDFF;
     --border-line: #E0E0E0;
     --focused-yellow: #FFCC00;
-    --dark-purple: #4F378B;
+    --light-yellow: #FFEFC0;
+    --dark-purple: #4b387a;
+    --bright-blue: #299dfd;
+    --smoke-white: rgb(219, 219, 219);
+    --btn-disabled: rgb(168, 168, 168);
+    --btn-disabled-text: rgb(122, 122, 122);
+    --turquoise: rgb(85, 140, 121);
+    --dark-grey: #343434;
+    --disabled-tab-font:var(--disabled-tab-font);
+    --grey-bg-containers: #F4F4F4;
+    
 }
 
 body,p {
@@ -28,20 +38,25 @@ button, input, select {
     }
 
 button:disabled {
-    background-color: rgb(168, 168, 168);
-    color:rgb(122, 122, 122);
+    background-color:var(--btn-disabled);
+    color:var(--btn-disabled-text);
     cursor:unset;
 }
 
 input {
     cursor:text;
+    margin-left:15px;
+    width: 250px;
 }
 
-.transparent-bg {
+#transparent-backdrop {
     width:100vw;
     height:100vh;
-    background-color: grey;
-    opacity: 0.6;
+    background-color: white;
+    opacity: 0.8;
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 @font-face {
@@ -89,7 +104,7 @@ input {
     padding:30px;
     min-width:350px;
     height:100vh;
-    border-right:1px solid #E0E0E0;
+    border-right:1px solid var(--border-line);
     box-sizing: border-box;
 }
 
@@ -106,7 +121,7 @@ input {
 }
 
 #logo {
-    background-color: rgb(85, 140, 121);
+    background-color: var(--turquoise);
 
     height:auto;
     border-radius: 10px;
@@ -151,7 +166,7 @@ input {
     margin-top: 80px;
     display:flex;
     align-items:center;
-    color: #343434;
+    color:var(--dark-grey);
 }
 
 #addProjectIcon {
@@ -171,11 +186,12 @@ input {
     align-items: center;
     padding:10px;
     gap:15px;
-    color: #565656;
+    
 }
 
-#del-tab {
+.disabled-tabs {
     background-color: var(--light-purple);
+    color: var(--btn-disabled-text);
 }
 
 /* add-task.js */
@@ -190,10 +206,10 @@ input {
     background-color: var(--focused-yellow);
 }
 
-#newTaskDetailsForm {
+#newTaskDetailsDiv {
     width:900px;
     height:550px;
-    background-color: #F4F4F4;
+    background-color: var(--grey-bg-containers);
     margin-top: 60px;
     padding:50px 90px;
 }
@@ -214,10 +230,7 @@ label {
     width:120px;
 }
 
-input {
-    margin-left:15px;
-    width: 250px;
-}
+
 
 input:read-only {
     cursor: unset;
@@ -268,7 +281,7 @@ input:read-only {
 }
 
 .addActionBtn {
-    background-color: #299DFD;
+    background-color: var(--bright-blue);
     color:white;
 }
 
@@ -286,10 +299,9 @@ input:read-only {
     position:absolute;
     top:0;
     left:-50%;
-    /* transform: translate(-50%, -50%); */
     width:500px;
     height:200px;
-    background-color: #299DFD;
+    background-color: var(--bright-blue);
 }
 
 select#choosingFolder {
@@ -302,5 +314,47 @@ select#choosingFolder {
     border-radius: 8px;
     padding-left:20px;
     text-align: center;
+}
+
+
+/* New folder Container */
+
+#newFolderContainer {
+    width:max-content;
+    height:200px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--dark-purple);
+    z-index: 1;
+    border-radius: 15px;
+    padding:50px 80px;
+    color:var(--smoke-white);
+    font-size: 20px;
+    input {
+        background-color:var(--light-purple);
+        padding:10px;
+        border-radius: 8px;
+        font-size: 17px;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 60px;
+    }
+}
+
+.projectActionBtnsContainer {
+    border-top:1px solid var(--border-line);
+    width:max-content;
+    padding-top:20px;
+    display:flex;
+    justify-content: center;
+    gap:35px;
+    margin-left: 15px;
+}
+
+.addProjectActionBtn {
+    background-color: var(--focused-yellow);
+    color:var(--dark-grey);
 }
 

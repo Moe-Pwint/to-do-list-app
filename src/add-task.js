@@ -1,10 +1,10 @@
 import "./styles.css";
 import { projectObjects, taskObjects } from "./object-arrays.js";
 import {createEle, createLabel, createInput, createButton, createPurpleAddButton} from "./helper-functions.js";
+import { displayNewFolderWindow } from "./new-project.js";
 
 //svg imports
 import landscapeDots from "./svg/landscapeDots.svg";
-import folderSearch from "./svg/folderSearch.svg";
 import newFolder from "./svg/newFolder.svg";
 import plus from "./svg/plus.svg";
 
@@ -25,11 +25,9 @@ function changeAddTaskTab () {
     const landscapeDotsIcon = createEle('img');
     landscapeDotsIcon.src = landscapeDots;
     landscapeDotsIcon.setAttribute('class','left-side-icons');
-    //addTaskBtn.appendChild(landscapeDotsIcon);
 
     const addingTaskText = createEle('p');
     addingTaskText.textContent = 'Adding a new task';
-    //addTaskBtn.appendChild(addingTaskText);
     addTaskBtn.replaceChildren(landscapeDotsIcon, addingTaskText);
 }
 
@@ -37,9 +35,8 @@ function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
     addNewTaskPage.id = 'addNewTaskPage';
     rightContainer.appendChild(addNewTaskPage);
-    //div or form???
     const newTaskDetailsBox = createEle('div');
-    newTaskDetailsBox.id = "newTaskDetailsForm";
+    newTaskDetailsBox.id = "newTaskDetailsDiv";
     addNewTaskPage.appendChild(newTaskDetailsBox);
 
     const taskDetailsTitle = createEle('h1');
@@ -56,7 +53,6 @@ function createTaskDetailsBox() {
     taskNameContainer.appendChild(taskNameLabel);
 
     const taskNameInput = createInput('text', 'taskName', 'Add task name');
-    //taskNameInput.required = true;
     taskNameContainer.appendChild(taskNameInput);
 
     const taskNameAddBtn = createPurpleAddButton();
@@ -71,18 +67,12 @@ function createTaskDetailsBox() {
     setFolderContainer.appendChild(setFolderLabel);
 
     const setFolderInput = createInput('text', 'setFolder', '*Please choose a project folder');
-    //setFolderInput.required = true;
     setFolderInput.readOnly = true;
     setFolderContainer.appendChild(setFolderInput);
 
     const folderTabsContainer = createEle('div');
     folderTabsContainer.setAttribute('class', 'folderTabs');
     setFolderContainer.appendChild(folderTabsContainer);
-
-    // const chooseFolderDropdown = createEle('label');
-    // chooseFolderDropdown.setAttribute('for', 'choosingFolder');
-    // chooseFolderDropdown.id = 'chooseFolderDropdown';
-    // folderTabsContainer.appendChild(chooseFolderDropdown);
     
     const select = createEle('select');
     select.setAttribute('id', 'choosingFolder');
@@ -142,13 +132,10 @@ function createTaskDetailsBox() {
     mainActionBtnsContainer.setAttribute('class', 'mainActionBtnsContainer');
     newTaskDetailsBox.appendChild(mainActionBtnsContainer);
 
-    
-
     const addTaskActionBtn = createEle('button');
-    addTaskActionBtn.setAttribute('type', 'submit');
+    // addTaskActionBtn.setAttribute('type', 'submit');
     addTaskActionBtn.id = 'addNewTaskActionBtn';
-    addTaskActionBtn.addEventListener('click', clickSubmit);
-    //addTaskActionBtn.disabled = true;
+    addTaskActionBtn.addEventListener('click', clickNewTaskSubmit);
     addTaskActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     addTaskActionBtn.textContent = 'Add new Task';
     mainActionBtnsContainer.appendChild(addTaskActionBtn);
@@ -160,7 +147,7 @@ function createTaskDetailsBox() {
 }
 
 
-//It takes the inputs from user and create a new task object.
+//This class takes the inputs from user and create a new task object.
 class NewTask {
     constructor(taskName,projectFolder,description,notes) {
         this.taskName = taskName;
@@ -176,11 +163,9 @@ class NewTask {
     }
 }
 
-//Listen to Add New Task action button, calls class NewTask() and return object's values. Then call function removeTaskPage.
-
-
-
-function clickSubmit() {
+//When New Task Action Button is clicked, this function calls class NewTask() and return object's values. 
+//Then call function removeTaskPage and function resetAddTaskTab.
+function clickNewTaskSubmit() {
     
     const objName = document.querySelector('#taskName');
     const objFolder = document.querySelector('#setFolder');
@@ -218,7 +203,7 @@ function resetAddTaskTab () {
 
 }
 
-//Listens to folder buttons, add chosen option to the the folder input.   
+//Listens to 'choose folder' button, add chosen option to the the folder input.   
 function assignFolderValue () {
     const dropDown = document.querySelector('#choosingFolder');
     const setFolder = document.querySelector('#setFolder');
@@ -228,4 +213,3 @@ function assignFolderValue () {
     })
 }
 
-function displayNewFolderWindow() {}

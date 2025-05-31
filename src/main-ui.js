@@ -133,7 +133,7 @@ function createMainElements () {
 
     const delTab = createEle('button');
     //this is common class for all dynamically created projects.
-    delTab.setAttribute('class', 'projects-tabs');
+    delTab.setAttribute('class', 'projects-tabs disabled-tabs');
     delTab.id = 'del-tab';
     delContainer.appendChild(delTab);
 
