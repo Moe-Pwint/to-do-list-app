@@ -51,12 +51,23 @@ input {
     width: 250px;
 }
 
-#transparent-backdrop {
+/* #transparent-backdrop {
     width:100vw;
     height:100vh;
     background-color: white;
     opacity: 0.8;
     position:absolute;
+    top:0;
+    left:0;
+} */
+
+#transparent-backdrop {
+    width:350px;
+    height:100vh;
+    background-color: white;
+    opacity: 0.4;
+    position:absolute;
+    z-index: 1;
     top:0;
     left:0;
 }
@@ -91,6 +102,10 @@ input {
     unicode-range: U+0020-007A;
 }
 
+.eventsDisabled {
+    pointer-events: 0;
+    opacity: 0.5;
+}
 
 .push-right {
     margin-left:auto;

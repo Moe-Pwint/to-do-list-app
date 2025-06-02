@@ -1,10 +1,21 @@
-export {createEle, createLabel, createInput, createButton, checkInputFieldStatus};
+export {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus};
 
 import plusPurple from "./svg/plusPurple.svg";
 import editPurple from"./svg/editPurple.svg";
 import disabledPlus from "./svg/disabledPlus.svg";
 import disabledEdit from "./svg/disabledEdit.svg";
 
+function appendTransparentBackdrop() {
+    const backdrop = createEle('div');
+    backdrop.setAttribute('id', 'transparent-backdrop');
+    const leftContainer = document.querySelector('#leftContainer');
+    leftContainer.appendChild(backdrop);
+}
+
+function removeTransparentBackdrop() {
+    const backdrop = document.querySelector('#transparent-backdrop');
+    backdrop.remove();
+}
 
 function createEle (ele) {
     return document.createElement(ele);

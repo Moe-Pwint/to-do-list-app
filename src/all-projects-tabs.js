@@ -2,6 +2,7 @@ import { createEle } from "./helper-functions";
 import folder from "./svg/folder.svg";
 import arrowDownRight from "./svg/arrow-down-right.svg";
 import './styles.css';
+import {openTaskPage} from "./open-task-page.js";
 
 export{updateAllProjectsTabs, updateProjectTasksTabs};
 
@@ -50,4 +51,8 @@ function updateProjectTasksTabs(parentProject, childTaskObj) {
     taskTabText.textContent = taskName;
     newTaskTab.appendChild(taskTabText);
     
+    document.getElementById(taskName).addEventListener('click', ()=> {
+        openTaskPage(childTaskObj);
+    });
 }
+

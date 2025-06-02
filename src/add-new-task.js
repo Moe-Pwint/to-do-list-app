@@ -1,6 +1,6 @@
 import "./styles.css";
 import { projectObjects, taskObjects } from "./object-arrays.js";
-import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
+import {appendTransparentBackdrop, removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
 import { displayNewFolderWindow} from "./add-new-project.js";
 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
@@ -15,7 +15,7 @@ const addTaskBtn = document.querySelector('.addTask');
 
 //Listen to "Add a new task" tab in Left Container.
 addTaskBtn.addEventListener('click',() => {
-    console.log('works');
+    appendTransparentBackdrop();
     changeAddTaskTab();
     createTaskDetailsBox();
     assignFolderValue();
@@ -37,6 +37,7 @@ function changeAddTaskTab () {
 function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
     addNewTaskPage.id = 'addNewTaskPage';
+    rightContainer.replaceChildren();
     rightContainer.appendChild(addNewTaskPage);
     const newTaskDetailsBox = createEle('div');
     newTaskDetailsBox.id = "newTaskDetailsDiv";
@@ -225,8 +226,11 @@ function cancelNewTask() {
 }
 
 function removeTaskPage() {
+    
     const taskPage = document.querySelector('#addNewTaskPage');
+    removeTransparentBackdrop();
     taskPage.remove();
+
 }
 
 function resetAddTaskTab () {
