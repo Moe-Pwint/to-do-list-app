@@ -1,4 +1,4 @@
-export {displayNewFolderWindow, updateChooseFolder};
+export {displayNewFolderWindow, loadChooseFolder};
 
 import './styles.css';
 import { projectObjects, taskObjects } from "./object-arrays.js";
@@ -58,6 +58,12 @@ function clickNewProjectSubmit() {
     }
 }
 
+function loadChooseFolder() {
+    for (const folder of projectObjects) {
+        updateChooseFolder(folder.projectName);
+    }
+}
+
 function updateChooseFolder(newFolder) {
     const choosingFolder = document.querySelector('#choosingFolder');
     
@@ -77,6 +83,7 @@ class NewProject {
     constructor(projectName) {
         
         this.projectName = projectName;
+        this.tasksList = [];
     }
 }
 

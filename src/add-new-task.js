@@ -1,7 +1,7 @@
 import "./styles.css";
 import { projectObjects, taskObjects } from "./object-arrays.js";
 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
-import { displayNewFolderWindow, updateChooseFolder } from "./add-new-project.js";
+import { displayNewFolderWindow, loadChooseFolder } from "./add-new-project.js";
 
 //svg imports
 import landscapeDots from "./svg/landscapeDots.svg";
@@ -94,6 +94,7 @@ function createTaskDetailsBox() {
     newFolderAddBtn.id = 'newFolderWindow';
     folderTabsContainer.appendChild(newFolderAddBtn);
     newFolderAddBtn.addEventListener('click', displayNewFolderWindow);
+    loadChooseFolder();
 
         //Description tab
     const taskDescriptionContainer = createEle('div');
@@ -180,12 +181,25 @@ function clickNewTaskSubmit() {
         const newTaskObj = new NewTask(objName.value, objFolder.value, objDescription, objNotes);
         taskObjects.push(newTaskObj);
         newTaskObj.printTaskDetails();
+        addNewTaskToProject(newTaskObj, objFolder.value);
+        console.log(projectObjects);
         removeTaskPage();
         resetAddTaskTab();
         return true;
     }
 
 }
+
+//when new task is submitted, the newTask Object is added to it's parent projectObj in its projectObj array.
+function addNewTaskToProject(newTaskObj, folderName) {
+    for (const projectObj of projectObjects) {
+        if (folderName == projectObj.projectName) {
+            projectObj.tasksList.push(newTaskObj);
+            return;
+        }
+    }
+}
+
 
 function cancelNewTask() {
     removeTaskPage();
