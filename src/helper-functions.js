@@ -63,16 +63,14 @@ function checkInputFieldStatus() {
         for (const field of inputFields) {
             field.addEventListener('focus',()=> {
                 const btn = field.nextElementSibling;
+                let newValues;
                 if (field.value !== '') {
-                    const disabledEditBtn = createButton(disabledEdit, 'Edit', 'inputButton');
-                    disabledEditBtn.disabled = true;
-                    field.parentNode.replaceChild(disabledEditBtn, btn);
+                    newValues = replaceBtnContents(disabledEdit, 'Edit');
                 } else {
-                    const disabledAddBtn = createButton(disabledPlus, 'Add', 'inputButton');
-                    disabledAddBtn.disabled = true;
-                    field.parentNode.replaceChild(disabledAddBtn, btn);
+                    newValues = replaceBtnContents(disabledPlus, 'Add');
                 }
-
+                btn.replaceChildren(...newValues);
+                btn.disabled = true;
             })
         }
     }
@@ -81,13 +79,14 @@ function checkInputFieldStatus() {
         for (const field of inputFields) {
             field.addEventListener('focusout', ()=>{
                 const btn = field.nextElementSibling;
+                let newValues;
                 if (field.value == '') {
-                    const purpleAddBtn = createButton(plusPurple, 'Add', 'inputButton');
-                    field.parentNode.replaceChild(purpleAddBtn, btn);
+                    newValues = replaceBtnContents(plusPurple, 'Add');
                 } else {
-                    const purpleEditBtn = createButton(editPurple, 'Edit', 'inputButton');
-                    field.parentNode.replaceChild(purpleEditBtn, btn);
+                    newValues = replaceBtnContents(editPurple, 'Edit');
                 }
+                btn.disabled = !btn.disabled;
+                btn.replaceChildren(...newValues);
             })
         }
     }
@@ -99,3 +98,12 @@ function checkInputFieldStatus() {
 
 
 
+function replaceBtnContents(iconSrc, textValue) {
+    const icon = createEle('img');
+    icon.src = iconSrc;
+    const text = createEle('p');
+    text.textContent = textValue;
+
+    return [icon,text];
+
+}
