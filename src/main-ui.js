@@ -2,6 +2,7 @@
 
 import "./styles.css";
 import {createEle} from './helper-functions.js';
+import {addNewProjectByIcon} from './new-project-btn.js';
 
 //images import
 import odinImage from "./images/odin.png";
@@ -118,7 +119,7 @@ function createMainElements () {
     addProjectIcon.appendChild(projectIcon);
     projectsTitleContainer.appendChild(addProjectIcon); 
 
-
+    addNewProjectByIcon();
 
     //PROJECTS DISPLAY
 
@@ -133,7 +134,7 @@ function createMainElements () {
 
     const delTab = createEle('button');
     //this is common class for all dynamically created projects.
-    delTab.setAttribute('class', 'projects-tabs disabled-tabs');
+    delTab.setAttribute('class', 'leftSide-tabs disabled-tabs');
     delTab.id = 'del-tab';
     delContainer.appendChild(delTab);
 

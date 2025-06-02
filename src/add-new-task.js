@@ -1,7 +1,8 @@
 import "./styles.css";
 import { projectObjects, taskObjects } from "./object-arrays.js";
 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
-import { displayNewFolderWindow, loadChooseFolder } from "./add-new-project.js";
+import { displayNewFolderWindow} from "./add-new-project.js";
+import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
 //svg imports
 import landscapeDots from "./svg/landscapeDots.svg";
@@ -80,6 +81,7 @@ function createTaskDetailsBox() {
     select.setAttribute('id', 'choosingFolder');
     select.setAttribute('class', 'setProjectFolderBtn');
     folderTabsContainer.appendChild(select);
+    select.addEventListener('focus', loadChooseFolder);
 
     const defaultOption = createEle('option');
     defaultOption.value = '';
@@ -94,7 +96,7 @@ function createTaskDetailsBox() {
     newFolderAddBtn.id = 'newFolderWindow';
     folderTabsContainer.appendChild(newFolderAddBtn);
     newFolderAddBtn.addEventListener('click', displayNewFolderWindow);
-    loadChooseFolder();
+    
 
         //Description tab
     const taskDescriptionContainer = createEle('div');
@@ -146,8 +148,24 @@ function createTaskDetailsBox() {
     checkInputFieldStatus();
 }
 
+function loadChooseFolder() {
+    const choosingFolder = document.querySelector('#choosingFolder');
+    choosingFolder.replaceChildren();
+    const defaultOption = createEle('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Choose a project folder';
+    defaultOption.setAttribute('class', 'chooseFolderOptions');
+    choosingFolder.appendChild(defaultOption);
 
+    for (const folder of projectObjects) {
+        const option = createEle('option');
+        option.value = folder.projectName;
+        option.textContent = folder.projectName;
+        option.setAttribute('class', 'chooseFolderOptions');
+        choosingFolder.appendChild(option);
+    }
 
+}
 
 //This class takes the inputs from user and create a new task object.
 class NewTask {
@@ -182,7 +200,7 @@ function clickNewTaskSubmit() {
         taskObjects.push(newTaskObj);
         newTaskObj.printTaskDetails();
         addNewTaskToProject(newTaskObj, objFolder.value);
-        console.log(projectObjects);
+        updateProjectTasksTabs(objFolder.value, newTaskObj);
         removeTaskPage();
         resetAddTaskTab();
         return true;

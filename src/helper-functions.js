@@ -46,7 +46,6 @@ function createButton(iconSrc, textValue, classValue) {
     return button;
 } 
 
-
 function checkInputFieldStatus() {
     const inputBtns = document.querySelectorAll('.inputButton');
     const inputFields = document.getElementsByClassName('inputField');
@@ -95,8 +94,6 @@ function checkInputFieldStatus() {
     disableBtnWhenFocus();
     checkUnfocusStatus();
 }
-
-
 
 function replaceBtnContents(iconSrc, textValue) {
     const icon = createEle('img');

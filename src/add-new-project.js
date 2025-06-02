@@ -1,8 +1,9 @@
-export {displayNewFolderWindow, loadChooseFolder};
+export {displayNewFolderWindow};
 
 import './styles.css';
 import { projectObjects, taskObjects } from "./object-arrays.js";
 import {createEle, createLabel, createInput} from "./helper-functions.js";
+import {updateAllProjectsTabs} from './all-projects-tabs.js';
 
 function displayNewFolderWindow() {
     const container = createEle('div');
@@ -52,26 +53,10 @@ function clickNewProjectSubmit() {
     } else {
         const newProjectObj = new NewProject(objName.value);
         projectObjects.push(newProjectObj);
-        updateChooseFolder(objName.value);
         removeProjectSettingContainer();
+        updateAllProjectsTabs(newProjectObj);
         return true;
     }
-}
-
-function loadChooseFolder() {
-    for (const folder of projectObjects) {
-        updateChooseFolder(folder.projectName);
-    }
-}
-
-function updateChooseFolder(newFolder) {
-    const choosingFolder = document.querySelector('#choosingFolder');
-    
-        const option = createEle('option');
-        option.value = newFolder;
-        option.textContent = newFolder;
-        option.setAttribute('class', 'chooseFolderOptions');
-        choosingFolder.appendChild(option);
 }
 
 function cancelNewProject() {
@@ -93,3 +78,4 @@ function removeProjectSettingContainer() {
     console.log(projectObjects);
 }
 
+//for add-new-task.js
