@@ -1,4 +1,4 @@
-export {displayNewFolderWindow};
+export {displayNewFolderWindow, updateChooseFolder};
 
 import './styles.css';
 import { projectObjects, taskObjects } from "./object-arrays.js";
@@ -37,6 +37,7 @@ function displayNewFolderWindow() {
     mainActionBtnsContainer.appendChild(addProjectActionBtn);
 
     const newProjectCancelBtn = createEle('button');
+    newProjectCancelBtn.addEventListener('click', cancelNewProject);
     newProjectCancelBtn.setAttribute('class', 'mainActionBtns cancelActionBtn');
     newProjectCancelBtn.textContent = 'Cancel project';
     mainActionBtnsContainer.appendChild(newProjectCancelBtn);
@@ -51,9 +52,24 @@ function clickNewProjectSubmit() {
     } else {
         const newProjectObj = new NewProject(objName.value);
         projectObjects.push(newProjectObj);
+        updateChooseFolder(objName.value);
         removeProjectSettingContainer();
         return true;
     }
+}
+
+function updateChooseFolder(newFolder) {
+    const choosingFolder = document.querySelector('#choosingFolder');
+    
+        const option = createEle('option');
+        option.value = newFolder;
+        option.textContent = newFolder;
+        option.setAttribute('class', 'chooseFolderOptions');
+        choosingFolder.appendChild(option);
+}
+
+function cancelNewProject() {
+    removeProjectSettingContainer();
 }
 
 //This class takes the inputs from user and create a new project object.
@@ -69,3 +85,4 @@ function removeProjectSettingContainer() {
     projectSettingContainer.remove();
     console.log(projectObjects);
 }
+

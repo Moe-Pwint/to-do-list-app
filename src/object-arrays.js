@@ -12,5 +12,5 @@ const taskObjects = [];
 //     }
 // }
 
-// const sampleFolder = new ProjectObj('sample folder');
-// sampleFolder.addToProjectArr();
+//const sampleFolder = new ProjectObj('sample folder');
+//sampleFolder.addToProjectArr();

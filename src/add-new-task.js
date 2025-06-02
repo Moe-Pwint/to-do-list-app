@@ -1,18 +1,20 @@
 import "./styles.css";
 import { projectObjects, taskObjects } from "./object-arrays.js";
-import {createEle, createLabel, createInput, createButton, createPurpleAddButton} from "./helper-functions.js";
-import { displayNewFolderWindow } from "./new-project.js";
+import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
+import { displayNewFolderWindow, updateChooseFolder } from "./add-new-project.js";
 
 //svg imports
 import landscapeDots from "./svg/landscapeDots.svg";
 import newFolder from "./svg/newFolder.svg";
 import plus from "./svg/plus.svg";
+import plusPurple from "./svg/plusPurple.svg";
 
 
 const addTaskBtn = document.querySelector('.addTask');
 
 //Listen to "Add a new task" tab in Left Container.
 addTaskBtn.addEventListener('click',() => {
+    console.log('works');
     changeAddTaskTab();
     createTaskDetailsBox();
     assignFolderValue();
@@ -52,10 +54,10 @@ function createTaskDetailsBox() {
     const taskNameLabel = createLabel('taskName', '*Task Name:');
     taskNameContainer.appendChild(taskNameLabel);
 
-    const taskNameInput = createInput('text', 'taskName', 'Add task name');
+    const taskNameInput = createInput('text', 'taskName', 'inputField', 'Add task name');
     taskNameContainer.appendChild(taskNameInput);
 
-    const taskNameAddBtn = createPurpleAddButton();
+    const taskNameAddBtn = createButton(plusPurple, 'Add', 'inputButton');
     taskNameContainer.appendChild(taskNameAddBtn);
 
         //choose project folder tab
@@ -66,7 +68,7 @@ function createTaskDetailsBox() {
     const setFolderLabel = createLabel('setFolder', '*Project folder:');
     setFolderContainer.appendChild(setFolderLabel);
 
-    const setFolderInput = createInput('text', 'setFolder', '*Please choose a project folder');
+    const setFolderInput = createInput('text', 'setFolder','', '*Please choose a project folder');
     setFolderInput.readOnly = true;
     setFolderContainer.appendChild(setFolderInput);
 
@@ -82,14 +84,8 @@ function createTaskDetailsBox() {
     const defaultOption = createEle('option');
     defaultOption.value = '';
     defaultOption.textContent = 'Choose a project folder';
+    defaultOption.setAttribute('class', 'chooseFolderOptions');
     select.appendChild(defaultOption);
-
-    projectObjects.forEach ((folder) => {
-        const option = createEle('option');
-        option.value = folder.folderName;
-        option.textContent = folder.folderName;
-        select.appendChild(option);
-    });
 
     folderTabsContainer.appendChild(select);
 
@@ -107,10 +103,10 @@ function createTaskDetailsBox() {
     const taskDescriptionLabel = createLabel('taskDescription', 'Description:');
     taskDescriptionContainer.appendChild(taskDescriptionLabel);
 
-    const taskDescriptionInput = createInput('text', 'taskDescription');
+    const taskDescriptionInput = createInput('text', 'taskDescription', 'inputField', 'taskDescription');
     taskDescriptionContainer.appendChild(taskDescriptionInput);
 
-    const taskDescriptionAddBtn = createPurpleAddButton();
+    const taskDescriptionAddBtn = createButton(plusPurple, 'Add', 'inputButton');
     taskDescriptionContainer.appendChild(taskDescriptionAddBtn);
 
         //Notes tab
@@ -121,10 +117,10 @@ function createTaskDetailsBox() {
     const taskNotesLabel = createLabel('taskNotes', 'Notes:');
     taskNotesContainer.appendChild(taskNotesLabel);
 
-    const taskNotesInput = createInput('text', 'taskNotes');
+    const taskNotesInput = createInput('text', 'taskNotes', 'inputField', 'taskNotes');
     taskNotesContainer.appendChild(taskNotesInput);
 
-    const taskNotesAddBtn = createPurpleAddButton();
+    const taskNotesAddBtn = createButton(plusPurple, 'Add', 'inputButton');
     taskNotesContainer.appendChild(taskNotesAddBtn);
 
         //Main Action Buttons tab
@@ -141,10 +137,15 @@ function createTaskDetailsBox() {
     mainActionBtnsContainer.appendChild(addTaskActionBtn);
 
     const newTaskCancelBtn = createEle('button');
+    newTaskCancelBtn.addEventListener('click', cancelNewTask);
     newTaskCancelBtn.setAttribute('class', 'mainActionBtns cancelActionBtn');
     newTaskCancelBtn.textContent = 'Cancel Task';
     mainActionBtnsContainer.appendChild(newTaskCancelBtn);
+
+    checkInputFieldStatus();
 }
+
+
 
 
 //This class takes the inputs from user and create a new task object.
@@ -184,6 +185,11 @@ function clickNewTaskSubmit() {
         return true;
     }
 
+}
+
+function cancelNewTask() {
+    removeTaskPage();
+    resetAddTaskTab();
 }
 
 function removeTaskPage() {

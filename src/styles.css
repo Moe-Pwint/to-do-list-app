@@ -8,7 +8,8 @@
     --dark-purple: #4b387a;
     --bright-blue: #299dfd;
     --smoke-white: rgb(219, 219, 219);
-    --btn-disabled: rgb(168, 168, 168);
+    --btn-disabled: #a8a8a8;
+    --btn-disabled-light: #d5d5d5;
     --btn-disabled-text: rgb(122, 122, 122);
     --turquoise: rgb(85, 140, 121);
     --dark-grey: #343434;
@@ -38,7 +39,7 @@ button, input, select {
     }
 
 button:disabled {
-    background-color:var(--btn-disabled);
+    background-color:var(--btn-disabled-light);
     color:var(--btn-disabled-text);
     cursor:unset;
 }
@@ -236,7 +237,7 @@ input:read-only {
     cursor: unset;
 }
 
-.plusButton {
+.inputButton {
     background-color: var(--light-purple);
     width:120px;
     height:35px;
