@@ -134,8 +134,9 @@ function createMainElements () {
 
     const delTab = createEle('button');
     //this is common class for all dynamically created projects.
-    delTab.setAttribute('class', 'leftSide-tabs disabled-tabs');
+    delTab.setAttribute('class', 'leftSide-tabs');
     delTab.id = 'del-tab';
+    delTab.disabled = true;
     delContainer.appendChild(delTab);
 
     const delIcon = createEle('img');

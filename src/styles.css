@@ -195,7 +195,7 @@ input {
     gap:15px;
 }
 
-.disabled-tabs {
+#del-tab:disabled {
     background-color: var(--light-purple);
     color: var(--btn-disabled-text);
 }
@@ -371,4 +371,8 @@ select#choosingFolder {
 
 .task-tabs {
     background-color: var(--light-yellow);
+    width:90%;
+    margin-left:auto;
+    height:40px;
+    margin-top:5px;
 }
