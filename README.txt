@@ -2,36 +2,75 @@
 
 1. index.js
         //This is the main js file.
+                import "./styles.css";
+                import "./main-ui.js";
+                import "./add-new-task.js";
 
 2. helper-functions.js
         //Universal functions shared across the js files are saved here.
 
 3. main-ui.js
         //This file generates all the beginning UI elements onto the page.
+                import "./styles.css";
+                import {createEle} from './helper-functions.js';
+                import {addNewProjectByIcon} from './new-project-btn.js';
+                import {createSampleTabs} from './object-n-task-arrays.js';
+                        //images import
+                        import odinImage from "./images/odin.png";
+                        import plus from "./svg/plus.svg";
+                        import search from "./svg/search.svg";
+                        import today from "./svg/today.svg";
+                        import addProject from "./svg/addProject.svg";
+                        import del from "./svg/del.svg";
+                        import portraitDots from './svg/portraitDots.svg';
 
 4.add-new-project.js
         //This is the tiny window that opens up and you can create a new project folder.
+                export {displayNewFolderWindow};
+                import './styles.css';
+                import { projectObjects, NewProject } from "./object-n-task-arrays.js";
+                import {createEle, createLabel, createInput} from "./helper-functions.js";
+                import {updateAllProjectsTabs} from './all-projects-tabs.js';
 
 5. add-new-task.js
         //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
+                import "./styles.css";
+                import { projectObjects, taskObjects, NewTask, } from "./object-n-task-arrays.js";
+                import "./helper-functions.js";
+                import { displayNewFolderWindow} from "./add-new-project.js";
+                import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
 6. all-projects-tabs.js
         //displaying and updating the projects and tasks tabs in the bottom left container.
-//When clicking these tabs, project/task page opens up on the right container.
+        //When clicking these tabs, project/task page opens up on the right container.
+                export {updateAllProjectsTabs, updateProjectTasksTabs};
+                import { createEle } from "./helper-functions";
+                import './styles.css';
+                import {openTaskPage} from "./open-task-page.js";
+                        //svg imports
+                        import folder from "./svg/folder.svg";
+                        import arrowDownRight from "./svg/arrow-down-right.svg";
 
 7. new-project-btn.js
         //This is the logic for new project icon in the bottom left container.
         //When clicked, it will call the tiny window where a new project can be made.
+                export {addNewProjectByIcon};
+                import {displayNewFolderWindow} from './add-new-project.js';
 
 8. object-n-task-arrays.js
         //this file keeps the projectObjects array and taskObjectsArray.
         //It also has two classes to create a task object and a project object.
+                export {projectObjects, taskObjects, NewTask, NewProject, createSampleTabs};
+                import {updateAllProjectsTabs, updateProjectTasksTabs} from './all-projects-tabs.js';
 
 9. open-task-page.js
         //When a task tab on the left bottom container is clicked, the task details are shown on the right container.
         //Task items can be added here.
         //Task object can be modified/deleted from this file.
-
+                export {openTaskPage};
+                import './styles.css';
+                import './object-n-task-arrays.js';
+                import {createEle} from './helper-functions.js';
 
 
 

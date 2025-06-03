@@ -1,7 +1,7 @@
 //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
 import "./styles.css";
 import { projectObjects, taskObjects, NewTask, } from "./object-n-task-arrays.js";
-import {appendTransparentBackdrop, removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
+import "./helper-functions.js";
 import { displayNewFolderWindow} from "./add-new-project.js";
 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
