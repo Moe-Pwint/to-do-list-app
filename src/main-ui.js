@@ -1,8 +1,9 @@
-//export default createMainElements;
+//This file generates all the beginning UI elements onto the page.
 
 import "./styles.css";
 import {createEle} from './helper-functions.js';
 import {addNewProjectByIcon} from './new-project-btn.js';
+import {createSampleTabs} from './object-n-task-arrays.js';
 
 //images import
 import odinImage from "./images/odin.png";
@@ -17,7 +18,6 @@ createMainElements();
 
 function createMainElements () {
 
-
     //main containers
     const appContainer = createEle('div');
     appContainer.id = 'appContainer';
@@ -30,8 +30,6 @@ function createMainElements () {
     const rightContainer = createEle('div');
     rightContainer.id = 'rightContainer';
     appContainer.appendChild(rightContainer);
-
-
 
     //logo section
     const logoContainer = createEle('div');
@@ -47,7 +45,6 @@ function createMainElements () {
     logoText.textContent = 'DoMe';
     logoText.id = 'logoText';
     logoContainer.appendChild(logoText);
-
 
     // top left tabs
     const topLeftContainer = createEle('div');
@@ -99,7 +96,6 @@ function createMainElements () {
     todayText.textContent = 'Today';
     todayContainer.appendChild(todayText);
 
-
     //Bottom section
     const projectsTitleContainer = createEle('div');
     projectsTitleContainer.setAttribute('id', 'projectsTitleContainer');
@@ -133,7 +129,7 @@ function createMainElements () {
     leftContainer.appendChild(delContainer);
 
     const delTab = createEle('button');
-    //this is common class for all dynamically created projects.
+    //this is common class for all dynamically created project and task tabs.
     delTab.setAttribute('class', 'leftSide-tabs');
     delTab.id = 'del-tab';
     delTab.disabled = true;
@@ -152,5 +148,7 @@ function createMainElements () {
     portraitDotsIcon.src = portraitDots;
     portraitDotsIcon.setAttribute('class', 'left-side-icons push-right');
     delTab.appendChild(portraitDotsIcon);
+
+    createSampleTabs();
 }
 

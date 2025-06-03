@@ -1,17 +1,21 @@
+//displaying and updating the projects and tasks tabs in the bottom left container.
+//When clicking these tabs, project/task page opens up on the right container.
+export{updateAllProjectsTabs, updateProjectTasksTabs};
+
 import { createEle } from "./helper-functions";
-import folder from "./svg/folder.svg";
-import arrowDownRight from "./svg/arrow-down-right.svg";
 import './styles.css';
 import {openTaskPage} from "./open-task-page.js";
 
-export{updateAllProjectsTabs, updateProjectTasksTabs};
+//svg imports
+import folder from "./svg/folder.svg";
+import arrowDownRight from "./svg/arrow-down-right.svg";
 
 function updateAllProjectsTabs(newProjectObj) {
     const projectName = newProjectObj.projectName;
     const projectsContainer = document.querySelector('#projectsContainer');
     
     const newProjectTabContainer = createEle('div');
-    newProjectTabContainer.id = projectName;
+    newProjectTabContainer.id = newProjectObj.projectId;
     projectsContainer.appendChild(newProjectTabContainer);
 
     const newProjectTab = createEle('button');
@@ -26,20 +30,15 @@ function updateAllProjectsTabs(newProjectObj) {
     const projectTabText = createEle('p');
     projectTabText.textContent = projectName;
     newProjectTab.appendChild(projectTabText);
-
-    // const portraitDotsIcon = createEle('img');
-    // portraitDotsIcon.src = portraitDots;
-    // portraitDotsIcon.setAttribute('class', 'left-side-icons push-right');
-    // newProjectTab.appendChild(portraitDotsIcon);
 }
 
 function updateProjectTasksTabs(parentProject, childTaskObj) {
     const taskName = childTaskObj.taskName;
-    const parentProjectContainer = document.getElementById(parentProject);
+    const parentProjectContainer = document.getElementById(parentProject.projectId);
 
     const newTaskTab = createEle('button');
     newTaskTab.setAttribute('class', 'leftSide-tabs task-tabs');
-    newTaskTab.id = taskName;
+    newTaskTab.id = childTaskObj.taskId;
     parentProjectContainer.appendChild(newTaskTab);
 
     const taskIcon = createEle('img');
@@ -51,8 +50,8 @@ function updateProjectTasksTabs(parentProject, childTaskObj) {
     taskTabText.textContent = taskName;
     newTaskTab.appendChild(taskTabText);
     
-    document.getElementById(taskName).addEventListener('click', ()=> {
-        openTaskPage(childTaskObj);
+    document.getElementById(childTaskObj.taskId).addEventListener('click', ()=> {
+    openTaskPage(childTaskObj);
     });
 }
 

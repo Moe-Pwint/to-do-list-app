@@ -1,5 +1,6 @@
+//When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
 import "./styles.css";
-import { projectObjects, taskObjects } from "./object-arrays.js";
+import { projectObjects, taskObjects, NewTask, } from "./object-n-task-arrays.js";
 import {appendTransparentBackdrop, removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
 import { displayNewFolderWindow} from "./add-new-project.js";
 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
@@ -18,12 +19,11 @@ addTaskBtn.addEventListener('click',() => {
     appendTransparentBackdrop();
     changeAddTaskTab();
     createTaskDetailsBox();
-    assignFolderValue();
+    assignFolderValueOnChange();
 });
 
 //Once "Add a new task" tab is clicked, it's turned yellow and text changed.
 function changeAddTaskTab () {
-    //change the tab contents.
     addTaskBtn.classList.add('active-yellow');
     const landscapeDotsIcon = createEle('img');
     landscapeDotsIcon.src = landscapeDots;
@@ -97,7 +97,6 @@ function createTaskDetailsBox() {
     newFolderAddBtn.id = 'newFolderWindow';
     folderTabsContainer.appendChild(newFolderAddBtn);
     newFolderAddBtn.addEventListener('click', displayNewFolderWindow);
-    
 
         //Description tab
     const taskDescriptionContainer = createEle('div');
@@ -168,22 +167,6 @@ function loadChooseFolder() {
 
 }
 
-//This class takes the inputs from user and create a new task object.
-class NewTask {
-    constructor(taskName,projectFolder,description,notes) {
-        this.taskName = taskName;
-        this.projectFolder = projectFolder;
-        this.description = description;
-        this.notes = notes;
-    }
-    printTaskDetails() {
-        console.log(`task name: ${this.taskName}`);
-        console.log(`project folder: ${this.projectFolder}`);
-        console.log(`description: ${this.description}`);
-        console.log(`Notes: ${this.notes}`);
-    }
-}
-
 //When New Task Action Button is clicked, this function calls class NewTask() and return object's values. 
 //Then call function removeTaskPage and function resetAddTaskTab.
 function clickNewTaskSubmit() {
@@ -192,6 +175,12 @@ function clickNewTaskSubmit() {
     const objFolder = document.querySelector('#setFolder');
     const objDescription = document.querySelector('#taskDescription').value;
     const objNotes = document.querySelector('#taskNotes').value;
+    let foundProjectObj;
+    for (const projectObj of projectObjects) {
+        if (objFolder.value == projectObj.projectName) {
+            foundProjectObj = projectObj;
+        }
+    }
 
     if (objName.value === "" || objFolder.value === "") {
         alert("Please add task name and project folder");
@@ -199,9 +188,8 @@ function clickNewTaskSubmit() {
     } else {
         const newTaskObj = new NewTask(objName.value, objFolder.value, objDescription, objNotes);
         taskObjects.push(newTaskObj);
-        newTaskObj.printTaskDetails();
-        addNewTaskToProject(newTaskObj, objFolder.value);
-        updateProjectTasksTabs(objFolder.value, newTaskObj);
+        addNewTaskToProject(newTaskObj, foundProjectObj);
+        updateProjectTasksTabs(foundProjectObj, newTaskObj);
         removeTaskPage();
         resetAddTaskTab();
         return true;
@@ -210,15 +198,9 @@ function clickNewTaskSubmit() {
 }
 
 //when new task is submitted, the newTask Object is added to it's parent projectObj in its projectObj array.
-function addNewTaskToProject(newTaskObj, folderName) {
-    for (const projectObj of projectObjects) {
-        if (folderName == projectObj.projectName) {
-            projectObj.tasksList.push(newTaskObj);
-            return;
-        }
-    }
+function addNewTaskToProject(newTaskObj, projectObj) {
+    projectObj.tasksList.push(newTaskObj);          
 }
-
 
 function cancelNewTask() {
     removeTaskPage();
@@ -226,7 +208,6 @@ function cancelNewTask() {
 }
 
 function removeTaskPage() {
-    
     const taskPage = document.querySelector('#addNewTaskPage');
     removeTransparentBackdrop();
     taskPage.remove();
@@ -246,7 +227,7 @@ function resetAddTaskTab () {
 }
 
 //Listens to 'choose folder' button, add chosen option to the the folder input.   
-function assignFolderValue () {
+function assignFolderValueOnChange () {
     const dropDown = document.querySelector('#choosingFolder');
     const setFolder = document.querySelector('#setFolder');
     dropDown.addEventListener('change', () => {

@@ -1,3 +1,41 @@
+------------------------------------------------  Summary of each js file  ------------------------------------------------
+
+1. index.js
+        //This is the main js file.
+
+2. helper-functions.js
+        //Universal functions shared across the js files are saved here.
+
+3. main-ui.js
+        //This file generates all the beginning UI elements onto the page.
+
+4.add-new-project.js
+        //This is the tiny window that opens up and you can create a new project folder.
+
+5. add-new-task.js
+        //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
+
+6. all-projects-tabs.js
+        //displaying and updating the projects and tasks tabs in the bottom left container.
+//When clicking these tabs, project/task page opens up on the right container.
+
+7. new-project-btn.js
+        //This is the logic for new project icon in the bottom left container.
+        //When clicked, it will call the tiny window where a new project can be made.
+
+8. object-n-task-arrays.js
+        //this file keeps the projectObjects array and taskObjectsArray.
+        //It also has two classes to create a task object and a project object.
+
+9. open-task-page.js
+        //When a task tab on the left bottom container is clicked, the task details are shown on the right container.
+        //Task items can be added here.
+        //Task object can be modified/deleted from this file.
+
+
+
+
+------------------------------------------------Brainstorming App Structure------------------------------------------------
 
 Let's think about how many modules we're gonna need.
 

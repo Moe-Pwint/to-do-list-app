@@ -1,7 +1,8 @@
+//This is the tiny window that opens up and you can create a new project folder.
 export {displayNewFolderWindow};
 
 import './styles.css';
-import { projectObjects, taskObjects } from "./object-arrays.js";
+import { projectObjects, NewProject } from "./object-n-task-arrays.js";
 import {createEle, createLabel, createInput} from "./helper-functions.js";
 import {updateAllProjectsTabs} from './all-projects-tabs.js';
 
@@ -30,7 +31,6 @@ function displayNewFolderWindow() {
     newFolderContainer.appendChild(mainActionBtnsContainer);
 
     const addProjectActionBtn = createEle('button');
-    // addProjectActionBtn.setAttribute('type', 'submit');
     addProjectActionBtn.id = 'addProjectActionBtn';
     addProjectActionBtn.addEventListener('click', clickNewProjectSubmit);
     addProjectActionBtn.setAttribute('class', 'mainActionBtns addProjectActionBtn');
@@ -63,19 +63,7 @@ function cancelNewProject() {
     removeProjectSettingContainer();
 }
 
-//This class takes the inputs from user and create a new project object.
-class NewProject {
-    constructor(projectName) {
-        
-        this.projectName = projectName;
-        this.tasksList = [];
-    }
-}
-
 function removeProjectSettingContainer() {
     const projectSettingContainer = document.querySelector('#newProjectSetContainer');
     projectSettingContainer.remove();
-    console.log(projectObjects);
 }
-
-//for add-new-task.js
