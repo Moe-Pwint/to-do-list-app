@@ -48,9 +48,11 @@ function createButton(iconSrc, textValue, classValue) {
     icon.src = iconSrc;
     button.appendChild(icon);
 
-    const text = createEle('p');
-    text.textContent = textValue;
-    button.appendChild(text);
+    if (textValue) {
+        const text = createEle('p');
+        text.textContent = textValue;
+        button.appendChild(text);
+    }
 
     button.setAttribute('class', classValue);
 

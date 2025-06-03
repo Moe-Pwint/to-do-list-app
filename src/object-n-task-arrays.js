@@ -26,6 +26,7 @@ class NewTask {
         this.description = description;
         this.notes = notes;
         this.taskId = this.taskName.split(' ').join('_');
+        this.items = [];
     }
 }
 

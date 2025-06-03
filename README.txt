@@ -8,6 +8,7 @@
 
 2. helper-functions.js
         //Universal functions shared across the js files are saved here.
+                export {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus};
 
 3. main-ui.js
         //This file generates all the beginning UI elements onto the page.
@@ -36,7 +37,7 @@
         //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
                 import "./styles.css";
                 import { projectObjects, taskObjects, NewTask, } from "./object-n-task-arrays.js";
-                import "./helper-functions.js";
+                import {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
                 import { displayNewFolderWindow} from "./add-new-project.js";
                 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
@@ -71,6 +72,11 @@
                 import './styles.css';
                 import './object-n-task-arrays.js';
                 import {createEle} from './helper-functions.js';
+                import {newItemDetails} from './new-item-details.js';
+
+10. new-item-details.js
+        //
+                export {newItemDetails};
 
 
 

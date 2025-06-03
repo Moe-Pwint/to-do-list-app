@@ -5,9 +5,15 @@ export {openTaskPage};
 
 import './styles.css';
 import './object-n-task-arrays.js';
-import {createEle} from './helper-functions.js';
+import {createButton, createEle} from './helper-functions.js';
+import {newItemDetails} from './new-item-details.js';
+
+//svg imports
+import taskEdit from './svg/taskEdit.svg';
+import plusWhite from './svg/plusWhite.svg';
 
 function openTaskPage(childTaskObj) {
+    //task title
     const taskName = childTaskObj.taskName;
     const container = createEle('div');
     container.setAttribute('class', 'openTaskContainer');
@@ -23,5 +29,26 @@ function openTaskPage(childTaskObj) {
     taskTitle.textContent = taskName;
     taskTitle.setAttribute('class', 'taskTitle');
     taskTitleContainer.appendChild(taskTitle);
+
+    const taskEditIcon = createButton(taskEdit,'','purpleIconBtn');
+    taskTitleContainer.appendChild(taskEditIcon);
+
+    //project title
+    const projectTitle = createEle('p');
+    projectTitle.textContent = `from ${childTaskObj.projectFolder}`;
+    projectTitle.setAttribute('class', 'TaskPageProjectFolder');
+    container.appendChild(projectTitle);
+
+    //add new item button
+    const addNewItemBtn = createButton(plusWhite, 'Add new item');
+    addNewItemBtn.id = 'addNewItemBtn';
+    container.appendChild(addNewItemBtn);
+
+    //document.querySelector('addNewItemBtn').addEventListener('click', newItemDetails(childTaskObj));
+
+    //items section
+    const itemsContainer = createEle('div');
+    itemsContainer.setAttribute('class', 'itemsContainer');
+    container.appendChild(itemsContainer);
 }
 
