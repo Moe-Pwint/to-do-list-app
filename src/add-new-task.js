@@ -1,6 +1,6 @@
 //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
 import "./styles.css";
-import { projectObjects, taskObjects, NewTask, } from "./object-n-task-arrays.js";
+import { projectObjects, taskObjects, NewTask, } from "./objects-n-classes.js";
 import {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
 import { displayNewFolderWindow} from "./add-new-project.js";
 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
@@ -12,7 +12,7 @@ import plus from "./svg/plus.svg";
 import plusPurple from "./svg/plusPurple.svg";
 
 
-const addTaskBtn = document.querySelector('.addTask');
+const addTaskBtn = document.querySelector('#addTask');
 
 //Listen to "Add a new task" tab in Left Container.
 addTaskBtn.addEventListener('click',() => {
@@ -24,14 +24,18 @@ addTaskBtn.addEventListener('click',() => {
 
 //Once "Add a new task" tab is clicked, it's turned yellow and text changed.
 function changeAddTaskTab () {
-    addTaskBtn.classList.add('active-yellow');
+    const span = createEle('span');
+
     const landscapeDotsIcon = createEle('img');
     landscapeDotsIcon.src = landscapeDots;
     landscapeDotsIcon.setAttribute('class','left-side-icons');
+    span.appendChild(landscapeDotsIcon);
 
     const addingTaskText = createEle('p');
     addingTaskText.textContent = 'Adding a new task';
-    addTaskBtn.replaceChildren(landscapeDotsIcon, addingTaskText);
+    span.appendChild(addingTaskText);
+    addTaskBtn.replaceChildren(span);
+    addTaskBtn.classList.add('active-yellow');
 }
 
 function createTaskDetailsBox() {
@@ -187,18 +191,14 @@ function clickNewTaskSubmit() {
     } else {
         const newTaskObj = new NewTask(objName.value, objFolder.value, objDescription, objNotes);
         taskObjects.push(newTaskObj);
-        addNewTaskToProject(newTaskObj, foundProjectObj);
+        foundProjectObj.tasksList.push(newTaskObj.taskId); 
         updateProjectTasksTabs(foundProjectObj, newTaskObj);
+        console.log(projectObjects);
         removeTaskPage();
         resetAddTaskTab();
         return true;
     }
 
-}
-
-//when new task is submitted, the newTask Object is added to it's parent projectObj in its projectObj array.
-function addNewTaskToProject(newTaskObj, projectObj) {
-    projectObj.tasksList.push(newTaskObj);          
 }
 
 function cancelNewTask() {
@@ -214,14 +214,16 @@ function removeTaskPage() {
 }
 
 function resetAddTaskTab () {
-    addTaskBtn.classList.remove('active-yellow');
+    addTaskBtn.classList.remove('active-yellow'); 
+    const newTaskSpan = createEle('span');
     const plusIcon = createEle('img');
     plusIcon.src = plus;
     plusIcon.setAttribute('class','left-side-icons');
-
+    newTaskSpan.appendChild(plusIcon);
     const newTaskText = createEle('p');
     newTaskText.textContent = 'Add a new task';
-    addTaskBtn.replaceChildren(plusIcon, newTaskText);
+    newTaskSpan.appendChild(newTaskText);
+    addTaskBtn.replaceChildren(newTaskSpan);
 
 }
 

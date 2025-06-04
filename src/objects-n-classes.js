@@ -1,11 +1,12 @@
 //this file keeps the projectObjects array and taskObjectsArray.
 //It also has two classes to create a task object and a project object.
-export {projectObjects, taskObjects, NewTask, NewProject, createSampleTabs};
+export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs};
 
 import {updateAllProjectsTabs, updateProjectTasksTabs} from './all-projects-tabs.js';
 
 const projectObjects = [];
 const taskObjects = [];
+const itemObjects = [];
 
 function createSampleTabs() {
     const sampleProject = new NewProject('Sample Project');
@@ -36,5 +37,23 @@ class NewProject {
         this.projectName = projectName;
         this.projectId = crypto.randomUUID();
         this.tasksList = [];
+    }
+}
+
+class NewItem {
+    constructor(itemName, itemDescription, itemDueDate, itemPriority,parentTaskId) {
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemDueDate = itemDueDate;
+        this.itemPriority = itemPriority;
+        this.parentTaskId = parentTaskId;
+        this.itemId = crypto.randomUUID();
+        this._markStatus = false;
+    }
+    get markStatus() {
+        return this._markStatus;
+    }
+    set markStatus(newStatus) {
+        this._markStatus = newStatus;
     }
 }

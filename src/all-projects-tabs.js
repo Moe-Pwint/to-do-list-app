@@ -21,17 +21,20 @@ function updateAllProjectsTabs(newProjectObj) {
     projectsContainer.appendChild(newProjectTabContainer);
 
     const newProjectTab = createEle('button');
-    newProjectTab.setAttribute('class', 'leftSide-tabs project-tabs');
+    newProjectTab.setAttribute('class', 'tabButton project-tabs left-tabs-style');
     newProjectTabContainer.appendChild(newProjectTab);
+
+    const projectSpan = createEle('span');
+    newProjectTab.appendChild(projectSpan);
 
     const projectIcon = createEle('img');
     projectIcon.src = folder;
     projectIcon.setAttribute('class', 'left-side-icons');
-    newProjectTab.appendChild(projectIcon);
+    projectSpan.appendChild(projectIcon);
 
     const projectTabText = createEle('p');
     projectTabText.textContent = projectName;
-    newProjectTab.appendChild(projectTabText);
+    projectSpan.appendChild(projectTabText);
 }
 
 function updateProjectTasksTabs(parentProject, childTaskObj) {
@@ -39,18 +42,21 @@ function updateProjectTasksTabs(parentProject, childTaskObj) {
     const parentProjectContainer = document.getElementById(parentProject.projectId);
 
     const newTaskTab = createEle('button');
-    newTaskTab.setAttribute('class', 'leftSide-tabs task-tabs');
+    newTaskTab.setAttribute('class', 'tabButton task-tabs');
     newTaskTab.id = childTaskObj.taskId;
     parentProjectContainer.appendChild(newTaskTab);
+
+    const taskSpan = createEle('span');
+    newTaskTab.appendChild(taskSpan);
 
     const taskIcon = createEle('img');
     taskIcon.src = arrowDownRight;
     taskIcon.setAttribute('class', 'left-side-icons');
-    newTaskTab.appendChild(taskIcon);
+    taskSpan.appendChild(taskIcon);
 
     const taskTabText = createEle('p');
     taskTabText.textContent = taskName;
-    newTaskTab.appendChild(taskTabText);
+    taskSpan.appendChild(taskTabText);
     
     document.getElementById(childTaskObj.taskId).addEventListener('click', ()=> {
     openTaskPage(childTaskObj);

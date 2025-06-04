@@ -15,7 +15,7 @@
                 import "./styles.css";
                 import {createEle} from './helper-functions.js';
                 import {addNewProjectByIcon} from './new-project-btn.js';
-                import {createSampleTabs} from './object-n-task-arrays.js';
+                import {createSampleTabs} from './objects-n-classes.js';
                         //images import
                         import odinImage from "./images/odin.png";
                         import plus from "./svg/plus.svg";
@@ -29,14 +29,14 @@
         //This is the tiny window that opens up and you can create a new project folder.
                 export {displayNewFolderWindow};
                 import './styles.css';
-                import { projectObjects, NewProject } from "./object-n-task-arrays.js";
+                import { projectObjects, NewProject } from "./objects-n-classes.js";
                 import {createEle, createLabel, createInput} from "./helper-functions.js";
                 import {updateAllProjectsTabs} from './all-projects-tabs.js';
 
 5. add-new-task.js
         //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
                 import "./styles.css";
-                import { projectObjects, taskObjects, NewTask, } from "./object-n-task-arrays.js";
+                import { projectObjects, taskObjects, NewTask, } from "./objects-n-classes.js";
                 import {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
                 import { displayNewFolderWindow} from "./add-new-project.js";
                 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
@@ -60,10 +60,10 @@
                 export {addNewProjectByIcon};
                 import {displayNewFolderWindow} from './add-new-project.js';
 
-8. object-n-task-arrays.js
+8. objects-n-classes.js
         //this file keeps the projectObjects array and taskObjectsArray.
         //It also has two classes to create a task object and a project object.
-                export {projectObjects, taskObjects, NewTask, NewProject, createSampleTabs};
+                export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs};
                 import {updateAllProjectsTabs, updateProjectTasksTabs} from './all-projects-tabs.js';
 
 9. open-task-page.js
@@ -72,13 +72,14 @@
         //Task object can be modified/deleted from this file.
                 export {openTaskPage};
                 import './styles.css';
-                import './object-n-task-arrays.js';
+                import './objects-n-classes.js';
                 import {createEle} from './helper-functions.js';
                 import {newItemDetails} from './new-item-details.js';
 
 10. new-item-details.js
         //
                 export {newItemDetails};
+                import {itemObjects, NewItem } from "./objects-n-classes.js";
                 import {createEle, createLabel, createInput, createButton} from './helper-functions.js';
                 //svg imports
                 import plusPurple from './svg/plusPurple.svg';

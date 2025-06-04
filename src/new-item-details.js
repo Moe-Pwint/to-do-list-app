@@ -1,4 +1,5 @@
 export {newItemDetails};
+import {itemObjects, NewItem } from "./objects-n-classes.js";
 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
 
 //svg imports
@@ -30,7 +31,7 @@ function createAddNewItemDetailsBox(taskObj) {
     addItemNameSection.appendChild(itemNameText);
 
     const checkbox = createCheckbox();
-    checkbox.id = 'checkbox';
+    // checkbox.id = 'checkbox';
     addItemNameSection.appendChild(checkbox);
 
         //body section
@@ -116,10 +117,10 @@ function createAddNewItemDetailsBox(taskObj) {
     mainActionBtnsContainer.appendChild(addItemActionBtn);
 
     const newItemCancelBtn = createEle('button');
-    newItemCancelBtn.addEventListener('click', cancelNewItem);
     newItemCancelBtn.setAttribute('class', 'mainActionBtns cancelActionBtn');
     newItemCancelBtn.textContent = 'Cancel item';
     mainActionBtnsContainer.appendChild(newItemCancelBtn);
+    newItemCancelBtn.addEventListener('click', closeItemContainer);
 
     checkInputFieldStatus();
 }
@@ -163,6 +164,7 @@ function createCheckbox() {
     const checkbox = createEle('input');
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute('class', 'checkbox');
+    checkbox.id = 'checkboxId';
     checkboxContainer.appendChild(checkbox);
     const checkboxText = createEle('p');
     checkboxText.textContent = 'Mark as done';
@@ -178,7 +180,7 @@ function clickNewItemSubmit(taskObj) {
     const itemDate = document.querySelector('#itemDate').value;
     const itemPriority = document.querySelector('#priorityInput').value;
     const parentTask = taskObj.taskId;
-    const checkbox = document.querySelector('#checkbox');
+    const checkbox = document.querySelector('#checkboxId');
 
     if (!itemName) {
         alert('Please add the name of the task item.');
@@ -191,37 +193,18 @@ function clickNewItemSubmit(taskObj) {
         }
         const newItem = new NewItem(itemName, itemDescription, dueDate, itemPriority, parentTask);
         if (checkbox.checked) {
+            console.log('checkbox is checked');
             newItem.markStatus = true;
         }
-        taskObj.itemsList.push(newItem);
-        console.log(taskObj);
-        console.log(newItem);
+        taskObj.itemsList.push(newItem.itemId);
+        itemObjects.push(newItem);
+        console.log(itemObjects);
+        closeItemContainer();
     }
 }
 
-function addNewItemToTask() {
-
-}
-
-function cancelNewItem() {
+function closeItemContainer() {
     const container = document.querySelector('#addNewItemContainer');
     container.remove();
 }
 
-class NewItem {
-    constructor(itemName, itemDescription, itemDueDate, itemPriority,parentTaskId) {
-        this.itemName = itemName;
-        this.itemDescription = itemDescription;
-        this.itemDueDate = itemDueDate;
-        this.itemPriority = itemPriority;
-        this.parentTaskId = parentTaskId;
-        this.itemId = crypto.randomUUID();
-        this._markStatus = false;
-    }
-    get markStatus() {
-        return this._markStatus;
-    }
-    set markStatus(newStatus) {
-        this._markStatus = newStatus;
-    }
-}

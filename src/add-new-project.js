@@ -2,7 +2,7 @@
 export {displayNewFolderWindow};
 
 import './styles.css';
-import { projectObjects, NewProject } from "./object-n-task-arrays.js";
+import { projectObjects, NewProject } from "./objects-n-classes.js";
 import {createEle, createLabel, createInput} from "./helper-functions.js";
 import {updateAllProjectsTabs} from './all-projects-tabs.js';
 

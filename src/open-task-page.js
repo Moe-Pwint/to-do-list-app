@@ -4,7 +4,7 @@
 export {openTaskPage};
 
 import './styles.css';
-import './object-n-task-arrays.js';
+import './objects-n-classes.js';
 import {createButton, createEle} from './helper-functions.js';
 import {newItemDetails} from './new-item-details.js';
 
@@ -13,8 +13,6 @@ import taskEdit from './svg/taskEdit.svg';
 import plusWhite from './svg/plusWhite.svg';
 
 function openTaskPage(childTaskObj) {
-
-    changeTaskTab(childTaskObj);
 
     //task title
     const taskName = childTaskObj.taskName;
@@ -47,7 +45,7 @@ function openTaskPage(childTaskObj) {
     addNewItemBtn.id = 'addNewItemBtn';
     container.appendChild(addNewItemBtn);
 
-    addNewItemBtn.addEventListener('click', newItemDetails(childTaskObj));
+    addNewItemBtn.addEventListener('click', () => newItemDetails(childTaskObj));
 
     //items section
     const itemsContainer = createEle('div');
@@ -55,8 +53,3 @@ function openTaskPage(childTaskObj) {
     container.appendChild(itemsContainer);
 }
 
-//Once "Add a new task" tab is clicked, it's turned yellow and text changed.
-function changeTaskTab(childTaskObj) {
-    const currentTaskTab = document.getElementById(childTaskObj.taskId);
-    currentTaskTab.classList.add('active-yellow');
-}

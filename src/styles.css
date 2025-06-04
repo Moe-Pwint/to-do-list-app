@@ -43,6 +43,10 @@ button:disabled {
     cursor:unset;
 }
 
+button.active-yellow {
+    background-color: var(--focused-yellow);
+}
+
 input {
     cursor:text;
     margin-left:15px;
@@ -196,6 +200,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-self:center;
 }
 
+.left-tabs-style {
+    width: 100%;
+    height:40px;
+    margin-bottom: 7px;
+    
+}
+
+.left-tabs-style span {
+    display:flex;
+    align-items: center;
+    font-size: 17px;
+    padding:0;
+    margin:0;
+    height:35px;
+}
 
 /* top-left section */
 
@@ -209,16 +228,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-left:5px;
     padding-right: 10px;
 }
-
-.top-left-tabs {
-    width: 100%;
-    height:40px;
-    display:flex;
-    align-items: center;
-    font-size: 17px;
-    margin-bottom: 5px;
-}
-
 
 /* bottom section */
 
@@ -244,14 +253,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 20px;
 }
 
-.leftSide-tabs {
-    display:flex;
-    width:100%;
-    height:45px;
-    align-items: center;
-    padding:10px;
-    gap:15px;
-}
 
 #del-tab:disabled {
     background-color: var(--light-purple);
@@ -260,14 +261,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* add-task.js */
 
+.task-tabs{
+    width: 90%;
+    height:40px;
+    background-color: var(--light-yellow);
+    margin-left:10%;
+}
+
+.task-tabs span {
+    display:flex;
+    align-items: center;
+    font-size: 17px;
+    height:35px;
+}
+
 #addNewTaskPage {
     width:inherit;
     display:flex;
     justify-content: center;
-}
-
-button.active-yellow {
-    background-color: var(--focused-yellow);
 }
 
 #newTaskDetailsDiv {
@@ -417,14 +428,6 @@ select#choosingFolder {
 /* new-project-tabs.js */
 .project-tabs {
     background-color:var(--light-blue);
-}
-
-.task-tabs {
-    background-color: var(--light-yellow);
-    width:90%;
-    margin-left:auto;
-    height:40px;
-    margin-top:5px;
 }
 
 /* Task Name Page  */

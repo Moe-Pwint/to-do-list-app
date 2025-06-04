@@ -3,7 +3,7 @@
 import "./styles.css";
 import {createEle} from './helper-functions.js';
 import {addNewProjectByIcon} from './new-project-btn.js';
-import {createSampleTabs} from './object-n-task-arrays.js';
+import {createSampleTabs} from './objects-n-classes.js';
 
 //images import
 import odinImage from "./images/odin.png";
@@ -15,6 +15,7 @@ import del from "./svg/del.svg";
 import portraitDots from './svg/portraitDots.svg';
 
 createMainElements();
+changeProjectTabsColor();
 
 function createMainElements () {
 
@@ -53,48 +54,58 @@ function createMainElements () {
 
         //Add new task tab
     const newTaskContainer = createEle('button');
-    //addTask class will do adding task logic.
-    newTaskContainer.setAttribute('class','addTask top-left-tabs');
+    //addTask id will do adding task logic.
+    newTaskContainer.id = 'addTask';
+    newTaskContainer.setAttribute('class','tabButton left-tabs-style');
     topLeftContainer.appendChild(newTaskContainer);
+
+    const newTaskSpan = createEle('span');
+    newTaskContainer.appendChild(newTaskSpan);
 
     const plusIcon = createEle('img');
     plusIcon.src = plus;
     plusIcon.setAttribute('class','left-side-icons');
-    newTaskContainer.appendChild(plusIcon);
+    newTaskSpan.appendChild(plusIcon);
 
     const newTaskText = createEle('p');
     newTaskText.textContent = 'Add a new task';
-    newTaskContainer.appendChild(newTaskText);
+    newTaskSpan.appendChild(newTaskText);
 
         //Search tab
     const searchContainer = createEle('button');
     //searchLogic class will do search logic.
-    searchContainer.setAttribute('class','searchLogic top-left-tabs');
+    searchContainer.setAttribute('class','searchLogic tabButton left-tabs-style');
     topLeftContainer.appendChild(searchContainer);
+
+    const searchSpan = createEle('span');
+    searchContainer.appendChild(searchSpan);
 
     const searchIcon = createEle('img');
     searchIcon.src = search;
     searchIcon.setAttribute('class','left-side-icons');
-    searchContainer.appendChild(searchIcon);
+    searchSpan.appendChild(searchIcon);
 
     const searchText = createEle('p');
     searchText.textContent = 'Search task or project';
-    searchContainer.appendChild(searchText);
+    searchSpan.appendChild(searchText);
 
         //Today tab
     const todayContainer = createEle('button');
     //todayLogic class will do today logic.
-    todayContainer.setAttribute('class','todayLogic top-left-tabs');
+    todayContainer.setAttribute('class','todayLogic tabButton left-tabs-style');
     topLeftContainer.appendChild(todayContainer);
+
+    const todaySpan = createEle('span');
+    todayContainer.appendChild(todaySpan);
 
     const todayIcon = createEle('img');
     todayIcon.src = today;
     todayIcon.setAttribute('class','left-side-icons');
-    todayContainer.appendChild(todayIcon);
+    todaySpan.appendChild(todayIcon);
 
     const todayText = createEle('p');
     todayText.textContent = 'Today';
-    todayContainer.appendChild(todayText);
+    todaySpan.appendChild(todayText);
 
     //Bottom section
     const projectsTitleContainer = createEle('div');
@@ -125,30 +136,45 @@ function createMainElements () {
 
     //Deleted tasks
 
-    const delContainer = createEle('div');
-    leftContainer.appendChild(delContainer);
+    // const delContainer = createEle('div');
+    // leftContainer.appendChild(delContainer);
 
     const delTab = createEle('button');
     //this is common class for all dynamically created project and task tabs.
-    delTab.setAttribute('class', 'leftSide-tabs');
+    delTab.setAttribute('class', 'tabButton left-tabs-style');
     delTab.id = 'del-tab';
-    delTab.disabled = true;
-    delContainer.appendChild(delTab);
+    // delTab.disabled = true;
+    leftContainer.appendChild(delTab);
+
+    const delSpan = createEle('span');
+    delTab.appendChild(delSpan);
 
     const delIcon = createEle('img');
     delIcon.src = del;
     delIcon.setAttribute('class', 'left-side-icons');
-    delTab.appendChild(delIcon);
+    delSpan.appendChild(delIcon);
 
     const delTabText = createEle('p');
     delTabText.textContent = 'Deleted Tasks';
-    delTab.appendChild(delTabText);
+    delSpan.appendChild(delTabText);
 
     const portraitDotsIcon = createEle('img');
     portraitDotsIcon.src = portraitDots;
     portraitDotsIcon.setAttribute('class', 'left-side-icons push-right');
-    delTab.appendChild(portraitDotsIcon);
+    delSpan.appendChild(portraitDotsIcon);
 
     createSampleTabs();
+}
+
+function changeProjectTabsColor() {
+
+    const container = document.querySelector('#leftContainer');
+    container.addEventListener('click', (event) => {
+        const tab = event.target.closest('.tabButton');
+      
+        if (tab && container.contains(tab)) {
+          tab.classList.add('active-yellow');
+        }
+      });
 }
 
