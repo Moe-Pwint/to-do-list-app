@@ -1,5 +1,7 @@
 //displaying and updating the projects and tasks tabs in the bottom left container.
 //When clicking these tabs, project/task page opens up on the right container.
+//Project tabs containers' ids are assigned their project's projectId number. 
+//Task tabs' ids are assigned their task's taskId number.
 export{updateAllProjectsTabs, updateProjectTasksTabs};
 
 import { createEle } from "./helper-functions";

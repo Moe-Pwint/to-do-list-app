@@ -106,7 +106,7 @@ function createTaskDetailsBox() {
     const taskDescriptionLabel = createLabel('taskDescription', 'Description:');
     taskDescriptionContainer.appendChild(taskDescriptionLabel);
 
-    const taskDescriptionInput = createInput('text', 'taskDescription', 'inputField', 'taskDescription');
+    const taskDescriptionInput = createInput('text', 'taskDescription', 'inputField');
     taskDescriptionContainer.appendChild(taskDescriptionInput);
 
     const taskDescriptionAddBtn = createButton(plusPurple, 'Add', 'inputButton');
@@ -120,7 +120,7 @@ function createTaskDetailsBox() {
     const taskNotesLabel = createLabel('taskNotes', 'Notes:');
     taskNotesContainer.appendChild(taskNotesLabel);
 
-    const taskNotesInput = createInput('text', 'taskNotes', 'inputField', 'taskNotes');
+    const taskNotesInput = createInput('text', 'taskNotes', 'inputField');
     taskNotesContainer.appendChild(taskNotesInput);
 
     const taskNotesAddBtn = createButton(plusPurple, 'Add', 'inputButton');
@@ -230,8 +230,7 @@ function assignFolderValueOnChange () {
     const dropDown = document.querySelector('#choosingFolder');
     const setFolder = document.querySelector('#setFolder');
     dropDown.addEventListener('change', () => {
-        const selectedValue = dropDown.value;
-        setFolder.value = selectedValue;
+        setFolder.value = dropDown.value;
     })
 }
 

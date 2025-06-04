@@ -1,5 +1,4 @@
 
-
 :root {
     --light-purple: #EADDFF;
     --border-line: #E0E0E0;
@@ -8,18 +7,17 @@
     --dark-purple: #4b387a;
     --light-blue: #D3E3FF;
     --bright-blue: #299dfd;
-    --smoke-white: rgb(219, 219, 219);
+    --smoke-white: #dbdbdb;
     --btn-disabled: #a8a8a8;
     --btn-disabled-light: #d5d5d5;
-    --btn-disabled-text: rgb(122, 122, 122);
+    --btn-disabled-text: #7a7a7a;
     --turquoise: rgb(85, 140, 121);
     --dark-grey: #343434;
-    --disabled-tab-font:var(--disabled-tab-font);
     --grey-bg-containers: #F4F4F4;
     
 }
 
-body,p {
+body {
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -49,6 +47,61 @@ input {
     cursor:text;
     margin-left:15px;
     width: 250px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: green;
+    border: 2px solid var(--dark-grey);
+    border-radius: 2px;
+}
+input[type="checkbox"]:hover {
+    cursor:pointer;
+}
+input[type="checkbox"]:checked {
+background-color: var(--btn-disabled);
+background-image: url('./svg/check.svg');
+background-position: center;
+border: none;
+}
+
+label {
+    min-width:120px;
+}
+
+input:read-only {
+    cursor: unset;
+}
+
+input[type='date'] {
+    width:100%;
+    display:flex;
+    position:relative;
+}
+
+input[type='date']::after {
+    content: 'Pick Date';
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    color:var(--dark-purple);
+    pointer-events: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: var(--light-purple);
+    padding:10px 90px 10px 13px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor:pointer;
+    margin-left:352px;
+}
+
+.inputField {
+    text-align: left;
 }
 
 #transparent-backdrop {
@@ -213,7 +266,7 @@ input {
     justify-content: center;
 }
 
-.active-yellow {
+button.active-yellow {
     background-color: var(--focused-yellow);
 }
 
@@ -237,15 +290,7 @@ input {
     padding:10px;
     align-items: center;
 }
-label {
-    width:120px;
-}
 
-
-
-input:read-only {
-    cursor: unset;
-}
 
 .inputButton {
     background-color: var(--light-purple);
@@ -384,7 +429,7 @@ select#choosingFolder {
 
 /* Task Name Page  */
 
-.openTaskContainer {
+#openTaskContainer {
     margin-left: 30px;
     margin-top: 50px;
 }
@@ -434,6 +479,68 @@ select#choosingFolder {
 .itemsContainer {
     width:900px;
     height:max-content;
+    margin: 50px;
+}
+
+#addNewItemContainer {
+    width:900px;
+    height:max-content;
     background-color: var(--grey-bg-containers);
     margin: 50px;
+    border: 1px solid var(--bright-blue);
+    border-radius: 10px;
+    padding:20px 80px 20px 30px;
+}
+
+.itemNameSection {
+    display:flex;
+    align-items: center;
+    padding: 0px 0px 30px 0px;
+}
+
+.itemNameText {
+    font-size: 22px;
+    color:var(--btn-disabled-text);
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    background-color: var(--btn-disabled-light);
+    border-radius: 50%;
+    margin-right:20px;
+}
+
+.checkboxContainer {
+    display:flex;
+    gap:8px;
+    align-items: center;
+    margin-left:auto;
+    color:var(--dark-grey);
+}
+
+.itemDetailsContainers {
+    display:flex;
+    border-bottom:1px solid var(--border-line);
+    width:80%;
+    height:35px;
+    padding:10px;
+    align-items: center;
+    margin:auto;
+}
+
+/* select#selectingPriority {
+    background: url('./svg/folderSearch.svg') no-repeat;
+    background-position: 20px 50%;
+    background-color: var(--light-purple);
+    width:250px;
+    height:35px;
+    color:var(--dark-purple);
+    border-radius: 8px;
+    padding-left:20px;
+    text-align: center;
+} */
+
+#selectingPriority option {
+    text-align: center;
 }

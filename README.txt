@@ -44,6 +44,8 @@
 6. all-projects-tabs.js
         //displaying and updating the projects and tasks tabs in the bottom left container.
         //When clicking these tabs, project/task page opens up on the right container.
+        //Project tabs containers' ids are assigned their project's projectId number. 
+        //Task tabs' ids are assigned their task's taskId number.
                 export {updateAllProjectsTabs, updateProjectTasksTabs};
                 import { createEle } from "./helper-functions";
                 import './styles.css';
@@ -77,6 +79,9 @@
 10. new-item-details.js
         //
                 export {newItemDetails};
+                import {createEle, createLabel, createInput, createButton} from './helper-functions.js';
+                //svg imports
+                import plusPurple from './svg/plusPurple.svg';
 
 
 

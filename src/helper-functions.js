@@ -24,17 +24,17 @@ function createEle (ele) {
 function createLabel (forValue, text) {
     const label = createEle('label');
     label.setAttribute('for', forValue);
-    label.textContent = text;
+    if (text) {label.textContent = text;}
     
     return label;
 }
 
 function createInput(typeValue, idValue, classValue, defaultText) {
     const input = createEle('input');
-    input.setAttribute('type', typeValue);
-    input.setAttribute('id', idValue);
-    input.setAttribute('name', idValue);
-    input.setAttribute('class', classValue);
+    if (typeValue) input.setAttribute('type', typeValue);
+    if (typeValue) input.setAttribute('id', idValue);
+    if(idValue) input.setAttribute('name', idValue);
+    if (classValue) input.setAttribute('class', classValue);
     defaultText && input.setAttribute('placeholder', defaultText);
     
     return input;
@@ -54,7 +54,9 @@ function createButton(iconSrc, textValue, classValue) {
         button.appendChild(text);
     }
 
-    button.setAttribute('class', classValue);
+    if (classValue) {
+        button.setAttribute('class', classValue);
+    }
 
     return button;
 } 

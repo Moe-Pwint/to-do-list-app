@@ -25,8 +25,8 @@ class NewTask {
         this.projectFolder = projectFolder;
         this.description = description;
         this.notes = notes;
-        this.taskId = this.taskName.split(' ').join('_');
-        this.items = [];
+        this.taskId = crypto.randomUUID();
+        this.itemsList = [];
     }
 }
 
@@ -34,7 +34,7 @@ class NewTask {
 class NewProject {
     constructor(projectName) {
         this.projectName = projectName;
-        this.projectId = this.projectName.split(' ').join('_');
+        this.projectId = crypto.randomUUID();
         this.tasksList = [];
     }
 }
