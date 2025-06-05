@@ -14,6 +14,7 @@ function createSampleTabs() {
 
     const sampleTask = new NewTask('Sample Task', 'Sample Project','Sample Description', 'Sample Notes');
     taskObjects.push(sampleTask);
+    projectObjects[0].tasksList.push(sampleTask.taskId);
 
     updateAllProjectsTabs(projectObjects[0]);
     updateProjectTasksTabs(projectObjects[0], taskObjects[0]);

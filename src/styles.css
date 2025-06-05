@@ -452,11 +452,18 @@ select#choosingFolder {
 #taskTitleContainer {
     display:flex;
     gap: 30px;
+    align-items: center;
+}
+
+#taskPageProjectFolder {
+    margin-top:5px;
+    margin-bottom:50px;
 }
 
 .taskTitle {
-    font-size: 35px;
+    font-size: 38px;
     max-width: 600px;
+    margin:5px;
 }
 
 .purpleIconBtn {

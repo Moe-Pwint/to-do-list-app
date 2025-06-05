@@ -38,7 +38,7 @@ function openTaskPage(childTaskObj) {
     //project title
     const projectTitle = createEle('p');
     projectTitle.textContent = `from ${childTaskObj.projectFolder}`;
-    projectTitle.setAttribute('class', 'TaskPageProjectFolder');
+    projectTitle.id = 'taskPageProjectFolder';
     container.appendChild(projectTitle);
 
     //add new item button

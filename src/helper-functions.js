@@ -138,7 +138,7 @@ function enableOtherTabs(mainTab) {
     const allTabs = document.querySelectorAll('.tabButton');
     for (const tab of allTabs) {
         if (tab !== mainTab) {
-            tab.disabled = !tab.disabled;
+            tab.disabled = false;
         }
     }
 }

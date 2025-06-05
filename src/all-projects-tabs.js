@@ -58,7 +58,7 @@ function updateProjectTasksTabs(parentProject, childTaskObj) {
     taskTabText.textContent = taskName;
     taskSpan.appendChild(taskTabText);
     
-    document.getElementById(childTaskObj.taskId).addEventListener('click', ()=> {
+    newTaskTab.addEventListener('click', ()=> {
     openTaskPage(childTaskObj);
     });
 }

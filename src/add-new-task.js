@@ -175,8 +175,8 @@ function clickNewTaskSubmit() {
         foundProjectObj.tasksList.push(newTaskObj.taskId); 
         updateProjectTasksTabs(foundProjectObj, newTaskObj);
         console.log(projectObjects);
+        console.log(taskObjects);
         removeTaskPage();
-        resetAddTaskTab();
         return true;
     }
 
@@ -186,6 +186,7 @@ function removeTaskPage() {
     const taskPage = document.querySelector('#addNewTaskPage');
     taskPage.remove();
     enableOtherTabs(addTaskBtn);
+    addTaskBtn.classList.remove('active-yellow');
 }
 
 //Listens to 'choose folder' button, add chosen option to the the folder input.   
