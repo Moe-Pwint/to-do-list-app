@@ -1,42 +1,24 @@
 //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
 import "./styles.css";
 import { projectObjects, taskObjects, NewTask, } from "./objects-n-classes.js";
-import {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus} from "./helper-functions.js";
+import { createEle, createLabel, createInput, createButton, checkInputFieldStatus, disableOtherTabs, enableOtherTabs} from "./helper-functions.js";
 import { displayNewFolderWindow} from "./add-new-project.js";
 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
 //svg imports
-import landscapeDots from "./svg/landscapeDots.svg";
 import newFolder from "./svg/newFolder.svg";
-import plus from "./svg/plus.svg";
 import plusPurple from "./svg/plusPurple.svg";
 
 
 const addTaskBtn = document.querySelector('#addTask');
 
+
 //Listen to "Add a new task" tab in Left Container.
 addTaskBtn.addEventListener('click',() => {
-    appendTransparentBackdrop();
-    changeAddTaskTab();
+    disableOtherTabs(addTaskBtn);
     createTaskDetailsBox();
     assignFolderValueOnChange();
 });
-
-//Once "Add a new task" tab is clicked, it's turned yellow and text changed.
-function changeAddTaskTab () {
-    const span = createEle('span');
-
-    const landscapeDotsIcon = createEle('img');
-    landscapeDotsIcon.src = landscapeDots;
-    landscapeDotsIcon.setAttribute('class','left-side-icons');
-    span.appendChild(landscapeDotsIcon);
-
-    const addingTaskText = createEle('p');
-    addingTaskText.textContent = 'Adding a new task';
-    span.appendChild(addingTaskText);
-    addTaskBtn.replaceChildren(span);
-    addTaskBtn.classList.add('active-yellow');
-}
 
 function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
@@ -143,7 +125,7 @@ function createTaskDetailsBox() {
     mainActionBtnsContainer.appendChild(addTaskActionBtn);
 
     const newTaskCancelBtn = createEle('button');
-    newTaskCancelBtn.addEventListener('click', cancelNewTask);
+    newTaskCancelBtn.addEventListener('click', removeTaskPage);
     newTaskCancelBtn.setAttribute('class', 'mainActionBtns cancelActionBtn');
     newTaskCancelBtn.textContent = 'Cancel Task';
     mainActionBtnsContainer.appendChild(newTaskCancelBtn);
@@ -170,8 +152,7 @@ function loadChooseFolder() {
 
 }
 
-//When New Task Action Button is clicked, this function calls class NewTask() and return object's values. 
-//Then call function removeTaskPage and function resetAddTaskTab.
+//When New Task Action Button is clicked, this function calls class NewTask() and return object's values.
 function clickNewTaskSubmit() {
     
     const objName = document.querySelector('#taskName');
@@ -201,30 +182,10 @@ function clickNewTaskSubmit() {
 
 }
 
-function cancelNewTask() {
-    removeTaskPage();
-    resetAddTaskTab();
-}
-
 function removeTaskPage() {
     const taskPage = document.querySelector('#addNewTaskPage');
-    removeTransparentBackdrop();
     taskPage.remove();
-
-}
-
-function resetAddTaskTab () {
-    addTaskBtn.classList.remove('active-yellow'); 
-    const newTaskSpan = createEle('span');
-    const plusIcon = createEle('img');
-    plusIcon.src = plus;
-    plusIcon.setAttribute('class','left-side-icons');
-    newTaskSpan.appendChild(plusIcon);
-    const newTaskText = createEle('p');
-    newTaskText.textContent = 'Add a new task';
-    newTaskSpan.appendChild(newTaskText);
-    addTaskBtn.replaceChildren(newTaskSpan);
-
+    enableOtherTabs(addTaskBtn);
 }
 
 //Listens to 'choose folder' button, add chosen option to the the folder input.   

@@ -1,7 +1,7 @@
 //This file generates all the beginning UI elements onto the page.
 
 import "./styles.css";
-import {createEle} from './helper-functions.js';
+import {changeProjectTabsColor, createEle} from './helper-functions.js';
 import {addNewProjectByIcon} from './new-project-btn.js';
 import {createSampleTabs} from './objects-n-classes.js';
 
@@ -73,8 +73,9 @@ function createMainElements () {
 
         //Search tab
     const searchContainer = createEle('button');
-    //searchLogic class will do search logic.
-    searchContainer.setAttribute('class','searchLogic tabButton left-tabs-style');
+    //searchLogic will do search logic.
+    searchContainer.id = 'searchLogic';
+    searchContainer.setAttribute('class','tabButton left-tabs-style');
     topLeftContainer.appendChild(searchContainer);
 
     const searchSpan = createEle('span');
@@ -91,8 +92,9 @@ function createMainElements () {
 
         //Today tab
     const todayContainer = createEle('button');
-    //todayLogic class will do today logic.
-    todayContainer.setAttribute('class','todayLogic tabButton left-tabs-style');
+    //todayLogic will do today logic.
+    todayContainer.id = 'todayLogic';
+    todayContainer.setAttribute('class','tabButton left-tabs-style');
     topLeftContainer.appendChild(todayContainer);
 
     const todaySpan = createEle('span');
@@ -136,14 +138,8 @@ function createMainElements () {
 
     //Deleted tasks
 
-    // const delContainer = createEle('div');
-    // leftContainer.appendChild(delContainer);
-
     const delTab = createEle('button');
-    //this is common class for all dynamically created project and task tabs.
-    delTab.setAttribute('class', 'tabButton left-tabs-style');
-    delTab.id = 'del-tab';
-    // delTab.disabled = true;
+    delTab.setAttribute('class', 'tabButton left-tabs-style del-tab');
     leftContainer.appendChild(delTab);
 
     const delSpan = createEle('span');
@@ -166,15 +162,5 @@ function createMainElements () {
     createSampleTabs();
 }
 
-function changeProjectTabsColor() {
 
-    const container = document.querySelector('#leftContainer');
-    container.addEventListener('click', (event) => {
-        const tab = event.target.closest('.tabButton');
-      
-        if (tab && container.contains(tab)) {
-          tab.classList.add('active-yellow');
-        }
-      });
-}
 

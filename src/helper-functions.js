@@ -1,21 +1,23 @@
-export {appendTransparentBackdrop,removeTransparentBackdrop, createEle, createLabel, createInput, createButton, checkInputFieldStatus};
+export { changeProjectTabsColor, createEle, createLabel, createInput, createButton, checkInputFieldStatus, disableOtherTabs, enableOtherTabs};
 
 import plusPurple from "./svg/plusPurple.svg";
 import editPurple from"./svg/editPurple.svg";
 import disabledPlus from "./svg/disabledPlus.svg";
 import disabledEdit from "./svg/disabledEdit.svg";
 
-function appendTransparentBackdrop() {
-    const backdrop = createEle('div');
-    backdrop.setAttribute('id', 'transparent-backdrop');
-    const leftContainer = document.querySelector('#leftContainer');
-    leftContainer.appendChild(backdrop);
-}
+// function appendTransparentBackdrop() {
+//     const backdrop = createEle('div');
+//     backdrop.setAttribute('id', 'transparent-backdrop');
+//     const leftContainer = document.querySelector('#leftContainer');
+//     leftContainer.appendChild(backdrop);
+// }
 
-function removeTransparentBackdrop() {
-    const backdrop = document.querySelector('#transparent-backdrop');
-    backdrop.remove();
-}
+// function removeTransparentBackdrop() {
+//     const backdrop = document.querySelector('#transparent-backdrop');
+//     backdrop.remove();
+// }
+
+
 
 function createEle (ele) {
     return document.createElement(ele);
@@ -118,4 +120,44 @@ function replaceBtnContents(iconSrc, textValue) {
 
     return [icon,text];
 
+}
+
+
+//TABS
+
+function disableOtherTabs(mainTab) {
+    const allTabs = document.querySelectorAll('.tabButton');
+    for (const tab of allTabs) {
+        if (tab !== mainTab) {
+            tab.disabled = true;
+        }
+    }
+}
+
+function enableOtherTabs(mainTab) {
+    const allTabs = document.querySelectorAll('.tabButton');
+    for (const tab of allTabs) {
+        if (tab !== mainTab) {
+            tab.disabled = !tab.disabled;
+        }
+    }
+}
+
+function changeProjectTabsColor() {
+
+    const container = document.querySelector('#leftContainer');
+    container.addEventListener('click', (event) => {
+        const tab = event.target.closest('.tabButton');
+        
+        const allTabs = document.querySelectorAll('.tabButton');
+        for (const eachTab of allTabs) {
+            if (eachTab.classList.contains('active-yellow') || eachTab !== tab) {
+                eachTab.classList.remove('active-yellow');
+            }
+        }
+      
+        if (tab && container.contains(tab)) {
+          tab.classList.add('active-yellow');
+        }
+      });
 }

@@ -37,7 +37,7 @@ button, input, select {
       outline: none;
     }
 
-button:disabled {
+button.inputButton:disabled {
     background-color:var(--btn-disabled-light);
     color:var(--btn-disabled-text);
     cursor:unset;
@@ -108,16 +108,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: left;
 }
 
-#transparent-backdrop {
-    width:350px;
+/* #transparent-backdrop {
+    width:450px;
     height:100vh;
     background-color: white;
     opacity: 0.4;
-    position:absolute;
-    z-index: 1;
-    top:0;
-    left:0;
-}
+    position:fixed;
+    inset:0;
+    z-index: 1000;
+} */
 
 @font-face {
     font-family:'handWritten_Bold';
@@ -149,10 +148,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     unicode-range: U+0020-007A;
 }
 
-.eventsDisabled {
+
+/* .eventsDisabled {
     pointer-events: 0;
     opacity: 0.5;
-}
+} */
 
 .push-right {
     margin-left:auto;
@@ -166,7 +166,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #leftContainer {
     padding:30px;
-    min-width:350px;
+    width:400px;
     height:100vh;
     border-right:1px solid var(--border-line);
     box-sizing: border-box;
@@ -247,6 +247,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height:30px;
 }
 
+.del-tab {
+    background-color: var(--light-purple);
+}
+
 /* project tabs section */
 
 #projectsContainer{
@@ -254,12 +258,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-#del-tab:disabled {
-    background-color: var(--light-purple);
-    color: var(--btn-disabled-text);
+button:disabled {
+    color:var(--btn-disabled-text);
+    
 }
 
 /* add-task.js */
+
+.tabButton {
+    min-width: max-content;
+}
 
 .task-tabs{
     width: 90%;
