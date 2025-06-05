@@ -15,7 +15,7 @@
                 import "./styles.css";
                 import {changeProjectTabsColor, createEle} from './helper-functions.js';
                 import {addNewProjectByIcon} from './new-project-btn.js';
-                import {createSampleTabs} from './objects-n-classes.js';
+                import {createSampleTabs, createSampleItem} from './objects-n-classes.js';
                         //images import
                         import odinImage from "./images/odin.png";
                         import plus from "./svg/plus.svg";
@@ -63,7 +63,7 @@
 8. objects-n-classes.js
         //this file keeps the projectObjects array and taskObjectsArray.
         //It also has two classes to create a task object and a project object.
-                export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs};
+                export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs, createSampleItem};
                 import {updateAllProjectsTabs, updateProjectTasksTabs} from './all-projects-tabs.js';
 
 9. open-task-page.js
@@ -72,19 +72,27 @@
         //Task object can be modified/deleted from this file.
                 export {openTaskPage};
                 import './styles.css';
-                import './objects-n-classes.js';
-                import {createEle} from './helper-functions.js';
+                import {itemObjects, taskObjects} from'./objects-n-classes.js';
+                import {createButton, createEle} from './helper-functions.js';
                 import {newItemDetails} from './new-item-details.js';
+                import { createItemDisplay } from './items-display.js';
+                //svg imports
+                import taskEdit from './svg/taskEdit.svg';
+                import plusWhite from './svg/plusWhite.svg'; 
 
 10. new-item-details.js
-        //
+        //This is the logic to create a new item in open-task-page.js. Then, item is saved in itemObjects array.
                 export {newItemDetails};
                 import {itemObjects, NewItem } from "./objects-n-classes.js";
-                import {createEle, createLabel, createInput, createButton} from './helper-functions.js';
+                import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
+                import {createCheckbox} from './items-display.js';
                 //svg imports
                 import plusPurple from './svg/plusPurple.svg';
 
-
+11. items-display.js
+        //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
+                export {createItemDisplay, createCheckbox};
+                import { createEle } from "./helper-functions";
 
 ------------------------------------------------Brainstorming App Structure------------------------------------------------
 

@@ -4,9 +4,10 @@
 export {openTaskPage};
 
 import './styles.css';
-import './objects-n-classes.js';
+import {itemObjects, taskObjects} from'./objects-n-classes.js';
 import {createButton, createEle} from './helper-functions.js';
 import {newItemDetails} from './new-item-details.js';
+import { createItemDisplay } from './items-display.js';
 
 //svg imports
 import taskEdit from './svg/taskEdit.svg';
@@ -49,7 +50,17 @@ function openTaskPage(childTaskObj) {
 
     //items section
     const itemsContainer = createEle('div');
-    itemsContainer.setAttribute('class', 'itemsContainer');
+    itemsContainer.id = 'itemsContainer';
     container.appendChild(itemsContainer);
+    loadItems(childTaskObj);
+
 }
 
+function loadItems(childTaskObj) {
+    const parentTask = taskObjects.find(obj => obj == childTaskObj);
+    const itemsListRef = parentTask.itemsList;
+    for (const itemIdRef of itemsListRef) {
+        const item = itemObjects.find(obj => obj.itemId == itemIdRef);
+        createItemDisplay(item);
+    }
+}

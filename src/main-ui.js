@@ -3,7 +3,7 @@
 import "./styles.css";
 import {changeProjectTabsColor, createEle} from './helper-functions.js';
 import {addNewProjectByIcon} from './new-project-btn.js';
-import {createSampleTabs} from './objects-n-classes.js';
+import {createSampleTabs, createSampleItem} from './objects-n-classes.js';
 
 //images import
 import odinImage from "./images/odin.png";
@@ -160,6 +160,7 @@ function createMainElements () {
     delSpan.appendChild(portraitDotsIcon);
 
     createSampleTabs();
+    createSampleItem();
 }
 
 

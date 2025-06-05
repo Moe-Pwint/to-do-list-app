@@ -1,6 +1,6 @@
 //this file keeps the projectObjects array and taskObjectsArray.
 //It also has two classes to create a task object and a project object.
-export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs};
+export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs, createSampleItem};
 
 import {updateAllProjectsTabs, updateProjectTasksTabs} from './all-projects-tabs.js';
 
@@ -17,6 +17,14 @@ function createSampleTabs() {
 
     updateAllProjectsTabs(projectObjects[0]);
     updateProjectTasksTabs(projectObjects[0], taskObjects[0]);
+}
+
+function createSampleItem() {
+    const sampleItem = new NewItem('Sample item', 'sample description text', "2025-06-17", 'Low', "07fc00eb-8a46-4cbf-b55f-762fa2658a35");
+    sampleItem.markStatus = true;
+    itemObjects.push(sampleItem);
+    const parentTask = taskObjects.find(task => task.taskName == 'Sample Task');
+    parentTask.itemsList.push(sampleItem.itemId);
 }
 
 //This class takes the inputs from user and create a new task object.

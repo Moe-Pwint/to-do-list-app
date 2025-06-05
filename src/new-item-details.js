@@ -1,6 +1,8 @@
+//This is the logic to create a new item in open-task-page.js. Then, item is saved in itemObjects array.
 export {newItemDetails};
 import {itemObjects, NewItem } from "./objects-n-classes.js";
 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
+import {createCheckbox} from './items-display.js';
 
 //svg imports
 import plusPurple from './svg/plusPurple.svg';
@@ -31,7 +33,6 @@ function createAddNewItemDetailsBox(taskObj) {
     addItemNameSection.appendChild(itemNameText);
 
     const checkbox = createCheckbox();
-    // checkbox.id = 'checkbox';
     addItemNameSection.appendChild(checkbox);
 
         //body section
@@ -158,19 +159,7 @@ function assignPriorityOnChange() {
     })
 }
 
-function createCheckbox() {
-    const checkboxContainer = createEle('div');
-    checkboxContainer.setAttribute('class', 'checkboxContainer');
-    const checkbox = createEle('input');
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute('class', 'checkbox');
-    checkbox.id = 'checkboxId';
-    checkboxContainer.appendChild(checkbox);
-    const checkboxText = createEle('p');
-    checkboxText.textContent = 'Mark as done';
-    checkboxContainer.appendChild(checkboxText);
-    return checkboxContainer;
-}
+
 
 //When New Item Action Button is clicked, this function calls class NewItem() and return object's values. 
 //Then call function removeItemPage and function resetAddItemTab.
@@ -198,7 +187,7 @@ function clickNewItemSubmit(taskObj) {
         }
         taskObj.itemsList.push(newItem.itemId);
         itemObjects.push(newItem);
-        console.log(itemObjects);
+        console.log(newItem);
         closeItemContainer();
     }
 }
@@ -207,4 +196,3 @@ function closeItemContainer() {
     const container = document.querySelector('#addNewItemContainer');
     container.remove();
 }
-
