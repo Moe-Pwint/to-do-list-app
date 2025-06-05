@@ -1,7 +1,7 @@
 //import { itemObjects } from "./objects-n-classes";
 
 //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
-export {createItemDisplay, createCheckbox};
+export {createItemDisplay, createCheckbox, changeCircle};
 
 import { createEle } from "./helper-functions";
 
@@ -15,10 +15,7 @@ function createItemDisplay(itemObj) {
 
     const itemCircle = createEle('div');
     itemCircle.setAttribute('class', 'circle');
-    const priorityStatus = itemObj.itemPriority;
-    if (priorityStatus == 'Low') itemCircle.style.backgroundColor = 'green';
-    if (priorityStatus == 'Medium') itemCircle.style.backgroundColor = 'yellow';
-    if (priorityStatus == 'High') itemCircle.style.backgroundColor = 'red';
+    changeCircle(itemCircle, itemObj.itemPriority);
     itemTab.appendChild(itemCircle);
 
     const itemName = createEle('p');
@@ -28,6 +25,7 @@ function createItemDisplay(itemObj) {
 
     //checkbox section
     const checkbox = createCheckbox(itemObj.markStatus);
+    
     checkbox.firstChild.addEventListener('change', () => {
         if (checkbox.firstChild.checked == true) {
             itemObj.markStatus = true;
@@ -37,9 +35,14 @@ function createItemDisplay(itemObj) {
             itemObj.markStatus = false;
             checkbox.lastChild.textContent = 'Mark as done';
     }
-        console.log(itemObj);
     })
     itemTab.appendChild(checkbox);
+}
+
+function changeCircle(circleEle, priorityStatus) {
+    if (priorityStatus == 'Low') circleEle.style.backgroundColor = 'var(--green)';
+    if (priorityStatus == 'Medium') circleEle.style.backgroundColor = 'var(--yellow)';
+    if (priorityStatus == 'High') circleEle.style.backgroundColor = 'var(--red)';
 }
 
 function createCheckbox(markStat) {

@@ -1,5 +1,8 @@
 
 :root {
+    --green: #34A853;
+    --yellow: #FFCC00;
+    --red: #F36464;
     --light-purple: #EADDFF;
     --border-line: #E0E0E0;
     --focused-yellow: #FFCC00;
@@ -524,6 +527,7 @@ select#choosingFolder {
 }
 
 .checkboxContainer {
+    width:200px;
     display:flex;
     gap:8px;
     align-items: center;

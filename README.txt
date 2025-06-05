@@ -85,13 +85,14 @@
                 export {newItemDetails};
                 import {itemObjects, NewItem } from "./objects-n-classes.js";
                 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
-                import {createCheckbox} from './items-display.js';
+                import {createItemDisplay, createCheckbox, changeCircle} from './items-display.js';
+
                 //svg imports
                 import plusPurple from './svg/plusPurple.svg';
 
 11. items-display.js
         //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
-                export {createItemDisplay, createCheckbox};
+                export {createItemDisplay, createCheckbox, changeCircle};
                 import { createEle } from "./helper-functions";
 
 ------------------------------------------------Brainstorming App Structure------------------------------------------------

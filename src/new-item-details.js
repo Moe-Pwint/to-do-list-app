@@ -2,7 +2,7 @@
 export {newItemDetails};
 import {itemObjects, NewItem } from "./objects-n-classes.js";
 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
-import {createCheckbox} from './items-display.js';
+import {createItemDisplay, createCheckbox, changeCircle} from './items-display.js';
 
 //svg imports
 import plusPurple from './svg/plusPurple.svg';
@@ -33,6 +33,15 @@ function createAddNewItemDetailsBox(taskObj) {
     addItemNameSection.appendChild(itemNameText);
 
     const checkbox = createCheckbox();
+    checkbox.firstChild.id = 'checkboxId';
+    checkbox.firstChild.addEventListener('change', () => {
+        if (checkbox.firstChild.checked == true) {
+            checkbox.lastChild.textContent = 'Unmark';
+        }
+        else {
+            checkbox.lastChild.textContent = 'Mark as done';
+    }
+    })
     addItemNameSection.appendChild(checkbox);
 
         //body section
@@ -98,6 +107,7 @@ function createAddNewItemDetailsBox(taskObj) {
     select.setAttribute('class', 'inputButton');
     priorityContainer.appendChild(select);
     select.addEventListener('focus', loadSelectOptions);
+    select.addEventListener('change', () => changeCircle(circle, select.value));
 
     const defaultOption = createEle('option');
     defaultOption.value = '';
@@ -187,7 +197,7 @@ function clickNewItemSubmit(taskObj) {
         }
         taskObj.itemsList.push(newItem.itemId);
         itemObjects.push(newItem);
-        console.log(newItem);
+        createItemDisplay(newItem);
         closeItemContainer();
     }
 }
