@@ -170,10 +170,10 @@ function clickNewTaskSubmit() {
         alert("Please add task name and project folder");
         return false;
     } else {
-        const newTaskObj = new NewTask(objName.value, objFolder.value, objDescription, objNotes);
+        const newTaskObj = new NewTask(objName.value, foundProjectObj.projectId, objDescription, objNotes);
         taskObjects.push(newTaskObj);
         foundProjectObj.tasksList.push(newTaskObj.taskId); 
-        updateProjectTasksTabs(foundProjectObj, newTaskObj);
+        updateProjectTasksTabs(foundProjectObj.projectId, newTaskObj);
         console.log(projectObjects);
         console.log(taskObjects);
         removeTaskPage();

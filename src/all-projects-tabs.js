@@ -39,7 +39,7 @@ function updateAllProjectsTabs(newProjectObj) {
 
 function updateProjectTasksTabs(parentProject, childTaskObj) {
     const taskName = childTaskObj.taskName;
-    const parentProjectContainer = document.getElementById(parentProject.projectId);
+    const parentProjectContainer = document.getElementById(parentProject);
 
     const newTaskTab = createEle('button');
     newTaskTab.setAttribute('class', 'tabButton task-tabs');

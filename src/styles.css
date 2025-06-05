@@ -207,7 +207,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .left-tabs-style {
     width: 100%;
     height:40px;
-    margin-bottom: 7px;
     
 }
 
@@ -278,6 +277,7 @@ button:disabled {
     height:40px;
     background-color: var(--light-yellow);
     margin-left:10%;
+    margin-top:5px;
 }
 
 .task-tabs span {
@@ -440,6 +440,7 @@ select#choosingFolder {
 /* new-project-tabs.js */
 .project-tabs {
     background-color:var(--light-blue);
+    margin-top: 15px;
 }
 
 /* Task Name Page  */

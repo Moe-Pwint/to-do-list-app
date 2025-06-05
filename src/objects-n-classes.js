@@ -12,12 +12,12 @@ function createSampleTabs() {
     const sampleProject = new NewProject('Sample Project');
     projectObjects.push(sampleProject);
 
-    const sampleTask = new NewTask('Sample Task', 'Sample Project','Sample Description', 'Sample Notes');
+    const sampleTask = new NewTask('Sample Task', sampleProject.projectId,'Sample Description', 'Sample Notes');
     taskObjects.push(sampleTask);
     projectObjects[0].tasksList.push(sampleTask.taskId);
 
     updateAllProjectsTabs(projectObjects[0]);
-    updateProjectTasksTabs(projectObjects[0], taskObjects[0]);
+    updateProjectTasksTabs(projectObjects[0].projectId, taskObjects[0]);
 }
 
 function createSampleItem() {

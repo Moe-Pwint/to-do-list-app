@@ -4,7 +4,7 @@
 export {openTaskPage};
 
 import './styles.css';
-import {itemObjects, taskObjects} from'./objects-n-classes.js';
+import {itemObjects, projectObjects, taskObjects} from'./objects-n-classes.js';
 import {createButton, createEle} from './helper-functions.js';
 import {newItemDetails} from './new-item-details.js';
 import { createItemDisplay } from './items-display.js';
@@ -37,7 +37,8 @@ function openTaskPage(childTaskObj) {
 
     //project title
     const projectTitle = createEle('p');
-    projectTitle.textContent = `from ${childTaskObj.projectFolder}`;
+    const projectFolder = projectObjects.find(obj => obj.tasksList.includes(childTaskObj.taskId));
+    projectTitle.textContent = `from ${projectFolder.projectName}`;
     projectTitle.id = 'taskPageProjectFolder';
     container.appendChild(projectTitle);
 
