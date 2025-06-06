@@ -1,5 +1,5 @@
 //This is the logic to create a new item in open-task-page.js. Then, item is saved in itemObjects array.
-export {newItemDetails};
+export {newItemDetails, loadPrioritySelectOptions, assignPriorityOnChange};
 import {itemObjects, NewItem } from "./objects-n-classes.js";
 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
 import {createItemDisplay, createCheckbox, changeCircle} from './items-display.js';
@@ -9,7 +9,6 @@ import plusPurple from './svg/plusPurple.svg';
 
 function newItemDetails(taskObj) {
     createAddNewItemDetailsBox(taskObj);
-    assignPriorityOnChange();
 }
 
 //Create UI box to display details and edit options.
@@ -106,14 +105,9 @@ function createAddNewItemDetailsBox(taskObj) {
     select.setAttribute('id', 'selectingPriority');
     select.setAttribute('class', 'inputButton');
     priorityContainer.appendChild(select);
-    select.addEventListener('focus', loadSelectOptions);
+    loadPrioritySelectOptions();
     select.addEventListener('change', () => changeCircle(circle, select.value));
-
-    const defaultOption = createEle('option');
-    defaultOption.value = '';
-    defaultOption.textContent = 'Set priority';
-    defaultOption.style.textAlign = 'center';
-    select.appendChild(defaultOption);
+    assignPriorityOnChange();
 
     //Main Action Buttons tab
     const mainActionBtnsContainer = createEle('div');
@@ -121,7 +115,6 @@ function createAddNewItemDetailsBox(taskObj) {
     addNewItemContainer.appendChild(mainActionBtnsContainer);
 
     const addItemActionBtn = createEle('button');
-    addItemActionBtn.id = 'addNewItemActionBtn';
     addItemActionBtn.addEventListener('click', ()=> clickNewItemSubmit(taskObj));
     addItemActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     addItemActionBtn.textContent = 'Add new item';
@@ -136,12 +129,13 @@ function createAddNewItemDetailsBox(taskObj) {
     checkInputFieldStatus();
 }
 
-function loadSelectOptions() {
+function loadPrioritySelectOptions() {
     const selectingPriority = document.querySelector('#selectingPriority');
-    selectingPriority.replaceChildren();
+    if (!selectingPriority.hasChildNodes()) {
     const defaultOption = createEle('option');
     defaultOption.value = '';
     defaultOption.textContent = 'Set priority';
+    defaultOption.style.textAlign = 'center';
     selectingPriority.appendChild(defaultOption);
     
     const lowOption = createEle('option');
@@ -158,6 +152,7 @@ function loadSelectOptions() {
     highOption.value = 'High';
     highOption.textContent = 'High';
     selectingPriority.appendChild(highOption);
+    }
 }
 
 //Listens to 'selectingPriority', add chosen option to the the priorityInput.   

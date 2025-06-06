@@ -7,6 +7,7 @@
     --border-line: #E0E0E0;
     --focused-yellow: #FFCC00;
     --light-yellow: #FFEFC0;
+    --medium-purple: #D0BCFF;
     --dark-purple: #4b387a;
     --light-blue: #D3E3FF;
     --bright-blue: #299dfd;
@@ -601,4 +602,14 @@ select#choosingFolder {
     border: 1px solid var(--bright-blue);
     border-radius: 10px;
     padding:20px 80px 20px 30px;
+}
+
+.editItemActionBtn {
+    background-color: var(--medium-purple);
+    color:var(--dark-purple);
+}
+
+.delActionBtn {
+    background-color: var(--red);
+    color: var(--dark-grey);
 }

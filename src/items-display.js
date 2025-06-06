@@ -4,6 +4,7 @@
 export {createItemDisplay, createCheckbox, changeCircle};
 
 import { createButton, createEle, createLabel, createInput, checkInputFieldStatus } from "./helper-functions";
+import {loadPrioritySelectOptions, assignPriorityOnChange} from './new-item-details.js';
 //svg imports
 import portraitDots from './svg/portraitDots.svg';
 import plusPurple from './svg/plusPurple.svg';
@@ -47,7 +48,7 @@ function createItemDisplay(itemObj) {
     itemEditBtn.setAttribute('class', 'allItemEditBtns');
     itemTab.appendChild(itemEditBtn);
     itemEditBtn.addEventListener('click',()=> {
-        editItem(itemObj);
+        editItem(itemObj, itemName, itemCircle);
         document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = true));
     });
 }
@@ -77,7 +78,7 @@ function createCheckbox(markStat) {
     return checkboxContainer;
 }
 
-function editItem(itemObj) {
+function editItem(itemObj, itemNameTop, circle) {
     const editItemContainer = createEle('div');
     editItemContainer.id = 'editItemContainer';
     const targetItem = document.getElementById(itemObj.itemId);
@@ -110,6 +111,10 @@ function editItem(itemObj) {
         itemNameContainer.appendChild(itemNameAddBtn);
     }
 
+    itemNameInput.addEventListener("input", (event) => {
+        itemNameTop.textContent = event.target.value;
+      });
+
     //item description Section
     const itemDescriptionContainer = createEle('div');
     itemDescriptionContainer.setAttribute('class', 'itemDetailsContainers');
@@ -141,5 +146,81 @@ function editItem(itemObj) {
     const itemDateInput = createInput('date', 'itemDate');
     itemDateInput.value = itemObj.itemDueDate;
     itemDateContainer.appendChild(itemDateInput);
+
+    //set priority section
+    const priorityContainer = createEle('div');
+    priorityContainer.setAttribute('class', 'itemDetailsContainers');
+    editItemContainer.appendChild(priorityContainer);
+
+    const priorityLabel = createLabel('priority', 'Priority:');
+    priorityContainer.appendChild(priorityLabel);
+
+    const priorityInput = createInput('text', 'priorityInput');
+    priorityInput.readOnly = true;
+    priorityInput.value = itemObj.itemPriority;
+    priorityContainer.appendChild(priorityInput);
+
+    const select = createEle('select');
+    select.setAttribute('id', 'selectingPriority');
+    select.setAttribute('class', 'inputButton');
+    priorityContainer.appendChild(select);
+    loadPrioritySelectOptions();
+    select.value = itemObj.itemPriority;
+    //select.addEventListener('focus', loadPrioritySelectOptions);
+    select.addEventListener('change', () => changeCircle(circle, select.value));
+    assignPriorityOnChange();
     checkInputFieldStatus();
+
+    //Main Action Buttons tab
+    const mainActionBtnsContainer = createEle('div');
+    mainActionBtnsContainer.setAttribute('class', 'mainActionBtnsContainer');
+    editItemContainer.appendChild(mainActionBtnsContainer);
+
+    const editItemActionBtn = createEle('button');
+    editItemActionBtn.addEventListener('click', ()=> saveItemSubmit(itemObj));
+    editItemActionBtn.setAttribute('class', 'mainActionBtns editItemActionBtn');
+    editItemActionBtn.textContent = 'Save and Close';
+    mainActionBtnsContainer.appendChild(editItemActionBtn);
+
+    const itemDelBtn = createEle('button');
+    itemDelBtn.setAttribute('class', 'mainActionBtns delActionBtn');
+    itemDelBtn.textContent = 'Delete Item';
+    mainActionBtnsContainer.appendChild(itemDelBtn);
+    newItemCancelBtn.addEventListener('click', ()=> deleteItem());
+
+}
+
+function saveItemSubmit(itemObj) {
+    const itemName = document.querySelector('#itemName').value;
+    const itemDescription = document.querySelector('#itemDescription').value;
+    const itemDate = document.querySelector('#itemDate').value;
+    const itemPriority = document.querySelector('#priorityInput').value;
+
+    if (!itemName) {
+        alert('Please add the name of the task item.');
+    } else {
+        let dueDate;
+        if (!itemDate) {
+            dueDate = '';
+        } else {
+            dueDate = itemDate;
+        }
+        itemObj.itemName = itemName;
+        itemObj.itemDescription = itemDescription;
+        itemObj.itemDueDate = itemDate;
+        itemObj.itemPriority = itemPriority;
+        console.log(itemObj);
+        closeItemContainer();
+    }
+}
+
+function closeItemContainer() {
+    const container = document.querySelector('#editItemContainer');
+    container.remove();
+}
+
+function deleteItem() {
+    //delete item from itemObjects array, from parent task's itemsList array, from current item display.
+    //Double ask if they really want to delete and it can't be undone.
+    closeItemContainer();
 }

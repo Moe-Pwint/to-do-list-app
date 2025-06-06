@@ -82,10 +82,10 @@
 
 10. new-item-details.js
         //This is the logic to create a new item in open-task-page.js. Then, item is saved in itemObjects array.
-                export {newItemDetails};
+                export {newItemDetails, loadPrioritySelectOptions,  assignPriorityOnChange};
                 import {itemObjects, NewItem } from "./objects-n-classes.js";
                 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
-                import {createItemDisplay, createCheckbox, changeCircle} from './items-display.js';
+                import {createItemDisplay, createCheckbox, changeCircle, assignPriorityOnChange} from './items-display.js';
 
                 //svg imports
                 import plusPurple from './svg/plusPurple.svg';
@@ -94,6 +94,7 @@
         //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
                 export {createItemDisplay, createCheckbox, changeCircle};
                 import { createEle, createButton, createLabel, createInput, checkInputFieldStatus } from "./helper-functions";
+                import {loadPrioritySelectOptions, assignPriorityOnChange} from './new-item-details.js';
                 //svg imports
                 import portraitDots from './svg/portraitDots.svg';
                 import plusPurple from './svg/plusPurple.svg';
