@@ -93,7 +93,11 @@
 11. items-display.js
         //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
                 export {createItemDisplay, createCheckbox, changeCircle};
-                import { createEle } from "./helper-functions";
+                import { createEle, createButton, createLabel, createInput, checkInputFieldStatus } from "./helper-functions";
+                //svg imports
+                import portraitDots from './svg/portraitDots.svg';
+                import plusPurple from './svg/plusPurple.svg';
+                import editPurple from"./svg/editPurple.svg";
 
 ------------------------------------------------Brainstorming App Structure------------------------------------------------
 

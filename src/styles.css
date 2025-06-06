@@ -86,26 +86,30 @@ input[type='date'] {
     width:100%;
     display:flex;
     position:relative;
+    padding:10px 90px 10px 0px;
 }
 
 input[type='date']::after {
     content: 'Pick Date';
     position: absolute;
     right: 15px;
-    top: 8px;
+    top: 6px;
     color:var(--dark-purple);
     pointer-events: none;
+    
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: var(--light-purple);
-    padding:10px 90px 10px 13px;
+    position:absolute;
+    top:0px;
+    right:0px;
+    padding:8px 90px 8px 13px;
     display:flex;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     cursor:pointer;
-    margin-left:352px;
 }
 
 .inputField {
@@ -578,9 +582,23 @@ select#choosingFolder {
     background-color: var(--items-display-bg);
     padding-left: 20px;
     padding-right: 20px;
+    flex-wrap:wrap;
 }
 
 .item-display-name {
     font-size: 20px;
     margin:15px;
+}
+
+/* Edit item */
+
+#editItemContainer {
+    /* display:flex; */
+    width:900px;
+    height:max-content;
+    background-color: var(--grey-bg-containers);
+    margin: 50px;
+    border: 1px solid var(--bright-blue);
+    border-radius: 10px;
+    padding:20px 80px 20px 30px;
 }

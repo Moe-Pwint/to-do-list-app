@@ -22,7 +22,7 @@ function createSampleTabs() {
 
 function createSampleItem() {
     const sampleItem = new NewItem('Sample item', 'sample description text', "2025-06-17", 'Low', "07fc00eb-8a46-4cbf-b55f-762fa2658a35");
-    sampleItem.markStatus = true;
+    sampleItem.markStatus = false;
     itemObjects.push(sampleItem);
     const parentTask = taskObjects.find(task => task.taskName == 'Sample Task');
     parentTask.itemsList.push(sampleItem.itemId);

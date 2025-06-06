@@ -35,6 +35,11 @@ function updateAllProjectsTabs(newProjectObj) {
     const projectTabText = createEle('p');
     projectTabText.textContent = projectName;
     projectSpan.appendChild(projectTabText);
+
+    //checking that if the project is added, while a new task is being created, the tab will be disabled.
+    if (document.querySelector('#addTask').classList.contains('active-yellow')) {
+        newProjectTab.disabled = true;
+    }
 }
 
 function updateProjectTasksTabs(parentProject, childTaskObj) {
