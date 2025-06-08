@@ -123,6 +123,7 @@ function createTaskDetailsBox() {
     addTaskActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     addTaskActionBtn.textContent = 'Add new Task';
     mainActionBtnsContainer.appendChild(addTaskActionBtn);
+    addTaskActionBtn.disabled = true;
 
     const newTaskCancelBtn = createEle('button');
     newTaskCancelBtn.addEventListener('click', removeTaskPage);
@@ -131,6 +132,30 @@ function createTaskDetailsBox() {
     mainActionBtnsContainer.appendChild(newTaskCancelBtn);
 
     checkInputFieldStatus();
+    //Enable add button only when name and project folder is set.
+    enableAddingBtn();
+}
+
+function enableAddingBtn() {
+    const taskName = document.querySelector('#taskName');
+    const folder = document.querySelector('#choosingFolder');
+    const addTaskBtn = document.querySelector('#addNewTaskActionBtn');
+    taskName.addEventListener('input', () => {
+        if (!taskName.value) {
+            addTaskBtn.disabled = true;
+        } else {
+            if (folder.value) {
+                addTaskBtn.disabled = false;
+            }
+        }
+    })
+    folder.addEventListener('input', () => {
+        if (folder.value) {
+            if (taskName.value) {
+                addTaskBtn.disabled = false;
+            }
+        }
+    })
 }
 
 function loadChooseFolder() {

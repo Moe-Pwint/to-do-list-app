@@ -339,6 +339,10 @@ button:disabled {
     gap:15px;
 }
 
+#setFolder {
+    pointer-events: none;
+}
+
 .setProjectFolderBtn {
     background-color: var(--light-purple);
     width:220px;
@@ -367,6 +371,11 @@ button:disabled {
 .addActionBtn {
     background-color: var(--bright-blue);
     color:white;
+    /* cursor:pointer; */
+}
+.addActionBtn:disabled {
+    background-color: var(--btn-disabled-light);
+    cursor: unset;
 }
 
 .cancelActionBtn {
