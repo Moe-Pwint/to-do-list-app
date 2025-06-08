@@ -151,7 +151,7 @@ function changeProjectTabsColor() {
         
         const allTabs = document.querySelectorAll('.tabButton');
         for (const eachTab of allTabs) {
-            if (eachTab.classList.contains('active-yellow') || eachTab !== tab) {
+            if (eachTab.classList.contains('active-yellow')) {
                 eachTab.classList.remove('active-yellow');
             }
         }

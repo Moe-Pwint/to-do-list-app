@@ -42,10 +42,26 @@ function openTaskPage(childTaskObj) {
     projectTitle.id = 'taskPageProjectFolder';
     container.appendChild(projectTitle);
 
+    //Project Description and notes
+    const taskExtraInfo = createEle('div');
+    container.appendChild(taskExtraInfo);
+    if (childTaskObj.description) {
+        taskExtraInfo.setAttribute('class', 'taskExtraInfo');
+        const description = createEle('p');
+        description.textContent = `Task Description: ${childTaskObj.description}`;
+        taskExtraInfo.appendChild(description);
+    }
+    if (childTaskObj.notes) {
+        taskExtraInfo.setAttribute('class', 'taskExtraInfo');
+        const notes = createEle('p');
+        notes.textContent = `Task Notes: ${childTaskObj.notes}`;
+        taskExtraInfo.appendChild(notes);
+    }
+
     //add new item button
     const addNewItemBtn = createButton(plusWhite, 'Add new item');
     addNewItemBtn.id = 'addNewItemBtn';
-    container.appendChild(addNewItemBtn);
+    taskTitleContainer.appendChild(addNewItemBtn);
 
     //items section
     const itemsContainer = createEle('div');

@@ -273,6 +273,13 @@ button:disabled {
 
 /* add-task.js */
 
+.taskExtraInfo {
+    background-color: var(--grey-bg-containers);
+    padding: 15px 30px;
+    margin-bottom: 50px;
+    width: 930px;
+}
+
 .tabButton {
     min-width: max-content;
 }
@@ -468,6 +475,7 @@ select#choosingFolder {
     display:flex;
     gap: 30px;
     align-items: center;
+    max-width: 1000px;
 }
 
 #taskPageProjectFolder {
@@ -510,6 +518,7 @@ select#choosingFolder {
     gap:5px;
     font-size: 22px;
     margin-top: 30px;
+    margin-left: auto;
 }
 
     /* items section */
