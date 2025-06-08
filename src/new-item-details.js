@@ -13,6 +13,8 @@ function newItemDetails(taskObj) {
 
 //Create UI box to display details and edit options.
 function createAddNewItemDetailsBox(taskObj) {
+    document.querySelector('#addNewItemBtn').disabled = true;
+    document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = true));
     const addNewItemContainer = createEle('div');
     addNewItemContainer.id = 'addNewItemContainer';
     const openTaskContainer = document.querySelector('#openTaskContainer');
@@ -191,6 +193,7 @@ function clickNewItemSubmit(taskObj) {
             newItem.markStatus = true;
         }
         taskObj.itemsList.push(newItem.itemId);
+        console.log(`taskObj.itemsList: ${taskObj.itemsList}`);
         itemObjects.push(newItem);
         createItemDisplay(newItem);
         closeItemContainer();
@@ -200,4 +203,6 @@ function clickNewItemSubmit(taskObj) {
 function closeItemContainer() {
     const container = document.querySelector('#addNewItemContainer');
     container.remove();
+    document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = false));
+    document.querySelector('#addNewItemBtn').disabled = false;
 }

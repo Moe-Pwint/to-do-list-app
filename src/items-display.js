@@ -1,4 +1,4 @@
-import { itemObjects } from "./objects-n-classes";
+import { itemObjects, taskObjects } from "./objects-n-classes";
 
 //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
 export {createItemDisplay, createCheckbox, changeCircle};
@@ -48,7 +48,7 @@ function createItemDisplay(itemObj, parentTask) {
     itemEditBtn.setAttribute('class', 'allItemEditBtns');
     itemTab.appendChild(itemEditBtn);
     itemEditBtn.addEventListener('click',()=> {
-        editItem(itemObj, itemName, itemCircle, parentTask);
+        editItem(itemObj, itemName, itemCircle);
         document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = true));
     });
 }
@@ -78,7 +78,7 @@ function createCheckbox(markStat) {
     return checkboxContainer;
 }
 
-function editItem(itemObj, itemNameTop, circle, parentTask) {
+function editItem(itemObj, itemNameTop, circle) {
     const editItemContainer = createEle('div');
     editItemContainer.id = 'editItemContainer';
     const targetItem = document.getElementById(itemObj.itemId);
@@ -186,7 +186,7 @@ function editItem(itemObj, itemNameTop, circle, parentTask) {
     itemDelBtn.setAttribute('class', 'mainActionBtns delActionBtn');
     itemDelBtn.textContent = 'Delete Item';
     mainActionBtnsContainer.appendChild(itemDelBtn);
-    itemDelBtn.addEventListener('click', ()=> deleteItem(itemObj, parentTask));
+    itemDelBtn.addEventListener('click', ()=> deleteItem(itemObj));
 
 }
 
@@ -209,8 +209,6 @@ function saveItemSubmit(itemObj) {
         itemObj.itemDescription = itemDescription;
         itemObj.itemDueDate = itemDate;
         itemObj.itemPriority = itemPriority;
-        console.log(itemObj);
-        console.log(itemObjects);
         closeItemContainer();
     }
 }
@@ -221,12 +219,15 @@ function closeItemContainer() {
     document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = false));
 }
 
-function deleteItem(itemObj, parentTask) {
+function deleteItem(itemObj) {
     const itemId = itemObj.itemId;
     document.getElementById(itemId).remove();
+    const parentTask = taskObjects.find((obj) => obj.itemsList.includes(itemId));
+    //console.log(`parentTask: ${parentTask}`);
     parentTask.itemsList.splice(parentTask.itemsList.indexOf(itemId), 1);
     const index = itemObjects.indexOf(itemObj);
     itemObjects.splice(index, 1);
+    document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = false));
 
     //Double ask if they really want to delete and it can't be undone.
     //closeItemContainer();

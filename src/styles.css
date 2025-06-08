@@ -584,6 +584,7 @@ select#choosingFolder {
     padding-left: 20px;
     padding-right: 20px;
     flex-wrap:wrap;
+    margin-bottom: 15px;
 }
 
 .item-display-name {

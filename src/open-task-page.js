@@ -47,8 +47,6 @@ function openTaskPage(childTaskObj) {
     addNewItemBtn.id = 'addNewItemBtn';
     container.appendChild(addNewItemBtn);
 
-    addNewItemBtn.addEventListener('click', () => newItemDetails(childTaskObj));
-
     //items section
     const itemsContainer = createEle('div');
     itemsContainer.id = 'itemsContainer';
@@ -58,7 +56,10 @@ function openTaskPage(childTaskObj) {
     if (itemsListRef.length > 0) {
         loadItems(itemsListRef, parentTask);
     }
+
+    addNewItemBtn.addEventListener('click', () => newItemDetails(childTaskObj));
 }
+
 
 function loadItems(itemsListRef, parentTask) {
     
