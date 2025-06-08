@@ -1,4 +1,4 @@
-//import { itemObjects } from "./objects-n-classes";
+import { itemObjects } from "./objects-n-classes";
 
 //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
 export {createItemDisplay, createCheckbox, changeCircle};
@@ -10,7 +10,7 @@ import portraitDots from './svg/portraitDots.svg';
 import plusPurple from './svg/plusPurple.svg';
 import editPurple from"./svg/editPurple.svg";
 
-function createItemDisplay(itemObj) {
+function createItemDisplay(itemObj, parentTask) {
     const itemsContainer = document.querySelector('#itemsContainer');
 
     const itemTab = createEle('div');
@@ -48,7 +48,7 @@ function createItemDisplay(itemObj) {
     itemEditBtn.setAttribute('class', 'allItemEditBtns');
     itemTab.appendChild(itemEditBtn);
     itemEditBtn.addEventListener('click',()=> {
-        editItem(itemObj, itemName, itemCircle);
+        editItem(itemObj, itemName, itemCircle, parentTask);
         document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = true));
     });
 }
@@ -78,7 +78,7 @@ function createCheckbox(markStat) {
     return checkboxContainer;
 }
 
-function editItem(itemObj, itemNameTop, circle) {
+function editItem(itemObj, itemNameTop, circle, parentTask) {
     const editItemContainer = createEle('div');
     editItemContainer.id = 'editItemContainer';
     const targetItem = document.getElementById(itemObj.itemId);
@@ -186,7 +186,7 @@ function editItem(itemObj, itemNameTop, circle) {
     itemDelBtn.setAttribute('class', 'mainActionBtns delActionBtn');
     itemDelBtn.textContent = 'Delete Item';
     mainActionBtnsContainer.appendChild(itemDelBtn);
-    newItemCancelBtn.addEventListener('click', ()=> deleteItem());
+    itemDelBtn.addEventListener('click', ()=> deleteItem(itemObj, parentTask));
 
 }
 
@@ -210,6 +210,7 @@ function saveItemSubmit(itemObj) {
         itemObj.itemDueDate = itemDate;
         itemObj.itemPriority = itemPriority;
         console.log(itemObj);
+        console.log(itemObjects);
         closeItemContainer();
     }
 }
@@ -217,10 +218,16 @@ function saveItemSubmit(itemObj) {
 function closeItemContainer() {
     const container = document.querySelector('#editItemContainer');
     container.remove();
+    document.querySelectorAll('.allItemEditBtns').forEach((btn => btn.disabled = false));
 }
 
-function deleteItem() {
-    //delete item from itemObjects array, from parent task's itemsList array, from current item display.
+function deleteItem(itemObj, parentTask) {
+    const itemId = itemObj.itemId;
+    document.getElementById(itemId).remove();
+    parentTask.itemsList.splice(parentTask.itemsList.indexOf(itemId), 1);
+    const index = itemObjects.indexOf(itemObj);
+    itemObjects.splice(index, 1);
+
     //Double ask if they really want to delete and it can't be undone.
-    closeItemContainer();
+    //closeItemContainer();
 }

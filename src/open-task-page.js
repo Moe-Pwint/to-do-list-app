@@ -53,15 +53,17 @@ function openTaskPage(childTaskObj) {
     const itemsContainer = createEle('div');
     itemsContainer.id = 'itemsContainer';
     container.appendChild(itemsContainer);
-    loadItems(childTaskObj);
-
-}
-
-function loadItems(childTaskObj) {
     const parentTask = taskObjects.find(obj => obj == childTaskObj);
     const itemsListRef = parentTask.itemsList;
+    if (itemsListRef.length > 0) {
+        loadItems(itemsListRef, parentTask);
+    }
+}
+
+function loadItems(itemsListRef, parentTask) {
+    
     for (const itemIdRef of itemsListRef) {
         const item = itemObjects.find(obj => obj.itemId == itemIdRef);
-        createItemDisplay(item);
+        createItemDisplay(item, parentTask);
     }
 }
