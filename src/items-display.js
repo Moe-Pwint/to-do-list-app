@@ -223,7 +223,6 @@ function deleteItem(itemObj) {
     const itemId = itemObj.itemId;
     document.getElementById(itemId).remove();
     const parentTask = taskObjects.find((obj) => obj.itemsList.includes(itemId));
-    //console.log(`parentTask: ${parentTask}`);
     parentTask.itemsList.splice(parentTask.itemsList.indexOf(itemId), 1);
     const index = itemObjects.indexOf(itemObj);
     itemObjects.splice(index, 1);

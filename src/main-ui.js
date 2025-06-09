@@ -1,9 +1,9 @@
 //This file generates all the beginning UI elements onto the page.
 
 import "./styles.css";
-import {changeProjectTabsColor, createEle} from './helper-functions.js';
+import {changeProjectTabsColor, createButton, createEle} from './helper-functions.js';
 import {addNewProjectByIcon} from './new-project-btn.js';
-import {createSampleTabs, createSampleItem} from './objects-n-classes.js';
+import {createSampleTabs, createSampleItem, projectObjects, taskObjects, itemObjects} from './objects-n-classes.js';
 
 //images import
 import odinImage from "./images/odin.png";
@@ -161,7 +161,40 @@ function createMainElements () {
 
     createSampleTabs();
     createSampleItem();
+
+    consoleLogObjArrays();
 }
 
+function consoleLogObjArrays() {
+    const allProjects = createEle('button');
+    allProjects.id = 'allProjects';
+    allProjects.textContent = 'allProjects';
+    leftContainer.appendChild(allProjects);
+    document.querySelector('#allProjects').addEventListener('click', () => {
+        projectObjects.forEach((project) => {
+            console.log(project.projectName);
+            console.log(`tasksList:`);
+            project.tasksList.forEach((Id) => {
+                const task = taskObjects.find((task) => task.taskId == Id);
+                console.log(task.taskName);
+            })
+        })
+    });
+
+    const allTasks = createEle('button');
+    allTasks.id = 'allTasks';
+    allTasks.textContent = 'allTasks';
+    leftContainer.appendChild(allTasks);
+    document.querySelector('#allTasks').addEventListener('click', () => {
+        taskObjects.forEach((task) => {
+            console.log(`task: ${task.taskName}`);
+            console.log('itemsList:');
+            task.itemsList.forEach((Id) => {
+                const item = itemObjects.find((item) => item.itemId == Id);
+                console.log(item.itemName);
+            })
+        })
+    })
+}
 
 

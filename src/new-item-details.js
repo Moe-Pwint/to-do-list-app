@@ -189,11 +189,9 @@ function clickNewItemSubmit(taskObj) {
         }
         const newItem = new NewItem(itemName, itemDescription, dueDate, itemPriority, parentTask);
         if (checkbox.checked) {
-            console.log('checkbox is checked');
             newItem.markStatus = true;
         }
         taskObj.itemsList.push(newItem.itemId);
-        console.log(`taskObj.itemsList: ${taskObj.itemsList}`);
         itemObjects.push(newItem);
         createItemDisplay(newItem);
         closeItemContainer();

@@ -50,6 +50,7 @@
                 import { createEle } from "./helper-functions";
                 import './styles.css';
                 import {openTaskPage} from "./open-task-page.js";
+                import {openFolderPage} from "./open-folder-page.js";
                         //svg imports
                         import folder from "./svg/folder.svg";
                         import arrowDownRight from "./svg/arrow-down-right.svg";
@@ -99,6 +100,14 @@
                 import portraitDots from './svg/portraitDots.svg';
                 import plusPurple from './svg/plusPurple.svg';
                 import editPurple from"./svg/editPurple.svg";
+
+12. open-folder-page.js
+        //When a folder tab is clicked from the left bottom container, folder contents will collapse.
+                export {openFolderPage};
+                import './styles.css';
+                import { openTaskPage } from "./open-task-page";
+                import {createEle} from './helper-functions.js';
+
 
 ------------------------------------------------Brainstorming App Structure------------------------------------------------
 

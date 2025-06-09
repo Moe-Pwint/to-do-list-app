@@ -1,11 +1,27 @@
 import "./styles.css";
 import "./main-ui.js";
 import "./add-new-task.js";
-//Write logic to edit task object at open-task-page.js
-//Listen to new task/new item submit buttons, when each inner button is on change, if all required fields are filled, enable the submit buttons.
-//* Save all objects in memory.
 
-//WHen project folder tabs are tapped, each project opens up along with it's tasks
-//Add notes and description for Task page in open-task-page.js
 
-//After an item is marked as done, append delete icon?
+//open-task-page.js
+    //Write logic to edit task object. Details can be edited and task can be deleted.
+
+//items-display.js //new-item-details.js
+    //Listen to item submit buttons, when each inner button is on change, 
+    //if all required fields are filled, enable the submit buttons.
+    //After an item is marked as done, append delete icon?
+
+//objects-n-classes.js
+    //* Save all objects in memory.
+
+//open-folder-page.js
+    //Mention on top that it is a project folder summary, 
+    //display each task and it's details. And in the next level, show its item names. 
+    //Folder name must be able to be edited and can be deleted. 
+    //Make it visible that each task is a clickable link. And task can be deleted from here too.
+
+//deleted-tasks.js
+    //Write logic for deleted tasks tab. All deleted tasks will be appended to an array called 'deletedTasks'.
+    //Deleted tasks can be recovered.
+
+//Create logics to display projectObjects, taskObjects, itemObjects arrays anytime I want them.

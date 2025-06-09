@@ -7,7 +7,7 @@ export{updateAllProjectsTabs, updateProjectTasksTabs};
 import { createEle } from "./helper-functions";
 import './styles.css';
 import {openTaskPage} from "./open-task-page.js";
-
+import {openFolderPage} from "./open-folder-page.js";
 //svg imports
 import folder from "./svg/folder.svg";
 import arrowDownRight from "./svg/arrow-down-right.svg";
@@ -40,6 +40,7 @@ function updateAllProjectsTabs(newProjectObj) {
     if (document.querySelector('#addTask').classList.contains('active-yellow')) {
         newProjectTab.disabled = true;
     }
+    newProjectTab.addEventListener('click', () => openFolderPage(newProjectObj));
 }
 
 function updateProjectTasksTabs(parentProject, childTaskObj) {
