@@ -1,9 +1,10 @@
 //This file generates all the beginning UI elements onto the page.
 
 import "./styles.css";
-import {changeProjectTabsColor, createButton, createEle} from './helper-functions.js';
+import {changeProjectTabsColor, disableOtherTabs, createEle} from './helper-functions.js';
 import {addNewProjectByIcon} from './new-project-btn.js';
 import {createSampleTabs, projectObjects, taskObjects, itemObjects} from './objects-n-classes.js';
+import {createTaskDetailsBox} from './add-new-task.js';
 
 //images import
 import odinImage from "./images/odin.png";
@@ -158,6 +159,13 @@ function createMainElements () {
     portraitDotsIcon.src = portraitDots;
     portraitDotsIcon.setAttribute('class', 'left-side-icons push-right');
     delSpan.appendChild(portraitDotsIcon);
+
+    //Listen to "Add a new task" tab in Left Container.
+    const newTaskBtn = document.querySelector('#addTask');
+    newTaskBtn.addEventListener('click',() => {
+        disableOtherTabs(newTaskBtn);
+        createTaskDetailsBox();
+    });
 
     createSampleTabs();
 

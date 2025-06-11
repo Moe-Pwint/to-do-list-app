@@ -1,7 +1,8 @@
 //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
+export {loadChooseFolder,createTaskDetailsBox};
 import "./styles.css";
 import { projectObjects, taskObjects, NewTask, } from "./objects-n-classes.js";
-import { createEle, createLabel, createInput, createButton, checkInputFieldStatus, disableOtherTabs, enableOtherTabs} from "./helper-functions.js";
+import { createEle, createLabel, createInput, createButton, checkInputFieldStatus, enableOtherTabs} from "./helper-functions.js";
 import { displayNewFolderWindow} from "./add-new-project.js";
 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
@@ -9,16 +10,6 @@ import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 import newFolder from "./svg/newFolder.svg";
 import plusPurple from "./svg/plusPurple.svg";
 
-
-const addTaskBtn = document.querySelector('#addTask');
-
-
-//Listen to "Add a new task" tab in Left Container.
-addTaskBtn.addEventListener('click',() => {
-    disableOtherTabs(addTaskBtn);
-    createTaskDetailsBox();
-    assignFolderValueOnChange();
-});
 
 function createTaskDetailsBox() {
     const addNewTaskPage = createEle('div');
@@ -131,8 +122,8 @@ function createTaskDetailsBox() {
     newTaskCancelBtn.textContent = 'Cancel Task';
     mainActionBtnsContainer.appendChild(newTaskCancelBtn);
 
+    assignFolderValueOnChange();
     checkInputFieldStatus();
-    //Enable add button only when name and project folder is set.
     enableAddingBtn();
 }
 
@@ -210,8 +201,9 @@ function clickNewTaskSubmit() {
 function removeTaskPage() {
     const taskPage = document.querySelector('#addNewTaskPage');
     taskPage.remove();
-    enableOtherTabs(addTaskBtn);
-    addTaskBtn.classList.remove('active-yellow');
+    const newTaskBtn = document.querySelector('#addTask');
+    enableOtherTabs(newTaskBtn);
+    newTaskBtn.classList.remove('active-yellow');
 }
 
 //Listens to 'choose folder' button, add chosen option to the the folder input.   

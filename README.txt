@@ -13,9 +13,10 @@
 3. main-ui.js
         //This file generates all the beginning UI elements onto the page.
                 import "./styles.css";
-                import {changeProjectTabsColor, createEle} from './helper-functions.js';
+                import {changeProjectTabsColor, disableOtherTabs, createEle} from './helper-functions.js';
                 import {addNewProjectByIcon} from './new-project-btn.js';
-                import {createSampleTabs} from './objects-n-classes.js';
+                import {createSampleTabs, projectObjects, taskObjects, itemObjects} from './objects-n-classes.js';
+                import {createTaskDetailsBox} from './add-new-task.js';
                         //images import
                         import odinImage from "./images/odin.png";
                         import plus from "./svg/plus.svg";
@@ -35,9 +36,10 @@
 
 5. add-new-task.js
         //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
+                export {loadChooseFolder,createTaskDetailsBox};
                 import "./styles.css";
                 import { projectObjects, taskObjects, NewTask, } from "./objects-n-classes.js";
-                import { createEle, createLabel, createInput, createButton, checkInputFieldStatus, disableOtherTabs, enableOtherTabs} from "./helper-functions.js";
+                import { createEle, createLabel, createInput, createButton, checkInputFieldStatus, enableOtherTabs} from "./helper-functions.js";
                 import { displayNewFolderWindow} from "./add-new-project.js";
                 import {updateProjectTasksTabs} from "./all-projects-tabs.js";
 
@@ -74,12 +76,15 @@
                 export {openTaskPage};
                 import './styles.css';
                 import {itemObjects, taskObjects} from'./objects-n-classes.js';
-                import {createButton, createEle} from './helper-functions.js';
+                import {createButton, createEle, createInput, createLabel} from './helper-functions.js';
                 import {newItemDetails} from './new-item-details.js';
                 import { createItemDisplay } from './items-display.js';
-                //svg imports
-                import taskEdit from './svg/taskEdit.svg';
-                import plusWhite from './svg/plusWhite.svg'; 
+                import { loadChooseFolder } from './add-new-task.js';
+                        //svg imports
+                        import taskEdit from './svg/taskEdit.svg';
+                        import plusWhite from './svg/plusWhite.svg'; 
+                        import editPurple from './svg/editPurple.svg';
+
 
 10. new-item-details.js
         //This is the logic to create a new item in open-task-page.js. Then, item is saved in itemObjects array.
@@ -87,19 +92,18 @@
                 import {itemObjects, NewItem } from "./objects-n-classes.js";
                 import {createEle, createLabel, createInput, createButton, checkInputFieldStatus} from './helper-functions.js';
                 import {createItemDisplay, createCheckbox, changeCircle, assignPriorityOnChange} from './items-display.js';
-
-                //svg imports
-                import plusPurple from './svg/plusPurple.svg';
+                        //svg imports
+                        import plusPurple from './svg/plusPurple.svg';
 
 11. items-display.js
         //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
                 export {createItemDisplay, createCheckbox, changeCircle};
                 import { createEle, createButton, createLabel, createInput, checkInputFieldStatus } from "./helper-functions";
                 import {loadPrioritySelectOptions, assignPriorityOnChange} from './new-item-details.js';
-                //svg imports
-                import portraitDots from './svg/portraitDots.svg';
-                import plusPurple from './svg/plusPurple.svg';
-                import editPurple from"./svg/editPurple.svg";
+                        //svg imports
+                        import portraitDots from './svg/portraitDots.svg';
+                        import plusPurple from './svg/plusPurple.svg';
+                        import editPurple from"./svg/editPurple.svg";
 
 12. open-folder-page.js
         //When a folder tab is clicked from the left bottom container, folder contents will collapse.
@@ -107,8 +111,8 @@
                 import './styles.css';
                 import { itemObjects, taskObjects, projectObjects } from './objects-n-classes';
                 import {createEle, createButton, createLabel, createInput} from './helper-functions.js';
-                //svg imports
-                import projectEdit from './svg/taskEdit.svg';
+                        //svg imports
+                        import projectEdit from './svg/taskEdit.svg';
 
 
 

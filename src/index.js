@@ -1,6 +1,6 @@
 import "./styles.css";
 import "./main-ui.js";
-import "./add-new-task.js";
+//import "./add-new-task.js";
 
 
 //open-task-page.js
@@ -16,9 +16,6 @@ import "./add-new-task.js";
 
 //open-folder-page.js
     //Mention on top that it is a project folder summary, 
-    //display each task and it's details. And in the next level, show its item names. 
-    //Folder name must be able to be edited and can be deleted. 
-    //Make it visible that each task is a clickable link. And task can be deleted from here too.
 
 //deleted-tasks.js
     //Write logic for deleted tasks tab. All deleted tasks will be appended to an array called 'deletedTasks'.
