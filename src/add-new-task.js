@@ -59,13 +59,15 @@ function createTaskDetailsBox() {
     select.setAttribute('id', 'choosingFolder');
     select.setAttribute('class', 'setProjectFolderBtn');
     folderTabsContainer.appendChild(select);
-    select.addEventListener('focus', loadChooseFolder);
 
     const defaultOption = createEle('option');
     defaultOption.value = '';
     defaultOption.textContent = 'Choose a project folder';
     defaultOption.setAttribute('class', 'chooseFolderOptions');
     select.appendChild(defaultOption);
+    
+    loadChooseFolder();
+    select.addEventListener('focus', loadChooseFolder);
 
     folderTabsContainer.appendChild(select);
 
@@ -151,21 +153,22 @@ function enableAddingBtn() {
 
 function loadChooseFolder() {
     const choosingFolder = document.querySelector('#choosingFolder');
-    choosingFolder.replaceChildren();
-    const defaultOption = createEle('option');
-    defaultOption.value = '';
-    defaultOption.textContent = 'Choose a project folder';
-    defaultOption.setAttribute('class', 'chooseFolderOptions');
-    choosingFolder.appendChild(defaultOption);
-
+    const options = choosingFolder.childNodes;
     for (const folder of projectObjects) {
-        const option = createEle('option');
-        option.value = folder.projectName;
-        option.textContent = folder.projectName;
-        option.setAttribute('class', 'chooseFolderOptions');
-        choosingFolder.appendChild(option);
+        let folderExists = false;
+        options.forEach((option) => {
+            if (option.value == folder.projectName) {
+                folderExists = true;
+            }
+        })
+        if (folderExists == false) {
+            const option = createEle('option');
+            option.value = folder.projectName;
+            option.textContent = folder.projectName;
+            option.setAttribute('class', 'chooseFolderOptions');
+            choosingFolder.appendChild(option);
+        }
     }
-
 }
 
 //When New Task Action Button is clicked, this function calls class NewTask() and return object's values.

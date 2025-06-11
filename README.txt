@@ -82,8 +82,9 @@
                 import { loadChooseFolder } from './add-new-task.js';
                         //svg imports
                         import taskEdit from './svg/taskEdit.svg';
-                        import plusWhite from './svg/plusWhite.svg'; 
+                        import plusWhite from './svg/plusWhite.svg';
                         import editPurple from './svg/editPurple.svg';
+                        import newFolder from './svg/newFolder.svg';
 
 
 10. new-item-details.js

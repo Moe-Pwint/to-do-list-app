@@ -14,6 +14,7 @@ import { loadChooseFolder } from './add-new-task.js';
 import taskEdit from './svg/taskEdit.svg';
 import plusWhite from './svg/plusWhite.svg';
 import editPurple from './svg/editPurple.svg';
+import newFolder from './svg/newFolder.svg';
 
 function openTaskPage(childTaskObj) {
 
@@ -144,13 +145,18 @@ function editTaskInfo(childTaskObj) {
     select.setAttribute('id', 'choosingFolder');
     select.setAttribute('class', 'setProjectFolderBtn');
     folderTabsContainer.appendChild(select);
-    select.addEventListener('focus', loadChooseFolder);
 
     const defaultOption = createEle('option');
     defaultOption.value = '';
     defaultOption.textContent = 'Choose a project folder';
     defaultOption.setAttribute('class', 'chooseFolderOptions');
     select.appendChild(defaultOption);
+    
+    loadChooseFolder();
+    select.value = projectFolder.projectName;
+    select.addEventListener('focus', loadChooseFolder);
+
+    
 
     folderTabsContainer.appendChild(select);
 
@@ -158,7 +164,7 @@ function editTaskInfo(childTaskObj) {
     newFolderAddBtn.setAttribute('class', 'setProjectFolderBtn');
     newFolderAddBtn.id = 'newFolderWindow';
     folderTabsContainer.appendChild(newFolderAddBtn);
-    newFolderAddBtn.addEventListener('click', displayNewFolderWindow);
+    //newFolderAddBtn.addEventListener('click', displayNewFolderWindow);
 
         //Description tab
     
