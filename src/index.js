@@ -25,3 +25,6 @@ import "./add-new-task.js";
     //Deleted tasks can be recovered.
 
 //Create logics to display projectObjects, taskObjects, itemObjects arrays anytime I want them.
+
+//all-projects-tabs.js, add-new-task.js
+    //When creating a very long project/task name, make sure ... is replaced so that the tab doesn't go overboard.

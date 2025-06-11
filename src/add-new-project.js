@@ -33,7 +33,7 @@ function displayNewFolderWindow() {
     const addProjectActionBtn = createEle('button');
     addProjectActionBtn.id = 'addProjectActionBtn';
     addProjectActionBtn.addEventListener('click', clickNewProjectSubmit);
-    addProjectActionBtn.setAttribute('class', 'mainActionBtns addProjectActionBtn');
+    addProjectActionBtn.setAttribute('class', 'mainActionBtns mainProjectActionBtn');
     addProjectActionBtn.textContent = 'Add project';
     mainActionBtnsContainer.appendChild(addProjectActionBtn);
 

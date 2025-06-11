@@ -24,7 +24,7 @@ function openTaskPage(childTaskObj) {
     rightContainer.appendChild(container);
 
     const taskTitleContainer = createEle('div');
-    taskTitleContainer.setAttribute('id', 'taskTitleContainer');
+    taskTitleContainer.setAttribute('class', 'titleContainer');
     container.appendChild(taskTitleContainer);
 
     const taskTitle = createEle('p');

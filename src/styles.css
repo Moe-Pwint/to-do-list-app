@@ -117,15 +117,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: left;
 }
 
-/* #transparent-backdrop {
-    width:450px;
+#transparent-backdrop {
+    width:100vw;
     height:100vh;
     background-color: white;
-    opacity: 0.4;
+    opacity: 0.7;
     position:fixed;
     inset:0;
-    z-index: 1000;
-} */
+    z-index: 1;
+}
 
 @font-face {
     font-family:'handWritten_Bold';
@@ -419,7 +419,7 @@ select#choosingFolder {
 
 /* New folder Container */
 
-#newFolderContainer {
+#newFolderContainer , #projectFolderContainer {
     width:max-content;
     height:200px;
     position:absolute;
@@ -427,7 +427,7 @@ select#choosingFolder {
     left:50%;
     transform: translate(-50%, -50%);
     background-color: var(--dark-purple);
-    z-index: 1;
+    z-index: 1000;
     border-radius: 15px;
     padding:50px 80px;
     color:var(--smoke-white);
@@ -453,7 +453,7 @@ select#choosingFolder {
     margin-left: 15px;
 }
 
-.addProjectActionBtn {
+.mainProjectActionBtn {
     background-color: var(--focused-yellow);
     color:var(--dark-grey);
 }
@@ -471,23 +471,24 @@ select#choosingFolder {
     margin-top: 50px;
 }
 
-#taskTitleContainer {
+.titleContainer {
     display:flex;
     gap: 30px;
     align-items: center;
-    max-width: 1000px;
+    max-width: 1200px;
 }
 
 #taskPageProjectFolder {
-    margin-top:5px;
+    margin-top:0px;
     margin-bottom:50px;
 }
 
 .taskTitle {
     font-size: 38px;
-    max-width: 600px;
+    max-width: 1000px;
     margin:5px;
 }
+
 
 .purpleIconBtn {
     display:flex;
@@ -495,8 +496,8 @@ select#choosingFolder {
     justify-content: center;
     background-color: var(--light-purple);
     border-radius: 8px;
-    width:40px;
-    height:40px;
+    min-width:40px;
+    min-height:40px;
 }
 
 .TaskPageProjectFolder {
@@ -508,8 +509,8 @@ select#choosingFolder {
 
 #addNewItemBtn {
     background-color: var(--bright-blue);
-    width:200px;
-    height:50px;
+    min-width:200px;
+    min-height:50px;
     color:white;
     border-radius: 8px;
     display:flex;
@@ -554,7 +555,7 @@ select#choosingFolder {
     height: 20px;
     background-color: var(--btn-disabled-light);
     border-radius: 50%;
-    margin-right:20px;
+    margin:10px;
 }
 
 .checkboxContainer {
@@ -564,6 +565,10 @@ select#choosingFolder {
     align-items: center;
     margin-left:auto;
     color:var(--dark-grey);
+    p{
+        margin:0;
+        padding:0;
+    }
 }
 
 .itemDetailsContainers {
@@ -599,15 +604,16 @@ select#choosingFolder {
     display:flex;
     align-items: center;
     background-color: var(--items-display-bg);
-    padding-left: 20px;
-    padding-right: 20px;
+    
     flex-wrap:wrap;
+    padding: 10px;
     margin-bottom: 15px;
 }
 
 .item-display-name {
     font-size: 20px;
-    margin:15px;
+    padding:0px 15px;
+    margin:0;
 }
 
 /* Edit item */
@@ -632,3 +638,69 @@ select#choosingFolder {
     background-color: var(--red);
     color: var(--dark-grey);
 }
+
+
+/* open-folder-page.js */
+
+.projectSummary {
+    min-width: 700px;
+    max-width: 1200px;
+    margin: 20px;
+    padding: 20px;
+}
+
+#projectTitle {
+    font-size: 34px;
+    max-width: 1200px;
+    margin:5px;
+}
+
+.taskSummaryContainer {
+    background-color: var(--grey-bg-containers);
+    margin: 30px;
+}
+
+.folderTaskContainer {
+    display:flex;
+    align-items: center;
+    margin-top: 40px;
+    font-size: 22px;
+}
+
+.folderTaskBtn {
+    margin-left:20px;
+    min-width: 200px; /* Adjust width */
+    height: 45px; /* Adjust height */
+    text-align: center;
+    background-color: var(--medium-purple);
+    border-radius: 8px;
+    color:var(--dark-purple);
+}
+
+.folderTaskName {
+    background-color: var(--light-yellow);
+    padding: 10px 25px;
+    width: 800px;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.folderItemsContainer {
+    width:800px;
+    padding: 40px 25px 5px 70px;
+    background-color: var(--light-purple);
+    font-size: 20px;
+    box-sizing: border-box;
+    margin-top: 7px;
+}
+
+.folderAllItems {
+    padding-left: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    li {
+        padding-bottom: 10px;
+    }
+}
+
+

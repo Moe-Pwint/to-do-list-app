@@ -15,7 +15,7 @@
                 import "./styles.css";
                 import {changeProjectTabsColor, createEle} from './helper-functions.js';
                 import {addNewProjectByIcon} from './new-project-btn.js';
-                import {createSampleTabs, createSampleItem} from './objects-n-classes.js';
+                import {createSampleTabs} from './objects-n-classes.js';
                         //images import
                         import odinImage from "./images/odin.png";
                         import plus from "./svg/plus.svg";
@@ -64,7 +64,7 @@
 8. objects-n-classes.js
         //this file keeps the projectObjects array and taskObjectsArray.
         //It also has two classes to create a task object and a project object.
-                export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs, createSampleItem};
+                export {projectObjects, taskObjects, itemObjects, NewTask, NewProject, NewItem, createSampleTabs};
                 import {updateAllProjectsTabs, updateProjectTasksTabs} from './all-projects-tabs.js';
 
 9. open-task-page.js
@@ -105,8 +105,11 @@
         //When a folder tab is clicked from the left bottom container, folder contents will collapse.
                 export {openFolderPage};
                 import './styles.css';
-                import { openTaskPage } from "./open-task-page";
-                import {createEle} from './helper-functions.js';
+                import { itemObjects, taskObjects, projectObjects } from './objects-n-classes';
+                import {createEle, createButton, createLabel, createInput} from './helper-functions.js';
+                //svg imports
+                import projectEdit from './svg/taskEdit.svg';
+
 
 
 ------------------------------------------------Brainstorming App Structure------------------------------------------------

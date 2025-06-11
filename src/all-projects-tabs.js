@@ -34,6 +34,7 @@ function updateAllProjectsTabs(newProjectObj) {
 
     const projectTabText = createEle('p');
     projectTabText.textContent = projectName;
+    projectTabText.id = projectName;
     projectSpan.appendChild(projectTabText);
 
     //checking that if the project is added, while a new task is being created, the tab will be disabled.
@@ -62,6 +63,7 @@ function updateProjectTasksTabs(parentProject, childTaskObj) {
 
     const taskTabText = createEle('p');
     taskTabText.textContent = taskName;
+    taskTabText.id = taskName;
     taskSpan.appendChild(taskTabText);
     
     newTaskTab.addEventListener('click', ()=> {
