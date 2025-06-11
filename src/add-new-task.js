@@ -1,5 +1,5 @@
 //When the top left tab "Add New Task" is clicked, this page is generated and a new task is created.
-export {loadChooseFolder,createTaskDetailsBox};
+export {loadChooseFolder,createTaskDetailsBox, assignFolderValueOnChange, enableAddingBtn};
 import "./styles.css";
 import { projectObjects, taskObjects, NewTask, } from "./objects-n-classes.js";
 import { createEle, createLabel, createInput, createButton, checkInputFieldStatus, enableOtherTabs} from "./helper-functions.js";
@@ -65,7 +65,7 @@ function createTaskDetailsBox() {
     defaultOption.textContent = 'Choose a project folder';
     defaultOption.setAttribute('class', 'chooseFolderOptions');
     select.appendChild(defaultOption);
-    
+
     loadChooseFolder();
     select.addEventListener('focus', loadChooseFolder);
 
@@ -126,27 +126,26 @@ function createTaskDetailsBox() {
 
     assignFolderValueOnChange();
     checkInputFieldStatus();
-    enableAddingBtn();
+    enableAddingBtn(addTaskActionBtn);
 }
 
-function enableAddingBtn() {
+function enableAddingBtn(taskActionBtn) {
     const taskName = document.querySelector('#taskName');
     const folder = document.querySelector('#choosingFolder');
-    const addTaskBtn = document.querySelector('#addNewTaskActionBtn');
     taskName.addEventListener('input', () => {
         if (!taskName.value) {
-            addTaskBtn.disabled = true;
+            taskActionBtn.disabled = true;
         } else {
             if (folder.value) {
-                addTaskBtn.disabled = false;
+                taskActionBtn.disabled = false;
             }
         }
     })
     folder.addEventListener('input', () => {
-        if (folder.value) {
-            if (taskName.value) {
-                addTaskBtn.disabled = false;
-            }
+        if (folder.value && taskName.value) {
+                taskActionBtn.disabled = false;
+        } else {
+            taskActionBtn.disabled = true;
         }
     })
 }
