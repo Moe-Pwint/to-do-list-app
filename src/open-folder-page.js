@@ -149,7 +149,6 @@ function deleteProject(folderObj) {
     tasksIds.forEach((id) => {
         const index = taskObjects.findIndex((taskObj) => taskObj.taskId == id);
         taskObjects.splice(index,1);
-        console.log(taskObjects);
     })
 
     //ProjectObj is removed from projectObjects array.

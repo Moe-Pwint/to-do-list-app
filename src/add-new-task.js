@@ -192,8 +192,6 @@ function clickNewTaskSubmit() {
         taskObjects.push(newTaskObj);
         foundProjectObj.tasksList.push(newTaskObj.taskId); 
         updateProjectTasksTabs(foundProjectObj.projectId, newTaskObj);
-        console.log(projectObjects);
-        console.log(taskObjects);
         removeTaskPage();
         return true;
     }

@@ -10,6 +10,7 @@ import {newItemDetails} from './new-item-details.js';
 import { createItemDisplay } from './items-display.js';
 import { loadChooseFolder, assignFolderValueOnChange, enableAddingBtn } from './add-new-task.js';
 import { displayNewFolderWindow} from "./add-new-project.js";
+import {updateProjectTasksTabs} from './all-projects-tabs.js';
 
 //svg imports
 import taskEdit from './svg/taskEdit.svg';
@@ -185,6 +186,26 @@ function editTaskInfo(childTaskObj) {
         taskDescriptionAddBtn = createButton(plusPurple, 'Add', 'inputButton');
     }
     taskDescriptionContainer.appendChild(taskDescriptionAddBtn);
+
+        //Notes tab
+    const taskNotesContainer = createEle('div');
+    taskNotesContainer.setAttribute('class', 'taskDetailsContainers');
+    editTaskDetailsBox.appendChild(taskNotesContainer);
+
+    const taskNotesLabel = createLabel('taskNotes', 'Notes:');
+    taskNotesContainer.appendChild(taskNotesLabel);
+
+    const taskNotesInput = createInput('text', 'taskNotes', 'inputField');
+    taskNotesContainer.appendChild(taskNotesInput);
+    taskNotesInput.value = childTaskObj.notes;
+
+    let taskNotesAddBtn;
+    if (taskNotesInput.value) {
+        taskNotesAddBtn = createButton(editPurple, 'Edit', 'inputButton');
+    } else {
+        taskNotesAddBtn = createButton(plusPurple, 'Add', 'inputButton');
+    }
+    taskNotesContainer.appendChild(taskNotesAddBtn);
     
     //Main Action Buttons tab
     const mainActionBtnsContainer = createEle('div');
@@ -193,7 +214,7 @@ function editTaskInfo(childTaskObj) {
 
     const editTaskActionBtn = createEle('button');
     editTaskActionBtn.id = 'editTaskActionBtn';
-    editTaskActionBtn.addEventListener('click', clickEditTaskSubmit);
+    editTaskActionBtn.addEventListener('click', ()=> clickEditTaskSubmit(childTaskObj));
     editTaskActionBtn.setAttribute('class', 'mainActionBtns addActionBtn');
     editTaskActionBtn.textContent = 'Save Edits';
     mainActionBtnsContainer.appendChild(editTaskActionBtn);
@@ -210,17 +231,75 @@ function editTaskInfo(childTaskObj) {
     
 }
 
-function clickEditTaskSubmit() {
-    //update the current open-task-page.js with saved edits.
-    //update task object details in taskObjects array.
-    removeTaskPage();
+function clickEditTaskSubmit(childTaskObj) {
+    const objName = document.querySelector('#taskName');
+    const objFolder = document.querySelector('#setFolder');
+    const objDescription = document.querySelector('#taskDescription').value;
+    const objNotes = document.querySelector('#taskNotes').value;
+
+    let foundProjectObj;
+    for (const projectObj of projectObjects) {
+        if (objFolder.value == projectObj.projectName) {
+            foundProjectObj = projectObj;
+        }
+    }
+
+    if (objName.value === "" || objFolder.value === "") {
+        alert("Please add task name and project folder");
+        return false;
+    } else {
+        //If folder is changed,
+        //Remove taskId from current project's tasksList.
+        const oldProject = projectObjects.find(obj => obj.tasksList.includes(childTaskObj.taskId));
+        if (objFolder.value !== oldProject.projectName) {
+            const index = oldProject.tasksList;
+            const indexToRemove = index.findIndex((taskId) => childTaskObj.taskId == taskId);
+            oldProject.tasksList.splice(indexToRemove,1); 
+            //Add taskId to new project's tasksList.
+            foundProjectObj.tasksList.push(childTaskObj.taskId);
+            //Move the task tab in projects and tasks tabs.
+            document.getElementById(childTaskObj.taskId).remove();
+            updateProjectTasksTabs(foundProjectObj.projectId, childTaskObj);
+            document.getElementById(childTaskObj.taskId).classList.add('active-yellow');
+        }
+        //update task name in task tabs.
+        const taskTab = document.getElementById(childTaskObj.taskName);
+        taskTab.id = objName.value;
+        taskTab.textContent = objName.value;
+
+        //update task object details in taskObjects array.
+        childTaskObj.taskName = objName.value;
+        childTaskObj.projectFolder = foundProjectObj.projectId;
+        childTaskObj.description = objDescription.value;
+        childTaskObj.notes = objNotes.value;
+        
+        removeTaskPage();
+        openTaskPage(childTaskObj);
+        return true;
+    }
 }
 
-function deleteTask(taskObj) {
-    //remove task object from taskObjects array.
+function deleteTask(childTaskObj) {
+    //Remove taskId from current project's tasksList.
+    const oldProject = projectObjects.find(obj => obj.tasksList.includes(childTaskObj.taskId));
+    const index = oldProject.tasksList;
+    const indexToRemove = index.findIndex((taskId) => childTaskObj.taskId == taskId);
+    oldProject.tasksList.splice(indexToRemove,1); 
     //remove all associated item objects.
-    //remove taskId from projectObj.tasksList array in projectObjects array.
+    for (let i=1; i<itemObjects.length;i++) {
+        const index = itemObjects.findLastIndex((item) => item.parentTaskId == childTaskObj.taskId);
+        if (index) {
+            itemObjects.splice(index,1);
+        }
+    }
+    //remove task object from projects and tasks tabs.
+    document.getElementById(childTaskObj.taskId).remove();
+    //remove task object from taskObjects array.
+    const taskToRemove = taskObjects.findIndex((task) => task.taskId == childTaskObj.taskId);
+    taskObjects.splice(taskToRemove, 1);
     removeTaskPage();
+    const rightContainer = document.querySelector('#rightContainer');
+    rightContainer.replaceChildren();
 }
 
 function removeTaskPage() {

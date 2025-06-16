@@ -5,6 +5,7 @@ import "./main-ui.js";
 
 //open-task-page.js
     //Write logic to edit task object. Details can be edited and task can be deleted.
+    //in task edit box, description and notes are shown as undefined.
 
 //items-display.js //new-item-details.js
     //Listen to item submit buttons, when each inner button is on change, 
@@ -25,3 +26,8 @@ import "./main-ui.js";
 
 //all-projects-tabs.js, add-new-task.js
     //When creating a very long project/task name, make sure ... is replaced so that the tab doesn't go overboard.
+
+
+//Everywhere
+    //Make cursor focus on input items.
+    //Make keyboard enter key click main action buttons.
