@@ -1,7 +1,16 @@
-export { changeProjectTabsColor, createEle, createLabel, createInput, createButton, checkInputFieldStatus, disableOtherTabs, enableOtherTabs};
+export {
+  changeProjectTabsColor,
+  createEle,
+  createLabel,
+  createInput,
+  createButton,
+  checkInputFieldStatus,
+  disableOtherTabs,
+  enableOtherTabs,
+};
 
 import plusPurple from "./svg/plusPurple.svg";
-import editPurple from"./svg/editPurple.svg";
+import editPurple from "./svg/editPurple.svg";
 import disabledPlus from "./svg/disabledPlus.svg";
 import disabledEdit from "./svg/disabledEdit.svg";
 
@@ -17,147 +26,144 @@ import disabledEdit from "./svg/disabledEdit.svg";
 //     backdrop.remove();
 // }
 
-
-
-function createEle (ele) {
-    return document.createElement(ele);
+function createEle(ele) {
+  return document.createElement(ele);
 }
 
-function createLabel (forValue, text) {
-    const label = createEle('label');
-    label.setAttribute('for', forValue);
-    if (text) {label.textContent = text;}
-    
-    return label;
+function createLabel(forValue, text) {
+  const label = createEle("label");
+  label.setAttribute("for", forValue);
+  if (text) {
+    label.textContent = text;
+  }
+
+  return label;
 }
 
 function createInput(typeValue, idValue, classValue, defaultText) {
-    const input = createEle('input');
-    if (typeValue) input.setAttribute('type', typeValue);
-    if (typeValue) input.setAttribute('id', idValue);
-    if(idValue) input.setAttribute('name', idValue);
-    if (classValue) input.setAttribute('class', classValue);
-    defaultText && input.setAttribute('placeholder', defaultText);
-    
-    return input;
+  const input = createEle("input");
+  if (typeValue) input.setAttribute("type", typeValue);
+  if (typeValue) input.setAttribute("id", idValue);
+  if (idValue) input.setAttribute("name", idValue);
+  if (classValue) input.setAttribute("class", classValue);
+  defaultText && input.setAttribute("placeholder", defaultText);
+
+  return input;
 }
 
 function createButton(iconSrc, textValue, classValue) {
-    const button = createEle('button');
-    
-    const icon = createEle('img');
+  const button = createEle("button");
 
-    icon.src = iconSrc;
-    button.appendChild(icon);
+  const icon = createEle("img");
 
-    if (textValue) {
-        const text = createEle('p');
-        text.textContent = textValue;
-        button.appendChild(text);
-    }
+  icon.src = iconSrc;
+  button.appendChild(icon);
 
-    if (classValue) {
-        button.setAttribute('class', classValue);
-    }
+  if (textValue) {
+    const text = createEle("p");
+    text.textContent = textValue;
+    button.appendChild(text);
+  }
 
-    return button;
-} 
+  if (classValue) {
+    button.setAttribute("class", classValue);
+  }
+
+  return button;
+}
 
 function checkInputFieldStatus() {
-    const inputBtns = document.querySelectorAll('.inputButton');
-    const inputFields = document.getElementsByClassName('inputField');
+  const inputBtns = document.querySelectorAll(".inputButton");
+  const inputFields = document.getElementsByClassName("inputField");
 
-    function focusInputFieldByBtn() {       
-        inputBtns.forEach((btn)=> {
-            btn.addEventListener('click', () => {
-                btn.previousElementSibling.focus();
-            })
-        })
-    }
+  function focusInputFieldByBtn() {
+    inputBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btn.previousElementSibling.focus();
+      });
+    });
+  }
 
-    function disableBtnWhenFocus() {
-        for (const field of inputFields) {
-            field.addEventListener('focus',()=> {
-                const btn = field.nextElementSibling;
-                let newValues;
-                if (field.value !== '') {
-                    newValues = replaceBtnContents(disabledEdit, 'Edit');
-                } else {
-                    newValues = replaceBtnContents(disabledPlus, 'Add');
-                }
-                btn.replaceChildren(...newValues);
-                btn.disabled = true;
-            })
+  function disableBtnWhenFocus() {
+    for (const field of inputFields) {
+      field.addEventListener("focus", () => {
+        const btn = field.nextElementSibling;
+        let newValues;
+        if (field.value !== "") {
+          newValues = replaceBtnContents(disabledEdit, "Edit");
+        } else {
+          newValues = replaceBtnContents(disabledPlus, "Add");
         }
+        btn.replaceChildren(...newValues);
+        btn.disabled = true;
+      });
     }
+  }
 
-    function checkUnfocusStatus() {
-        for (const field of inputFields) {
-            field.addEventListener('focusout', ()=>{
-                const btn = field.nextElementSibling;
-                let newValues;
-                if (field.value == '') {
-                    newValues = replaceBtnContents(plusPurple, 'Add');
-                } else {
-                    newValues = replaceBtnContents(editPurple, 'Edit');
-                }
-                btn.disabled = !btn.disabled;
-                btn.replaceChildren(...newValues);
-            })
+  function checkUnfocusStatus() {
+    for (const field of inputFields) {
+      field.addEventListener("focusout", () => {
+        const btn = field.nextElementSibling;
+        let newValues;
+        if (field.value == "") {
+          newValues = replaceBtnContents(plusPurple, "Add");
+        } else {
+          newValues = replaceBtnContents(editPurple, "Edit");
         }
+        btn.disabled = !btn.disabled;
+        btn.replaceChildren(...newValues);
+      });
     }
+  }
 
-    focusInputFieldByBtn();
-    disableBtnWhenFocus();
-    checkUnfocusStatus();
+  focusInputFieldByBtn();
+  disableBtnWhenFocus();
+  checkUnfocusStatus();
 }
 
 function replaceBtnContents(iconSrc, textValue) {
-    const icon = createEle('img');
-    icon.src = iconSrc;
-    const text = createEle('p');
-    text.textContent = textValue;
+  const icon = createEle("img");
+  icon.src = iconSrc;
+  const text = createEle("p");
+  text.textContent = textValue;
 
-    return [icon,text];
-
+  return [icon, text];
 }
-
 
 //TABS
 
 function disableOtherTabs(mainTab) {
-    const allTabs = document.querySelectorAll('.tabButton');
-    for (const tab of allTabs) {
-        if (tab !== mainTab) {
-            tab.disabled = true;
-        }
+  const allTabs = document.querySelectorAll(".tabButton");
+  for (const tab of allTabs) {
+    if (tab !== mainTab) {
+      tab.disabled = true;
     }
+  }
 }
 
 function enableOtherTabs(mainTab) {
-    const allTabs = document.querySelectorAll('.tabButton');
-    for (const tab of allTabs) {
-        if (tab !== mainTab) {
-            tab.disabled = false;
-        }
+  const allTabs = document.querySelectorAll(".tabButton");
+  for (const tab of allTabs) {
+    if (tab !== mainTab) {
+      tab.disabled = false;
     }
+  }
 }
 
 function changeProjectTabsColor() {
+  const container = document.querySelector("#leftContainer");
+  container.addEventListener("click", (event) => {
+    const tab = event.target.closest(".tabButton");
 
-    const container = document.querySelector('#leftContainer');
-    container.addEventListener('click', (event) => {
-        const tab = event.target.closest('.tabButton');
-        
-        const allTabs = document.querySelectorAll('.tabButton');
-        for (const eachTab of allTabs) {
-            if (eachTab.classList.contains('active-yellow')) {
-                eachTab.classList.remove('active-yellow');
-            }
-        }
-      
-        if (tab && container.contains(tab)) {
-          tab.classList.add('active-yellow');
-        }
-      });
+    const allTabs = document.querySelectorAll(".tabButton");
+    for (const eachTab of allTabs) {
+      if (eachTab.classList.contains("active-yellow")) {
+        eachTab.classList.remove("active-yellow");
+      }
+    }
+
+    if (tab && container.contains(tab)) {
+      tab.classList.add("active-yellow");
+    }
+  });
 }

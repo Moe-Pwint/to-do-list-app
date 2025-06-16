@@ -1,69 +1,77 @@
 //This is the tiny window that opens up and you can create a new project folder.
-export {displayNewFolderWindow};
+export { displayNewFolderWindow };
 
-import './styles.css';
+import "./styles.css";
 import { projectObjects, NewProject } from "./objects-n-classes.js";
-import {createEle, createLabel, createInput} from "./helper-functions.js";
-import {updateAllProjectsTabs} from './all-projects-tabs.js';
+import { createEle, createLabel, createInput } from "./helper-functions.js";
+import { updateAllProjectsTabs } from "./all-projects-tabs.js";
 
 function displayNewFolderWindow() {
-    const container = createEle('div');
-    container.id = 'newProjectSetContainer';
-    document.body.appendChild(container);
+  const container = createEle("div");
+  container.id = "newProjectSetContainer";
+  document.body.appendChild(container);
 
-    const newFolderContainer = createEle('div');
-    newFolderContainer.id = 'newFolderContainer';
-    container.appendChild(newFolderContainer);
+  const newFolderContainer = createEle("div");
+  newFolderContainer.id = "newFolderContainer";
+  container.appendChild(newFolderContainer);
 
-    const backdrop = createEle('div');
-    backdrop.id = 'transparent-backdrop';
-    container.appendChild(backdrop);
+  const backdrop = createEle("div");
+  backdrop.id = "transparent-backdrop";
+  container.appendChild(backdrop);
 
-    const label = createLabel('folder-name', 'Please set the name of the project folder:');
-    newFolderContainer.appendChild(label);
+  const label = createLabel(
+    "folder-name",
+    "Please set the name of the project folder:",
+  );
+  newFolderContainer.appendChild(label);
 
-    const input = createInput('text', 'folder-name');
-    input.setAttribute('placeholder','Type the name here');
-    newFolderContainer.appendChild(input);
+  const input = createInput("text", "folder-name");
+  input.setAttribute("placeholder", "Type the name here");
+  newFolderContainer.appendChild(input);
 
-    const mainActionBtnsContainer = createEle('div');
-    mainActionBtnsContainer.setAttribute('class', 'projectActionBtnsContainer');
-    newFolderContainer.appendChild(mainActionBtnsContainer);
+  const mainActionBtnsContainer = createEle("div");
+  mainActionBtnsContainer.setAttribute("class", "projectActionBtnsContainer");
+  newFolderContainer.appendChild(mainActionBtnsContainer);
 
-    const addProjectActionBtn = createEle('button');
-    addProjectActionBtn.id = 'addProjectActionBtn';
-    addProjectActionBtn.addEventListener('click', clickNewProjectSubmit);
-    addProjectActionBtn.setAttribute('class', 'mainActionBtns mainProjectActionBtn');
-    addProjectActionBtn.textContent = 'Add project';
-    mainActionBtnsContainer.appendChild(addProjectActionBtn);
+  const addProjectActionBtn = createEle("button");
+  addProjectActionBtn.id = "addProjectActionBtn";
+  addProjectActionBtn.addEventListener("click", clickNewProjectSubmit);
+  addProjectActionBtn.setAttribute(
+    "class",
+    "mainActionBtns mainProjectActionBtn",
+  );
+  addProjectActionBtn.textContent = "Add project";
+  mainActionBtnsContainer.appendChild(addProjectActionBtn);
 
-    const newProjectCancelBtn = createEle('button');
-    newProjectCancelBtn.addEventListener('click', cancelNewProject);
-    newProjectCancelBtn.setAttribute('class', 'mainActionBtns cancelActionBtn');
-    newProjectCancelBtn.textContent = 'Cancel project';
-    mainActionBtnsContainer.appendChild(newProjectCancelBtn);
+  const newProjectCancelBtn = createEle("button");
+  newProjectCancelBtn.addEventListener("click", cancelNewProject);
+  newProjectCancelBtn.setAttribute("class", "mainActionBtns cancelActionBtn");
+  newProjectCancelBtn.textContent = "Cancel project";
+  mainActionBtnsContainer.appendChild(newProjectCancelBtn);
 }
 
 function clickNewProjectSubmit() {
-    const objName = document.querySelector('#folder-name');
+  const objName = document.querySelector("#folder-name");
 
-    if (objName.value === "") {
-        alert("Please add the name of the new project folder.");
-        return false;
-    } else {
-        const newProjectObj = new NewProject(objName.value);
-        projectObjects.push(newProjectObj);
-        removeProjectSettingContainer();
-        updateAllProjectsTabs(newProjectObj);
-        return true;
-    }
+  if (objName.value === "") {
+    alert("Please add the name of the new project folder.");
+    return false;
+  } else {
+    const newProjectObj = new NewProject(objName.value);
+    projectObjects.push(newProjectObj);
+    removeProjectSettingContainer();
+    updateAllProjectsTabs(newProjectObj);
+    return true;
+  }
 }
 
 function cancelNewProject() {
-    removeProjectSettingContainer();
+  removeProjectSettingContainer();
 }
 
 function removeProjectSettingContainer() {
-    const projectSettingContainer = document.querySelector('#newProjectSetContainer');
-    projectSettingContainer.remove();
+  const projectSettingContainer = document.querySelector(
+    "#newProjectSetContainer",
+  );
+  projectSettingContainer.remove();
 }
