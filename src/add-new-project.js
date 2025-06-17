@@ -48,6 +48,12 @@ function displayNewFolderWindow() {
   newProjectCancelBtn.setAttribute("class", "mainActionBtns cancelActionBtn");
   newProjectCancelBtn.textContent = "Cancel project";
   mainActionBtnsContainer.appendChild(newProjectCancelBtn);
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      clickNewProjectSubmit();
+    }
+  });
 }
 
 function clickNewProjectSubmit() {

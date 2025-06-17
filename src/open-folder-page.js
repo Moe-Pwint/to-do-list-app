@@ -122,6 +122,12 @@ function editProject(folderObj) {
   deleteProjectBtn.setAttribute("class", "mainActionBtns delActionBtn");
   deleteProjectBtn.textContent = "Delete Project";
   mainActionBtnsContainer.appendChild(deleteProjectBtn);
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      saveProjectEdit(folderObj);
+    }
+  });
 }
 
 function saveProjectEdit(folderObj) {

@@ -77,9 +77,11 @@ function createAddNewItemDetailsBox(taskObj) {
     "Add item name",
   );
   itemNameContainer.appendChild(itemNameInput);
+  itemNameInput.focus();
 
   const itemNameAddBtn = createButton(plusPurple, "Add", "inputButton");
   itemNameContainer.appendChild(itemNameAddBtn);
+  itemNameAddBtn.disabled = true;
 
   //item description Section
   const itemDescriptionContainer = createEle("div");
@@ -149,6 +151,15 @@ function createAddNewItemDetailsBox(taskObj) {
   newItemCancelBtn.addEventListener("click", closeItemContainer);
 
   checkInputFieldStatus();
+
+  document.querySelectorAll(".inputField").forEach((input) => {
+    input.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        clickNewItemSubmit(taskObj);
+      }
+    });
+  });
 }
 
 function loadPrioritySelectOptions() {

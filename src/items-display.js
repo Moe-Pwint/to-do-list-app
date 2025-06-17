@@ -215,6 +215,15 @@ function editItem(itemObj, itemNameTop, circle) {
   itemDelBtn.textContent = "Delete Item";
   mainActionBtnsContainer.appendChild(itemDelBtn);
   itemDelBtn.addEventListener("click", () => deleteItem(itemObj));
+
+  document.querySelectorAll(".inputField").forEach((input) => {
+    input.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        saveItemSubmit(itemObj);
+      }
+    });
+  });
 }
 
 function saveItemSubmit(itemObj) {

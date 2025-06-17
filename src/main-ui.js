@@ -21,8 +21,6 @@ import plus from "./svg/plus.svg";
 import search from "./svg/search.svg";
 import today from "./svg/today.svg";
 import addProject from "./svg/addProject.svg";
-import del from "./svg/del.svg";
-import portraitDots from "./svg/portraitDots.svg";
 
 createMainElements();
 changeProjectTabsColor();
@@ -144,29 +142,6 @@ function createMainElements() {
   const projectsContainer = createEle("div");
   projectsContainer.id = "projectsContainer";
   leftContainer.appendChild(projectsContainer);
-
-  //Deleted tasks
-
-  const delTab = createEle("button");
-  delTab.setAttribute("class", "tabButton left-tabs-style del-tab");
-  leftContainer.appendChild(delTab);
-
-  const delSpan = createEle("span");
-  delTab.appendChild(delSpan);
-
-  const delIcon = createEle("img");
-  delIcon.src = del;
-  delIcon.setAttribute("class", "left-side-icons");
-  delSpan.appendChild(delIcon);
-
-  const delTabText = createEle("p");
-  delTabText.textContent = "Deleted Tasks";
-  delSpan.appendChild(delTabText);
-
-  const portraitDotsIcon = createEle("img");
-  portraitDotsIcon.src = portraitDots;
-  portraitDotsIcon.setAttribute("class", "left-side-icons push-right");
-  delSpan.appendChild(portraitDotsIcon);
 
   //Listen to "Add a new task" tab in Left Container.
   const newTaskBtn = document.querySelector("#addTask");

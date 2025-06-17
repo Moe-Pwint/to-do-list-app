@@ -52,9 +52,11 @@ function createTaskDetailsBox() {
     "Add task name",
   );
   taskNameContainer.appendChild(taskNameInput);
+  taskNameInput.focus();
 
   const taskNameAddBtn = createButton(plusPurple, "Add", "inputButton");
   taskNameContainer.appendChild(taskNameAddBtn);
+  taskNameAddBtn.disabled = true;
 
   //choose project folder tab
   const setFolderContainer = createEle("div");
@@ -150,6 +152,14 @@ function createTaskDetailsBox() {
   newTaskCancelBtn.textContent = "Cancel Task";
   mainActionBtnsContainer.appendChild(newTaskCancelBtn);
 
+  document.querySelectorAll(".inputField").forEach((input) => {
+    input.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        clickNewTaskSubmit();
+      }
+    });
+  });
   assignFolderValueOnChange();
   checkInputFieldStatus();
   enableAddingBtn(addTaskActionBtn);

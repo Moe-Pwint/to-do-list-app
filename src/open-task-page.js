@@ -256,6 +256,15 @@ function editTaskInfo(childTaskObj) {
   deleteTaskBtn.textContent = "Delete Task";
   mainActionBtnsContainer.appendChild(deleteTaskBtn);
 
+  document.querySelectorAll(".inputField").forEach((input) => {
+    input.addEventListener("keydown", (event) => {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        clickEditTaskSubmit(childTaskObj);
+      }
+    });
+  });
+
   assignFolderValueOnChange();
   checkInputFieldStatus();
   enableAddingBtn(editTaskActionBtn);
