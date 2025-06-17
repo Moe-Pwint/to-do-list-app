@@ -1,4 +1,4 @@
-import { itemObjects, taskObjects } from "./objects-n-classes";
+import { itemObjects, taskObjects } from "./objects-n-classes.js";
 
 //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
 export { createItemDisplay, createCheckbox, changeCircle };
@@ -9,7 +9,7 @@ import {
   createLabel,
   createInput,
   checkInputFieldStatus,
-} from "./helper-functions";
+} from "./helper-functions.js";
 import {
   loadPrioritySelectOptions,
   assignPriorityOnChange,

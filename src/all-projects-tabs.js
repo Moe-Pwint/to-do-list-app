@@ -4,7 +4,7 @@
 //Task tabs' ids are assigned their task's taskId number.
 export { updateAllProjectsTabs, updateProjectTasksTabs };
 
-import { createEle } from "./helper-functions";
+import { createEle } from "./helper-functions.js";
 import "./styles.css";
 import { openTaskPage } from "./open-task-page.js";
 import { openFolderPage } from "./open-folder-page.js";

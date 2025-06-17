@@ -2,7 +2,11 @@
 export { openFolderPage };
 
 import "./styles.css";
-import { itemObjects, taskObjects, projectObjects } from "./objects-n-classes";
+import {
+  itemObjects,
+  taskObjects,
+  projectObjects,
+} from "./objects-n-classes.js";
 import {
   createEle,
   createButton,

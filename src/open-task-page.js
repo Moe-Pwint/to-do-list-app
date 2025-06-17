@@ -326,11 +326,8 @@ function deleteTask(childTaskObj) {
   );
   oldProject.tasksList.splice(indexToRemove, 1);
   //remove all associated item objects.
-  for (let i = 1; i < itemObjects.length; i++) {
-    const index = itemObjects.findLastIndex(
-      (item) => item.parentTaskId == childTaskObj.taskId,
-    );
-    if (index) {
+  for (let index = itemObjects.length - 1; index >= 0; index--) {
+    if (itemObjects[index].parentTaskId == childTaskObj.taskId) {
       itemObjects.splice(index, 1);
     }
   }
