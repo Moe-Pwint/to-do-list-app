@@ -6,6 +6,7 @@ import {
   itemObjects,
   taskObjects,
   projectObjects,
+  updateStorage,
 } from "./objects-n-classes.js";
 import {
   createEle,
@@ -107,9 +108,9 @@ function editProject(folderObj) {
 
   const saveProjectActionBtn = createEle("button");
   saveProjectActionBtn.id = "saveProjectActionBtn";
-  saveProjectActionBtn.addEventListener("click", () =>
-    saveProjectEdit(folderObj),
-  );
+  saveProjectActionBtn.addEventListener("click", () => {
+    saveProjectEdit(folderObj);
+  });
   saveProjectActionBtn.setAttribute(
     "class",
     "mainActionBtns mainProjectActionBtn",
@@ -145,6 +146,7 @@ function saveProjectEdit(folderObj) {
     projectTab.id = nameInput.value;
     //new name is saved in projectObject array.
     folderObj.projectName = nameInput.value;
+    updateStorage();
     removeEditProjectContainer();
     return true;
   }
@@ -176,6 +178,7 @@ function deleteProject(folderObj) {
     (projectObj) => projectObj.projectId == folderObj.projectId,
   );
   projectObjects.splice(index, 1);
+  updateStorage();
 
   removeEditProjectContainer();
   const container = document.querySelector("#rightContainer");

@@ -12,18 +12,23 @@ import {
   projectObjects,
   taskObjects,
   itemObjects,
+  updateAllTabs,
+  loadStorage,
 } from "./objects-n-classes.js";
 import { createTaskDetailsBox } from "./add-new-task.js";
 
 //images import
 import odinImage from "./images/odin.png";
 import plus from "./svg/plus.svg";
-import search from "./svg/search.svg";
-import today from "./svg/today.svg";
+// import search from "./svg/search.svg";
+// import today from "./svg/today.svg";
 import addProject from "./svg/addProject.svg";
 
 createMainElements();
 changeProjectTabsColor();
+
+loadStorage();
+updateAllTabs();
 
 function createMainElements() {
   //main containers
@@ -78,45 +83,46 @@ function createMainElements() {
   newTaskText.textContent = "Add a new task";
   newTaskSpan.appendChild(newTaskText);
 
-  //Search tab
-  const searchContainer = createEle("button");
-  //searchLogic will do search logic.
-  searchContainer.id = "searchLogic";
-  searchContainer.setAttribute("class", "tabButton left-tabs-style");
-  topLeftContainer.appendChild(searchContainer);
+  // //Search tab
+  // const searchContainer = createEle("button");
+  // //searchLogic will do search logic.
+  // searchContainer.id = "searchLogic";
+  // searchContainer.setAttribute("class", "tabButton left-tabs-style");
+  // topLeftContainer.appendChild(searchContainer);
 
-  const searchSpan = createEle("span");
-  searchContainer.appendChild(searchSpan);
+  // const searchSpan = createEle("span");
+  // searchContainer.appendChild(searchSpan);
 
-  const searchIcon = createEle("img");
-  searchIcon.src = search;
-  searchIcon.setAttribute("class", "left-side-icons");
-  searchSpan.appendChild(searchIcon);
+  // const searchIcon = createEle("img");
+  // searchIcon.src = search;
+  // searchIcon.setAttribute("class", "left-side-icons");
+  // searchSpan.appendChild(searchIcon);
 
-  const searchText = createEle("p");
-  searchText.textContent = "Search task or project";
-  searchSpan.appendChild(searchText);
+  // const searchText = createEle("p");
+  // searchText.textContent = "Search task or project";
+  // searchSpan.appendChild(searchText);
 
-  //Today tab
-  const todayContainer = createEle("button");
-  //todayLogic will do today logic.
-  todayContainer.id = "todayLogic";
-  todayContainer.setAttribute("class", "tabButton left-tabs-style");
-  topLeftContainer.appendChild(todayContainer);
+  // //Today tab
+  // const todayContainer = createEle("button");
+  // //todayLogic will do today logic.
+  // todayContainer.id = "todayLogic";
+  // todayContainer.setAttribute("class", "tabButton left-tabs-style");
+  // topLeftContainer.appendChild(todayContainer);
 
-  const todaySpan = createEle("span");
-  todayContainer.appendChild(todaySpan);
+  // const todaySpan = createEle("span");
+  // todayContainer.appendChild(todaySpan);
 
-  const todayIcon = createEle("img");
-  todayIcon.src = today;
-  todayIcon.setAttribute("class", "left-side-icons");
-  todaySpan.appendChild(todayIcon);
+  // const todayIcon = createEle("img");
+  // todayIcon.src = today;
+  // todayIcon.setAttribute("class", "left-side-icons");
+  // todaySpan.appendChild(todayIcon);
 
-  const todayText = createEle("p");
-  todayText.textContent = "Today";
-  todaySpan.appendChild(todayText);
+  // const todayText = createEle("p");
+  // todayText.textContent = "Today";
+  // todaySpan.appendChild(todayText);
 
   //Bottom section
+
   const projectsTitleContainer = createEle("div");
   projectsTitleContainer.setAttribute("id", "projectsTitleContainer");
   leftContainer.appendChild(projectsTitleContainer);

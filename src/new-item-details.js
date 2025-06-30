@@ -1,6 +1,6 @@
 //This is the logic to create a new item in open-task-page.js. Then, item is saved in itemObjects array.
 export { newItemDetails, loadPrioritySelectOptions, assignPriorityOnChange };
-import { itemObjects, NewItem } from "./objects-n-classes.js";
+import { itemObjects, NewItem, updateStorage } from "./objects-n-classes.js";
 import {
   createEle,
   createLabel,
@@ -229,6 +229,7 @@ function clickNewItemSubmit(taskObj) {
     taskObj.itemsList.push(newItem.itemId);
     itemObjects.push(newItem);
     createItemDisplay(newItem);
+    updateStorage();
     closeItemContainer();
   }
 }

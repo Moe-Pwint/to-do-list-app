@@ -6,7 +6,12 @@ export {
   enableAddingBtn,
 };
 import "./styles.css";
-import { projectObjects, taskObjects, NewTask } from "./objects-n-classes.js";
+import {
+  projectObjects,
+  taskObjects,
+  NewTask,
+  updateStorage,
+} from "./objects-n-classes.js";
 import {
   createEle,
   createLabel,
@@ -14,6 +19,7 @@ import {
   createButton,
   checkInputFieldStatus,
   enableOtherTabs,
+  truncateString,
 } from "./helper-functions.js";
 import { displayNewFolderWindow } from "./add-new-project.js";
 import { updateProjectTasksTabs } from "./all-projects-tabs.js";
@@ -199,7 +205,7 @@ function loadChooseFolder() {
     if (folderExists == false) {
       const option = createEle("option");
       option.value = folder.projectName;
-      option.textContent = folder.projectName;
+      option.textContent = truncateString(folder.projectName, 30);
       option.setAttribute("class", "chooseFolderOptions");
       choosingFolder.appendChild(option);
     }
@@ -232,6 +238,7 @@ function clickNewTaskSubmit() {
     taskObjects.push(newTaskObj);
     foundProjectObj.tasksList.push(newTaskObj.taskId);
     updateProjectTasksTabs(foundProjectObj.projectId, newTaskObj);
+    updateStorage();
     removeTaskPage();
     return true;
   }

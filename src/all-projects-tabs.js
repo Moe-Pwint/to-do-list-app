@@ -21,7 +21,10 @@ function updateAllProjectsTabs(newProjectObj) {
   projectsContainer.appendChild(newProjectTabContainer);
 
   const newProjectTab = createEle("button");
-  newProjectTab.setAttribute("class", "tabButton project-tabs left-tabs-style");
+  newProjectTab.setAttribute(
+    "class",
+    "tabButton project-tabs left-tabs-style truncateTab",
+  );
   newProjectTabContainer.appendChild(newProjectTab);
 
   const projectSpan = createEle("span");

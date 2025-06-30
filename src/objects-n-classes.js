@@ -4,10 +4,13 @@ export {
   projectObjects,
   taskObjects,
   itemObjects,
+  updateStorage,
+  loadStorage,
   NewTask,
   NewProject,
   NewItem,
   createSampleTabs,
+  updateAllTabs,
 };
 
 import {
@@ -15,9 +18,31 @@ import {
   updateProjectTasksTabs,
 } from "./all-projects-tabs.js";
 
-const projectObjects = [];
-const taskObjects = [];
-const itemObjects = [];
+let projectObjects = [];
+let taskObjects = [];
+let itemObjects = [];
+
+function loadStorage() {
+  const loadedProjectObjs = localStorage.getItem("projectObjs");
+  if (loadedProjectObjs) {
+    projectObjects = JSON.parse(loadedProjectObjs);
+  }
+  let loadedTaskObjs = localStorage.getItem("taskObjs");
+  if (loadedTaskObjs) {
+    taskObjects = JSON.parse(loadedTaskObjs);
+    console.log("works!");
+  }
+  const loadedItemObjs = localStorage.getItem("itemObjs");
+  if (loadedItemObjs) {
+    itemObjects = JSON.parse(loadedItemObjs);
+  }
+}
+
+function updateStorage() {
+  localStorage.setItem("projectObjs", JSON.stringify(projectObjects));
+  localStorage.setItem("taskObjs", JSON.stringify(taskObjects));
+  localStorage.setItem("itemObjs", JSON.stringify(itemObjects));
+}
 
 function createSampleTabs() {
   const sampleProject = new NewProject("Sample Project");
@@ -32,8 +57,19 @@ function createSampleTabs() {
   taskObjects.push(sampleTask);
   projectObjects[0].tasksList.push(sampleTask.taskId);
 
-  updateAllProjectsTabs(projectObjects[0]);
-  updateProjectTasksTabs(projectObjects[0].projectId, taskObjects[0]);
+  // updateAllProjectsTabs(projectObjects[0]);
+  // updateProjectTasksTabs(projectObjects[0].projectId, taskObjects[0]);
+  // updateStorage();
+}
+
+function updateAllTabs() {
+  for (let i = 0; i < projectObjects.length; i++) {
+    updateAllProjectsTabs(projectObjects[i]);
+  }
+
+  taskObjects.forEach((obj) => {
+    updateProjectTasksTabs(obj.projectFolder, obj);
+  });
 }
 
 //This class takes the inputs from user and create a new task object.

@@ -2,7 +2,11 @@
 export { displayNewFolderWindow };
 
 import "./styles.css";
-import { projectObjects, NewProject } from "./objects-n-classes.js";
+import {
+  projectObjects,
+  NewProject,
+  updateStorage,
+} from "./objects-n-classes.js";
 import { createEle, createLabel, createInput } from "./helper-functions.js";
 import { updateAllProjectsTabs } from "./all-projects-tabs.js";
 
@@ -28,6 +32,7 @@ function displayNewFolderWindow() {
   const input = createInput("text", "folder-name");
   input.setAttribute("placeholder", "Type the name here");
   newFolderContainer.appendChild(input);
+  document.querySelector("#folder-name").focus();
 
   const mainActionBtnsContainer = createEle("div");
   mainActionBtnsContainer.setAttribute("class", "projectActionBtnsContainer");
@@ -67,6 +72,7 @@ function clickNewProjectSubmit() {
     projectObjects.push(newProjectObj);
     removeProjectSettingContainer();
     updateAllProjectsTabs(newProjectObj);
+    updateStorage();
     return true;
   }
 }

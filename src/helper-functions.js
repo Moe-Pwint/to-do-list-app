@@ -7,6 +7,7 @@ export {
   checkInputFieldStatus,
   disableOtherTabs,
   enableOtherTabs,
+  truncateString,
 };
 
 import plusPurple from "./svg/plusPurple.svg";
@@ -166,4 +167,11 @@ function changeProjectTabsColor() {
       tab.classList.add("active-yellow");
     }
   });
+}
+
+function truncateString(str, maxLength) {
+  if (str.length > maxLength) {
+    return [str.slice(0, maxLength - 3), "..."].join("");
+  }
+  return str;
 }

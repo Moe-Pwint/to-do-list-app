@@ -1,4 +1,8 @@
-import { itemObjects, taskObjects } from "./objects-n-classes.js";
+import {
+  itemObjects,
+  taskObjects,
+  updateStorage,
+} from "./objects-n-classes.js";
 
 //When the open-task-page.js is loaded, items will be displayed using the logics in this file.
 export { createItemDisplay, createCheckbox, changeCircle };
@@ -48,6 +52,7 @@ function createItemDisplay(itemObj) {
       itemObj.markStatus = false;
       checkbox.lastChild.textContent = "Mark as done";
     }
+    updateStorage();
   });
   itemTab.appendChild(checkbox);
 
@@ -57,9 +62,9 @@ function createItemDisplay(itemObj) {
   itemTab.appendChild(itemEditBtn);
   itemEditBtn.addEventListener("click", () => {
     editItem(itemObj, itemName, itemCircle);
-    document
-      .querySelectorAll(".allItemEditBtns")
-      .forEach((btn) => (btn.disabled = true));
+    document.querySelectorAll(".allItemEditBtns").forEach((btn) => {
+      btn.disabled = true;
+    });
   });
 }
 
@@ -90,6 +95,7 @@ function createCheckbox(markStat) {
 }
 
 function editItem(itemObj, itemNameTop, circle) {
+  document.querySelector("#addNewItemBtn").disabled = true;
   const editItemContainer = createEle("div");
   editItemContainer.id = "editItemContainer";
   const targetItem = document.getElementById(itemObj.itemId);
@@ -239,12 +245,14 @@ function saveItemSubmit(itemObj) {
     itemObj.itemDescription = itemDescription;
     itemObj.itemDueDate = itemDate;
     itemObj.itemPriority = itemPriority;
+    updateStorage();
     closeItemContainer();
   }
 }
 
 function closeItemContainer() {
   const container = document.querySelector("#editItemContainer");
+  document.querySelector("#addNewItemBtn").disabled = false;
   container.remove();
   document
     .querySelectorAll(".allItemEditBtns")
@@ -261,7 +269,6 @@ function deleteItem(itemObj) {
   document
     .querySelectorAll(".allItemEditBtns")
     .forEach((btn) => (btn.disabled = false));
-
-  //Double ask if they really want to delete and it can't be undone.
-  //closeItemContainer();
+  document.querySelector("#addNewItemBtn").disabled = false;
+  updateStorage();
 }

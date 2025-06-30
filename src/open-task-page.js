@@ -8,6 +8,7 @@ import {
   itemObjects,
   projectObjects,
   taskObjects,
+  updateStorage,
 } from "./objects-n-classes.js";
 import {
   createButton,
@@ -267,6 +268,7 @@ function editTaskInfo(childTaskObj) {
 
   assignFolderValueOnChange();
   checkInputFieldStatus();
+  updateStorage();
   enableAddingBtn(editTaskActionBtn);
 }
 
@@ -317,7 +319,7 @@ function clickEditTaskSubmit(childTaskObj) {
     childTaskObj.projectFolder = foundProjectObj.projectId;
     childTaskObj.description = objDescription;
     childTaskObj.notes = objNotes;
-
+    updateStorage();
     removeTaskPage();
     openTaskPage(childTaskObj);
     return true;
@@ -347,6 +349,7 @@ function deleteTask(childTaskObj) {
     (task) => task.taskId == childTaskObj.taskId,
   );
   taskObjects.splice(taskToRemove, 1);
+  updateStorage();
   removeTaskPage();
   const rightContainer = document.querySelector("#rightContainer");
   rightContainer.replaceChildren();
