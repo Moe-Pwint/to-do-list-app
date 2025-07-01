@@ -9,9 +9,9 @@ import {
 import { addNewProjectByIcon } from "./new-project-btn.js";
 import {
   createSampleTabs,
-  projectObjects,
-  taskObjects,
-  itemObjects,
+  // projectObjects,
+  // taskObjects,
+  // itemObjects,
   updateAllTabs,
   loadStorage,
 } from "./objects-n-classes.js";
@@ -158,49 +158,49 @@ function createMainElements() {
 
   createSampleTabs();
 
-  consoleLogObjArrays();
+  // consoleLogObjArrays();
 }
 
-function consoleLogObjArrays() {
-  const allProjects = createEle("button");
-  allProjects.id = "allProjects";
-  allProjects.textContent = "allProjects";
-  const leftContainer = document.querySelector("#leftContainer");
-  leftContainer.appendChild(allProjects);
-  document.querySelector("#allProjects").addEventListener("click", () => {
-    projectObjects.forEach((project) => {
-      console.log(project.projectName);
-      console.log(`tasksList:`);
-      project.tasksList.forEach((Id) => {
-        const task = taskObjects.find((task) => task.taskId == Id);
-        console.log(task.taskName);
-      });
-    });
-  });
+// function consoleLogObjArrays() {
+//   const allProjects = createEle("button");
+//   allProjects.id = "allProjects";
+//   allProjects.textContent = "allProjects";
+//   const leftContainer = document.querySelector("#leftContainer");
+//   leftContainer.appendChild(allProjects);
+//   document.querySelector("#allProjects").addEventListener("click", () => {
+//     projectObjects.forEach((project) => {
+//       console.log(project.projectName);
+//       console.log(`tasksList:`);
+//       project.tasksList.forEach((Id) => {
+//         const task = taskObjects.find((task) => task.taskId == Id);
+//         console.log(task.taskName);
+//       });
+//     });
+//   });
 
-  const allTasks = createEle("button");
-  allTasks.id = "allTasks";
-  allTasks.textContent = "allTasks";
-  leftContainer.appendChild(allTasks);
-  document.querySelector("#allTasks").addEventListener("click", () => {
-    taskObjects.forEach((task) => {
-      console.log(`task: ${task.taskName}`);
-      console.log("itemsList:");
-      task.itemsList.forEach((Id) => {
-        const item = itemObjects.find((item) => item.itemId == Id);
-        console.log(item.itemName);
-      });
-    });
-  });
+//   const allTasks = createEle("button");
+//   allTasks.id = "allTasks";
+//   allTasks.textContent = "allTasks";
+//   leftContainer.appendChild(allTasks);
+//   document.querySelector("#allTasks").addEventListener("click", () => {
+//     taskObjects.forEach((task) => {
+//       console.log(`task: ${task.taskName}`);
+//       console.log("itemsList:");
+//       task.itemsList.forEach((Id) => {
+//         const item = itemObjects.find((item) => item.itemId == Id);
+//         console.log(item.itemName);
+//       });
+//     });
+//   });
 
-  const allItems = createEle("button");
-  allItems.id = "allItems";
-  allItems.textContent = "allItems";
-  leftContainer.appendChild(allItems);
-  document.querySelector("#allItems").addEventListener("click", () => {
-    itemObjects.forEach((item) => {
-      console.log(`itemName: ${item.itemName}`);
-      console.log(`itemParent: ${item.parentTaskId}`);
-    });
-  });
-}
+//   const allItems = createEle("button");
+//   allItems.id = "allItems";
+//   allItems.textContent = "allItems";
+//   leftContainer.appendChild(allItems);
+//   document.querySelector("#allItems").addEventListener("click", () => {
+//     itemObjects.forEach((item) => {
+//       console.log(`itemName: ${item.itemName}`);
+//       console.log(`itemParent: ${item.parentTaskId}`);
+//     });
+//   });
+// }
